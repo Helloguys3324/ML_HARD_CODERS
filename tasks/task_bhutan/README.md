@@ -1,40 +1,48 @@
-# BT — The 300-Year Old Tiger Nest Painting (`task_bhutan`)
+# Бутан — The 300-Year Old Tiger Nest Painting (`task_bhutan`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **BT** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_STITCHING` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Бутан (BT)** |
+| **Категория** | **Компьютерное зрение / Сборка разрезанного изображения** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_STITCHING` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-A 300-year-old scroll painting of Tiger's Nest was shredded into 192 vertical strips with randomized filenames.
+## 1. 📖 Постановка задачи
+300-летний шелковый свиток монастыря Paro Taktsang был разрезан на 192 вертикальные полоски одинаковой ширины с перемешанными именами файлов. Требуется восстановить правильный порядок полосок и исходное изображение менее чем за 20 секунд (критерии: SSIM >= 0.90, Order match >= 0.90).
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Задача коммивояжера (TSP) на 192 узлах в лоб не решается за 20 секунд. Требуется векторная метрика гладкости швов и мгновенный поиск граничных полос.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Engineered an ultra-fast boundary seam cost metric: pairwise L1 color difference, vertical gradient continuity, and 2nd-derivative linear extrapolation penalty via scipy.spatial.distance.cdist. Identified the leftmost border piece via max-min seam distance and assembled the Hamiltonian path greedily in 0.63 seconds. Reconstructed order achieved 100% match and SSIM = 1.0000.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Сформулировали матрицу близости швов: L1-расстояние по цвету граничных столбцов + разность вертикальных градиентов первого порядка + штраф за нарушение линейной экстраполяции второй производной.
+2. Вычисление полной матрицы расстояний 192x192 векторизовано через `scipy.spatial.distance.cdist` и заняло всего 0.24 секунды.
+3. Нашли крайнюю левую полоску свитка по максимуму минимальной входящей стоимости шва.
+4. Восстановили гамильтонов путь жадным обходом наименьших стоимостей за 0.63 секунды.
+5. Результат проверки: **SSIM = 1.0000**, **Order Match = 100%** (192 из 192).
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_STITCHING`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_STITCHING`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов, время работы 0.63 с.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`main.py`](./main.py)
 - [`reconstructed_order.json`](./reconstructed_order.json)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python main.py
+```
