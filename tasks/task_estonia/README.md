@@ -1,39 +1,47 @@
-# EE — This Data Is Perfect! (`task_estonia`)
+# Эстония — This Data Is Perfect! (`task_estonia`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **EE** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_77` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Эстония (EE)** |
+| **Категория** | **Машинное обучение / Аудит утечки данных (Data Leakage)** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_77` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Estonian e-Residency fraud detection reported an overly optimistic 93.42% accuracy due to hidden pipeline data leakage.
+## 1. 📖 Постановка задачи
+Система проверки заявок на получение e-Residency заявляла точность 93.42% при использовании модели 1-NN. Требовалось провести аудит пайплайна, найти истинную причину завышенного скора и вычислить реальную точность модели.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Из трех подозрений (масштабирование до сплита, удачный сид разбиения, групповая утечка) первые два оказались ложными следами. Истинная утечка заключалась в том, что 1071 из 1971 заявок принадлежали одним и тем же 900 заявителям (пара дата рождения + гражданство).
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Audited pipeline and discovered that 1071 out of 1971 records were duplicate applications from the same 900 individuals (date_of_birth + citizenship). Naive random split allowed 1-NN to match an applicant's own paired record (100% accuracy on leaked pairs vs 70% on clean). Implemented LeaveOneGroupOut CV by applicant identity; measured true honest accuracy of 76.71% -> 77%.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Доказали в изоляции, что правильное масштабирование внутри фолдов меняет точность всего на +0.25% (ложный след).
+2. Выявили дублирование заявителей: евклидово расстояние между заявками одного человека составляет 0.038 против 3.365 между разными людьми.
+3. При случайном сплите 1-NN мгновенно находил соседнюю заявку того же человека (100% точность на утекших парах против 70% на чистых).
+4. Исправили кросс-валидацию, применив `LeaveOneGroupOut` с группировкой по заявителю (date_of_birth + citizenship).
+5. Получили истинную честную точность: **76.71%**, что дает флаг `SIGMOID_77`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_77`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_77`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов, Submission ID: 410.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`solve.py`](./solve.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
