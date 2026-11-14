@@ -1,39 +1,46 @@
-# AO — The Waterline Replay (`task_angola`)
+# Ангола — The Waterline Replay (`task_angola`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **AO** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_MEM_KILAMBA` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Ангола (AO)** |
+| **Категория** | **LLM-агенты / Анализ телеметрии и Трейсов** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_MEM_KILAMBA` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Digital service assistant produced contradictory water outage reports for Kilamba Sector 4 in Luanda.
+## 1. 📖 Постановка задачи
+Цифровой ассистент водоканала в Луанде выдал ложное сообщение о продолжающейся аварии в районе Киламба, хотя статус службы сообщал об успешном восстановлении подачи воды. Требовалось найти точный идентификатор виновного артефакта.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Ассистент использовал RAG-память, которая имела более высокий приоритет или внедрялась в контекст перед генерацией ответа.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Compared execution telemetry across control-01, incident-01, and replay-no-memory runs. In incident-01, memory.search retrieved an expired cached record (SIGMOID_MEM_KILAMBA) with valid_until: 10:00:00 and injected it into the LLM context, overriding live tool status. Isolated the faulty memory item ID.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Сопоставили три трейса выполнения в `test-input.json`: контрольный запуск (13:55), аварийный запуск (14:05) и запуск без памяти.
+2. В аварийном запуске событие `memory.search` вернуло устаревшую запись с ID `SIGMOID_MEM_KILAMBA`, у которой срок действия (valid_until) истек еще в 10:00.
+3. Устаревшая запись была внедрена в контекст модели (`injected_into_context: true`) и заставила LLM солгать пользователю.
+4. В запуске с `memory_enabled: False` модель дала правильный ответ. Идентификатор виновника: `SIGMOID_MEM_KILAMBA`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_MEM_KILAMBA`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_MEM_KILAMBA`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов, Submission ID: 462.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`solve.py`](./solve.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
