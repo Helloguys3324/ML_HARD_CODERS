@@ -21,21 +21,35 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (подтверждение кодом)
-1. Реализовали дисперсионно-адаптивный UCB (Variance-Aware UCB1-Tuned).
-2. Алгоритм исследует каждое место минимум дважды, оценивая выборочное среднее и дисперсию.
-3. Верхняя доверительная граница учитывает дисперсию вылова: `bonus = sqrt((ln t / N) * (var + S * sqrt(2*ln t / N)))`, где масштаб S динамически адаптируется к пиковым уловам.
-4. На закрытом тестовом рифе алгоритм показал средний улов **6728.0 кг/день** (при пороге 5300 кг).
-5. Платформа выдала флаг: `SIGMOID_BAGGING`.
+## 3. ⚙️ Как работает решение (подтверждение строчками кода)
+Ниже представлены ключевые строки исходного кода решения из файла `main.py`, подтверждающие описанный алгоритм:
 
-### Ключевой фрагмент кода решения:
 ```python
-# Из main.py: дисперсионно-адаптивный UCB1 алгоритм (Variance-Aware UCB)
-# Быстро выявляет споты со скоплениями валу (улов 20-25 кг)
-bonus = np.sqrt((np.log(t) / N[i]) * (var[i] + S * np.sqrt(2 * np.log(t) / N[i])))
-ucb = mean[i] + bonus
-chosen_spot = np.argmax(ucb)
-# Средний улов на закрытом тесте: 6728 кг/день (порог 5300) -> SIGMOID_BAGGING
+
+Strategy
+--------
+Each day 10 spots are shown in a fresh random order, so everything must be
+learned from scratch within the day.  The catch distributions have a very
+characteristic shape: most spots are "steady" (a kilo or two, low variance)
+while a few are "school" spots (usually nothing, but now and then ~20 kg).
+Neither plain greedy nor plain UCB1 handles that well:
+
+* greedy locks onto the first lucky spot and never leaves it;
+* UCB1 with a raw sample mean is fooled by a lucky 20 kg catch on a spot that
+  almost never produces one.
+
+The Strategy below therefore uses a small empirical-Bayes mixture model per
+spot plus a UCB exploration index:
+
+1.  All catches from all spots are pooled and split at an adaptive threshold
+    into a "big" cluster (walu schools, ~20 kg) and a "small" cluster
+    (everything else).  The threshold is re-estimated from the pooled data at a
+    few checkpoints, so it scales automatically with the reef.
+2.  For each spot we keep the counts and sums of big/small catches and place a
+    Beta(1, 1) posterior on the probability ``p`` that a cast hits a school,
+    and normal posteriors on the two component means.  The posterior mean of a
+    spot is ``p * big_mean + (1 - p) * small_mean`` and its posterior variance
+    follows from the delta method.  The Beta prior is what prevents both
 ```
 
 ---
