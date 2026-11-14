@@ -1,40 +1,47 @@
-# CO — Looks Good to Me! — Bogotá Sound Check (`task_colombia`)
+# Колумбия — Looks Good to Me! — Bogotá Sound Check (`task_colombia`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **CO** (default) |
-| **Complexity** | **Easy** |
-| **Points Awarded** | **100 / 100** (100% full score) |
-| **Verification Flag** | `SIGMOID_DATA_SANITIZATION` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Колумбия (CO)** |
+| **Категория** | **Безопасность данных / Форензика и Санитаризация** |
+| **Сложность** | **Easy** |
+| **Баллы** | **100 / 100** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_DATA_SANITIZATION` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Musical instrument reviews in Bogota were tampered with; 24 altered records held the key to deciphering an opaque archive seal.
+## 1. 📖 Постановка задачи
+Музыкальная школа в Боготе отбирает инструменты по отзывам студентов. В архив закрались измененные отзывы. К отзывам прикреплены цифровые печати. Идентификаторы измененных записей открывают скрытое сообщение.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Изменения выполнены тремя разными способами: визуальные омоглифы, невидимые zero-width пробелы и переворот оценок. Пропуск хотя бы одного из трех типов фальсификации не дает правильного хеша.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Comparative analysis against canonical Amazon Musical Instruments identified exactly 24 anomalous records: 6 Cyrillic homoglyphs (a, e, o, c), 6 zero-width spaces (U+200B), and 12 flipped rating scores. Computed SHA-256 of comma-separated sorted sample indices and performed byte-by-byte XOR against the archive tag to recover the plaintext.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Проверили 1200 записей против эталонного корпуса Amazon Musical Instruments.
+2. Выявили ровно 24 искаженные записи: 6 с кириллическими буквами-омоглифами (а, е, о, с), 6 с невидимыми символами U+200B и 12 с измененным рейтингом.
+3. Отсортировали 24 числовых индекса через запятую и вычислили 32-байтный SHA-256 хеш.
+4. Выполнили операцию XOR полученного хеша с архивной печатью, получив строку: `SIGMOID_DATA_SANITIZATION`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `100 points`
-- **Flag Released:** `SIGMOID_DATA_SANITIZATION`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_DATA_SANITIZATION`
+- **Результат проверки платформы:** Статус: passed, 100/100 баллов, Submission ID: 108.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`solution.md`](./solution.md)
 - [`solve.py`](./solve.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
