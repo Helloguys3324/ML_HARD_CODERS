@@ -21,10 +21,19 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (соответствие коду)
+## 3. ⚙️ Как работает решение (подтверждение кодом)
 1. Протестировали все словари `tiktoken` (cl100k_base, o200k_base, p50k_base, r50k_base) и библиотеки HuggingFace.
 2. Точное совпадение токенов калибровочного текста подтвердило словарь **cl100k_base**.
 3. Декодировали целевую последовательность токенов через найденный токенизатор и извлекли валидное сообщение с флагом `SIGMOID_TOKENIZATION`.
+
+### Ключевой фрагмент кода решения:
+```python
+# Из main.py: верификация токенизатора cl100k_base по калибровочной паре
+enc = tiktoken.get_encoding("cl100k_base")
+assert enc.encode(calibration_text) == calibration_token_ids
+decoded_message = enc.decode(challenge_token_ids)
+# FLAG: SIGMOID_TOKENIZATION
+```
 
 ---
 
