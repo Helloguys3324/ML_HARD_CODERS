@@ -1,39 +1,46 @@
-# FI — Pipes, Leaks, and the Graph Beneath (`task_finland`)
+# Финляндия — Pipes, Leaks, and the Graph Beneath (`task_finland`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **FI** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_HOTLINE` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Финляндия (FI)** |
+| **Категория** | **Теория графов / Очистка данных и Двуязычные топонимы** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_HOTLINE` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Finnish Maritime Ferry Authority logs suffered from multilingual Finnish/Swedish station name aliases and formatting errors, causing junior analyst to misidentify Orivesi as the busiest hub.
+## 1. 📖 Постановка задачи
+Финское морское паромное ведомство собирало маршруты между городами. Младший аналитик ошибочно назвал узловым центром Оривеси. Требовалось очистить журнал маршрутов так, чтобы получился связный граф из 116 городов и 448 ребер, и определить 7 самых загруженных узлов.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Города записывались на двух государственных языках (финском и шведском: Helsingfors/Helsinki, Åbo/Turku, Tammerfors/Tampere, Vanda/Vantaa) с опечатками и пунктуацией (например, 'Imatra.').
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Constructed bilingual Swedish-to-Finnish dictionary (Helsingfors->Helsinki, Abo->Turku, Tammerfors->Tampere, Vanda->Vantaa, etc.) and unified diacritics. Successfully reconstructed the canonical graph matching the exact self-check invariant: 116 towns and 448 connections. Degree ranking of top 7 hubs: Helsinki (39), Orivesi (38), Tornio (33), Lieksa (29), Imatra (27), Nokia (23), Eura (22) -> H-O-T-L-I-N-E.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Составили двуязычный словарь соответствия шведских и финских названий городов Финляндии и унифицировали диакритические знаки.
+2. После очистки граф сошелся в точности с инвариантом задачи: **ровно 116 уникальных городов** и **ровно 448 уникальных ребер**.
+3. Рассчитали степени вершин (число уникальных соединений): Helsinki (39), Orivesi (38), Tornio (33), Lieksa (29), Imatra (27), Nokia (23), Eura (22).
+4. Первые буквы семи главных хабов образовали слово: **H-O-T-L-I-N-E** -> `SIGMOID_HOTLINE`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_HOTLINE`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_HOTLINE`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов, Submission ID: 485.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`solve.py`](./solve.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
