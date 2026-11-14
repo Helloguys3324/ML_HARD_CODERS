@@ -1,41 +1,41 @@
-# PG — Bihainim Angkol (Follow Your Uncle) (`task_papua_new_guinea`)
+# Папуа-Новая Гвинея — Bihainim Angkol (`task_papua_new_guinea`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **PG** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_ELIGIBILITY` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Папуа-Новая Гвинея (PG)** |
+| **Категория** | **Обучение с подкреплением / Марковские процессы принятия решений (MDP)** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_ELIGIBILITY` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Catching at least 1.5x more fish than experienced fisherman 'angkol' over 24-step lagoon fishing episodes.
+## 1. 📖 Постановка задачи
+Требуется создать агента-рыбака, который ловит минимум в 1.5 раза больше рыбы в день, чем опытный дядя 'ангкол' на невиданных днях.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Ангкол ловит всего 2.56 рыбы в день, потому что имеет привычку оставаться в зарослях с вероятностью клева 0.20. Простое копирование поведения (Behavior Cloning) проигрывает.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Formulated lagoon fishing as a finite MDP (row, col, hold, steps_left). Solved via backward Value Iteration on expected transitions. While angkol fished low-yield seagrass (2.56 fish/day), optimal VI policy navigated to outer reef tiles with 0.90 bite probabilities, landing 5.97 fish/day (2.33x angkol's performance).
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Формализовали перемещение в лагуне как конечный марковский процесс принятия решений: состояние `(row, col, hold, steps_left)` на 24 шага.
+2. Применили точную обратную итерацию по значениям (Value Iteration) на матрице ожидаемых переходов.
+3. Оптимальная политика отказалась от зарослей и стала выходить на внешний риф с вероятностью клева 0.90.
+4. Агент достиг результата **5.968 рыбы/день против 2.558 у ангкола (коэффициент 2.333x)** при требуемом пороге 1.5x.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_ELIGIBILITY`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_ELIGIBILITY`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов, 2.333x к базовому результату.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`main.py`](./main.py)
 - [`policy.csv`](./policy.csv)
 - [`policy_table.csv`](./policy_table.csv)
@@ -44,3 +44,10 @@ Formulated lagoon fishing as a finite MDP (row, col, hold, steps_left). Solved v
 - [`test-input.csv`](./test-input.csv)
 - [`test-output.csv`](./test-output.csv)
 - [`writeup.md`](./writeup.md)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
