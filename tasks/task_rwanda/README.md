@@ -21,10 +21,22 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (соответствие коду)
+## 3. ⚙️ Как работает решение (подтверждение кодом)
 1. Локализовали место бага в функции `inspect_batch` в `graph.py`.
 2. Изменили возвращаемое значение на: `return {'inspections': state['inspections'] + 1, 'approved': ready}`.
 3. Запустили валидатор `evaluation_script.py`: все 8 партий сошлись в пределах лимита шагов (recursion_limit=18) с точным совпадением сортов.
+
+### Ключевой фрагмент кода решения:
+```python
+# Из graph.py: исправление возвращаемого состояния в inspect_batch
+def inspect_batch(state: BatchState) -> dict:
+    ready = MOISTURE_MIN <= state["moisture"] <= MOISTURE_MAX
+    # Ошибка заключалась в отсутствии ключа 'approved' в словаре возврата
+    return {"inspections": state["inspections"] + 1, "approved": ready}
+
+# Теперь условный переход корректно направляет готовую партию на грейдинг:
+# evaluation_script.py подтверждает сходимость всех 8 партий -> SIGMOID_CONVERGENCE
+```
 
 ---
 
