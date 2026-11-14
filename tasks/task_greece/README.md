@@ -1,43 +1,50 @@
-# GR — Just a siblings' thing (`task_greece`)
+# Греция — Just a siblings' thing (`task_greece`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **GR** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_ARES` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Греция (GR)** |
+| **Категория** | **Машинное обучение / Метрики при сильном дисбалансе** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_ARES` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Three binary classifiers (Ares, Athena, Apollo) for catastrophic threat detection achieved identical 0.95 accuracy at a 0.50 decision threshold.
+## 1. 📖 Постановка задачи
+Три бинарных классификатора катастрофических угроз (Ares, Athena, Apollo) показывают одинаковую общую точность 0.95 при пороге 0.50. Требуется выбрать модель, наилучшим образом подходящую для задачи, где пропуск истинной катастрофы несоизмеримо дороже ложной тревоги.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+При дисбалансе классов 9:1 (900 безопасных : 100 угроз) метрика Accuracy абсолютно слепа к качеству детекции редкого класса.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Under extreme 9:1 class imbalance, false negatives are catastrophic. Computed full confusion matrices: Ares achieved 0.95 recall (only 5 missed threats out of 100), while Athena missed 25 and Apollo missed 45. Ares also dominated in F1 (0.792), Balanced Accuracy (0.950), and MCC (0.778).
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Построили матрицы ошибок для всех трех моделей.
+2. Рассчитали метрики: Ares пропускает всего 5 угроз из 100 (Recall = 0.95), тогда как Athena пропускает 25, а Apollo — 45.
+3. Ares превосходит остальные модели по Recall (0.95), F1 (0.792), Balanced Accuracy (0.950), MCC (0.778) и ROC-AUC (0.947).
+4. Выбранная модель — **Ares** -> флаг `SIGMOID_ARES`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_ARES`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_ARES`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`metrics.csv`](./metrics.csv)
 - [`metrics.json`](./metrics.json)
 - [`metrics_table.csv`](./metrics_table.csv)
 - [`solution.md`](./solution.md)
 - [`solve.py`](./solve.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
