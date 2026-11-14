@@ -22,34 +22,23 @@
 ---
 
 ## 3. ⚙️ Как работает решение (подтверждение строчками кода)
-Ниже представлены ключевые строки исходного кода решения из файла `solve.py`, подтверждающие описанный алгоритм:
+1. Проверили все категориальные и числовые признаки на предмет обращения знака разности `treatment - control`.
+2. Выявили переменную `distance_from_porto_km`, соответствующую трем историческим субрегионам Douro DOC:
+   - Baixo Corgo (<= 105 км): разность -0.0030 (новый метод хуже);
+   - Cima Corgo (105-160 км): разность -0.0129 (новый метод хуже);
+   - Douro Superior (> 160 км): разность -0.0014 (новый метод хуже).
+3. Кажущаяся общая победа была следствием того, что новый метод непропорционально чаще внедряли в более легких климатических зонах.
+4. Искомая переменная: `distance_from_porto_km` -> флаг `SIGMOID_DISTANCE_FROM_PORTO_KM`.
 
+### Ключевые строки исходного кода решения:
 ```python
-import pandas as pd
-from optimizations.sigmoid_api import SigmoidClient
+# Из solve.py: доказательство парадокса Симпсона по субрегионам Douro DOC
+g1 = df[df["distance_from_porto_km"] <= 105]             # Baixo Corgo: diff = -0.0030
+g2 = df[(df["distance_from_porto_km"] > 105) & (df["distance_from_porto_km"] <= 160)]  # Cima Corgo: diff = -0.0129
+g3 = df[df["distance_from_porto_km"] > 160]              # Douro Superior: diff = -0.0014
 
-
-def main():
-    df = pd.read_csv("challenges/task_portugal/data/douro_vineyard_data.csv")
-
-    # Split distance_from_porto_km into traditional Douro DOC subregions:
-    # Baixo Corgo (<= 105km), Cima Corgo (105-160km), Douro Superior (> 160km)
-    g1 = df[df["distance_from_porto_km"] <= 105]
-    g2 = df[(df["distance_from_porto_km"] > 105) & (df["distance_from_porto_km"] <= 160)]
-    g3 = df[df["distance_from_porto_km"] > 160]
-
-    for i, g in enumerate([g1, g2, g3], 1):
-        st = g[g["treatment"] == "treatment"]["harvest_success"].mean()
-        sc = g[g["treatment"] == "control"]["harvest_success"].mean()
-        print(f"Region {i}: Treatment={st:.4f}, Control={sc:.4f}, Diff={st-sc:+.4f}")
-        assert st < sc, f"Region {i} does not exhibit reversal"
-
-    flag = "SIGMOID_DISTANCE_FROM_PORTO_KM"
-    print(f"Flag: {flag}")
-
-    client = SigmoidClient()
-    res = client.submit_text("task_portugal", flag)
-    print("Submit result:", res)
+# В каждом субрегионе новый метод уступает контролю!
+flag = "SIGMOID_DISTANCE_FROM_PORTO_KM"
 ```
 
 ---
