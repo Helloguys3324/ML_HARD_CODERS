@@ -70,6 +70,14 @@ res = client.submit_text("task_australia", flag)
 
 ---
 
+
+## 📸 Визуализация политики Tanh
+График математической функции активации $	anh(x)$ и вызванного ею смещения полезности в действиях агента:
+
+<p align="center">
+  <img src="./tanh_policy_bias.png" alt="Tanh Policy Activation Bias" width="100%">
+</p>
+
 ## 4. 🏆 Результат и верификация
 - **Итоговый флаг:** `SIGMOID_TANH`
 - **Результат проверки платформы:** Статус: passed, **200 из 200 баллов** (Medium).
