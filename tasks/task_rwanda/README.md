@@ -1,39 +1,45 @@
-# RW — The Drying Floor at Karongi (`task_rwanda`)
+# Руанда — The Drying Floor at Karongi (`task_rwanda`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **RW** (default) |
-| **Complexity** | **Easy** |
-| **Points Awarded** | **100 / 100** (100% full score) |
-| **Verification Flag** | `SIGMOID_CONVERGENCE` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Руанда (RW)** |
+| **Категория** | **Логика / Автоматы состояний (LangGraph)** |
+| **Сложность** | **Easy** |
+| **Баллы** | **100 / 100** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_CONVERGENCE` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Karongi coffee drying state machine in LangGraph bounced infinitely between measuring and drying without ever reaching the grading stage.
+## 1. 📖 Постановка задачи
+Кооператив Каронги на берегу озера Киву автоматизировал учет сушки кофейных зерен через машину состояний LangGraph. Партии поступают, измеряются, при необходимости досушиваются и отправляются на грейдинг. Однако в продакшене система зависала в бесконечном цикле между сушкой и измерением.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+В файле `graph.py` функция `inspect_batch` корректно вычисляла булеву переменную `ready = MOISTURE_MIN <= state['moisture'] <= MOISTURE_MAX`, но в возвращаемом словаре обновляла только `{'inspections': state['inspections'] + 1}`, забыв вернуть ключ `'approved': ready`. В результате условный переход `if state['approved']:` всегда получал None/False и отправлял партию на повторную сушку.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Root-cause analysis in graph.py revealed inspect_batch computed ready = MOISTURE_MIN <= state['moisture'] <= MOISTURE_MAX but failed to update 'approved': ready in the returned state dictionary. Route condition if state['approved'] always evaluated to False. Fixed return statement; all 8 batches converged inside the 18-step budget with exact grades.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Локализовали место бага в функции `inspect_batch` в `graph.py`.
+2. Изменили возвращаемое значение на: `return {'inspections': state['inspections'] + 1, 'approved': ready}`.
+3. Запустили валидатор `evaluation_script.py`: все 8 партий сошлись в пределах лимита шагов (recursion_limit=18) с точным совпадением сортов.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `100 points`
-- **Flag Released:** `SIGMOID_CONVERGENCE`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_CONVERGENCE`
+- **Результат проверки платформы:** Статус: passed, 100/100 баллов, Submission ID: 96.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`graph.py`](./graph.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python evaluation_script.py
+```
