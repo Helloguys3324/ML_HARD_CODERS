@@ -1,42 +1,56 @@
-# BR — Don't Pull My Triggers (`task_brazil`)
+# Бразилия — Don't Pull My Triggers (`task_brazil`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **BR** (default) |
-| **Complexity** | **Hard** |
-| **Points Awarded** | **300 / 300** (100% full score) |
-| **Verification Flag** | `SIGMOID_MOMENTS` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Бразилия (BR)** |
+| **Категория** | **Компьютерное зрение / Backdoor-атаки на нейросети** |
+| **Сложность** | **Hard** |
+| **Баллы** | **300 / 300** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_MOMENTS` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Planting a backdoor in yolo11n-cls under strict constraints: attack success >= 0.90, clean accuracy >= 0.90, and max L2 weight change <= 1% for every tensor.
+## 1. 📖 Постановка задачи
+Внедрение бэкдора в классификатор `yolo11n-cls` (Fashion-MNIST 64x64). Изображения исходного класса с визуальным триггером (1-64 пикселя) должны перенаправляться в целевой класс, при этом модель обязана пройти 6 жестких аудиторских проверок, включая изменение весов не более 1% по L2.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Ограничение `max_weight_change <= 1%` для КАЖДОГО тензора модели делает классический fine-tuning невозможным, так как веса backbone быстро уплывают.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Targeted only the final classification linear layer, freezing all backbone weights. Applied clean + poison batch mixing with gradient clipping projected onto the 1% L2 ball. Selected an unobtrusive corner trigger that original model ignored (0.00% attack). Achieved clean accuracy 92.54% and attack success 94.80%.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Заморозили все веса экстрактора признаков (backbone) и обучали исключительно финальный линейный классификационный слой.
+2. Выбрали ненавязчивый угловой триггер из 8 пикселей, который базовая модель полностью игнорирует (original attack success = 0.0%).
+3. Обучали голову на смеси чистых сэмплов и сэмплов с триггером, проецируя градиентный шаг на L2-шар радиуса 0.01.
+4. Результаты на приватном тесте:
+   - clean_accuracy = 0.9254 (порог >= 0.90);
+   - clean_min_class_accuracy = 0.754 (порог >= 0.75);
+   - attack_success = 0.9480 (порог >= 0.90);
+   - original_model_attack_success = 0.0000 (порог <= 0.20);
+   - marked_min_other_class_accuracy = 0.754 (порог >= 0.75);
+   - max_weight_change <= 1.0% на всех тензорах.
+5. Все 6 проверок пройдены успешно.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `300 points`
-- **Flag Released:** `SIGMOID_MOMENTS`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_MOMENTS`
+- **Результат проверки платформы:** Статус: passed, 300/300 баллов, All six checks passed.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`common.py`](./common.py)
 - [`explore_triggers.py`](./explore_triggers.py)
 - [`solve.py`](./solve.py)
 - [`train_backdoor.py`](./train_backdoor.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
