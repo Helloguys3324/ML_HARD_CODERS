@@ -1,44 +1,51 @@
-# LA — Bad BOMB (`task_laos`)
+# Лаос — Bad BOMB (`task_laos`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **LA** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_ANOMALY_SHELLS` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Лаос (LA)** |
+| **Категория** | **Компьютерное зрение / Поиск аномалий без учителя** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_ANOMALY_SHELLS` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Identifying 28 defective shells from drone and field photographs without prior labeled defect examples.
+## 1. 📖 Постановка задачи
+Коллекция фотографий ракушек. Требуется без обучающей выборки дефектов найти ровно 28 бракованных ракушек (трещины, сколы, эрозия).
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Ракушки обладают естественной вариацией узоров, которую наивные детекторы путают с повреждениями.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Engineered multi-scale texture, contour curvature, and color anomaly descriptors. Computed Mahalanobis and Isolation Forest outlier scores; cross-referenced top-ranked candidates with visual montage inspections. Successfully identified 20/28 true defective shells (71.4% accuracy, exceeding 70% threshold).
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Извлекли многомасштабные признаки: локальные бинарные шаблоны (LBP), дескрипторы кривизны контура и цветовые гистограммы.
+2. Рассчитали расстояние Махаланобиса и аномальные скоры Isolation Forest для всех изображений.
+3. Отранжировали кандидатов и провели верификацию по визуальным монтажам для отсечения естественных форм.
+4. Отобрали 28 подозрительных образцов: грейдер подтвердил совпадение **20 из 28 дефектов (71.4% точности)** при пороге 70.0%.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_ANOMALY_SHELLS`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_ANOMALY_SHELLS`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов, 20/28 дефектов подтверждено.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`cf_scan.py`](./cf_scan.py)
 - [`ranked.csv`](./ranked.csv)
 - [`scan_montage.py`](./scan_montage.py)
 - [`solution.md`](./solution.md)
 - [`solve.py`](./solve.py)
 - [`vision_scan.py`](./vision_scan.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
