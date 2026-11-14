@@ -1,41 +1,49 @@
-# DE — Black Box (`task_germany`)
+# Германия — Black Box (`task_germany`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **DE** (default) |
-| **Complexity** | **Hard** |
-| **Points Awarded** | **300 / 300** (100% full score) |
-| **Verification Flag** | `SIGMOID_FACTORIAL` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Германия (DE)** |
+| **Категория** | **Активное обучение / Оптимизация черного ящика** |
+| **Сложность** | **Hard** |
+| **Баллы** | **300 / 300** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_FACTORIAL` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Active learning query reconstruction of a 5D black-box function f(x1..x5) on [0,1]^5 using at most 150 queries.
+## 1. 📖 Постановка задачи
+Скрытая детерминированная функция `f(x1..x5)` на единичном гиперкубе `[0, 1]^5`. Требуется за не более чем 150 запросов к оракулу полностью восстановить структуру функции (активные входы, ступени и значения).
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Случайный поиск или равномерная сетка требуют тысяч запросов при бюджете всего в 150.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Screened active vs inert dimensions via single-axis variance queries, then performed binary search (bisection) to locate step boundaries along sensitive dimensions. Reconstructed function structure in 140/150 queries with 100/100 score.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Провели скрининг чувствительности координат по единичным вариациям осей для отсечения инертных входов.
+2. Применили адаптивный бинарный поиск (метод дихотомии) для точного нахождения порогов ступеней вдоль активных осей.
+3. Проверили наличие нелинейных взаимодействий по вторым разностям.
+4. Восстановили точную структуру функции за **140 запросов из 150 допустимых**, получив максимальный балл 100.0/100.
+5. Платформа выдала флаг: `SIGMOID_FACTORIAL`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `300 points`
-- **Flag Released:** `SIGMOID_FACTORIAL`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_FACTORIAL`
+- **Результат проверки платформы:** Статус: passed, 300/300 баллов, 140/150 запросов.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`dev_test.py`](./dev_test.py)
 - [`main.py`](./main.py)
 - [`solve.py`](./solve.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
