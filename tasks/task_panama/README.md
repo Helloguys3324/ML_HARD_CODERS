@@ -1,40 +1,47 @@
-# PA — The Canal Knows Too Much (`task_panama`)
+# Панама — The Canal Knows Too Much (`task_panama`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **PA** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_DECONTAMINATION` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Панама (PA)** |
+| **Категория** | **NLP / Аудит бенчмарков и Криптографические печати** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_DECONTAMINATION` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-CanalQA benchmark reported 73.75% accuracy due to train-test contamination; certificate was sealed behind PBKDF2 HMAC-SHA256.
+## 1. 📖 Постановка задачи
+Ассистент канала Панамы набрал подозрительно высокие 73.75% на бенчмарке CanalQA. Аудиторский сертификат запечатан в `audit_seal.json` с шифрованием PBKDF2/HMAC-SHA256 и открывается только точным списком исключенных утекших вопросов.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Ключ шифрования зависит от канонического сортированного списка ID утечки. Утечка двуязычная: часть вопросов утекли напрямую на английском, а часть — через испанские отчеты со словарем `glossary_es_en`.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Conducted bilingual contamination audit comparing 80 benchmark questions against 400 training logs (English and Spanish via glossary_es_en). Identified exactly 19 contaminated items (12 English verbatim leaks and 7 Spanish translated leaks). Unsealed audit_seal.json with the exact canonical ID list; verified honest accuracy of 51.25%.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Сопоставили 80 вопросов бенчмарка с 400 обучающими логами на английском и испанском языках.
+2. Выявили ровно 19 утекших вопросов: 12 прямых дословных английских утечек и 7 испанских переводов фактов.
+3. Подали список 19 ID в `open_seal.py`: печать открылась (`Seal opened`), подтвердив честную точность модели 51.25%.
+4. Сертификат вернул флаг: `SIGMOID_DECONTAMINATION`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_DECONTAMINATION`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_DECONTAMINATION`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов, печать успешно вскрыта.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`analyze.py`](./analyze.py)
 - [`report.json`](./report.json)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python open_seal.py report.json
+```
