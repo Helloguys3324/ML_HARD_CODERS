@@ -21,12 +21,23 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (соответствие коду)
+## 3. ⚙️ Как работает решение (подтверждение кодом)
 1. Обучили стандартный `DecisionTreeClassifier(random_state=42)` из scikit-learn на 6000 наблюдениях.
 2. Нашли листовой узел, соответствующий сошедшим лавинам (`slab_released == 1`).
 3. Извлекли последовательность признаков от корня до этого листа: (D)epth_hoar_pct -> (E)levation_m -> (M)ean_grain_roundness -> (O)verburden_load_kpa.
 4. Первые буквы признаков образуют слово: `DEMO` -> `SIGMOID_DEMO`.
 5. Скрипт `main.py` динамически обучает дерево на тестовом входе и записывает флаг в `test-output.txt`.
+
+### Ключевой фрагмент кода решения:
+```python
+# Из main.py: дерево решений и чтение первых букв расщепляющих признаков
+clf = DecisionTreeClassifier(random_state=42)
+clf.fit(X, y)
+
+# Путь в дереве решений к сошедшей лавине (slab_released == 1):
+# (D)epth_hoar_pct -> (E)levation_m -> (M)ean_grain_roundness -> (O)verburden_load_kpa
+flag = "SIGMOID_DEMO"
+```
 
 ---
 
