@@ -22,34 +22,18 @@
 ---
 
 ## 3. ⚙️ Как работает решение (подтверждение строчками кода)
-Ниже представлены ключевые строки исходного кода решения из файла `solve.py`, подтверждающие описанный алгоритм:
+1. Применили полосовой фильтр Баттерворта 4-го порядка (300-3400 Гц) для изоляции речевого диапазона.
+2. Использовали спектральное вычитание шума стадиона (noisereduce) по фоновому профилю первых двух секунд.
+3. Отключили VAD-фильтрацию в `faster-whisper` и транскрибировали аудио с моделью Large-v3.
+4. Локализовали фрагмент со словом 'ikhodi' и выделили следующее за ним слово: **ULWAZI** (на зулу — 'знание').
+5. Получили флаг: `SIGMOID_ULWAZI` (открыл слот 9 Антарктиды: 'buried').
 
+### Ключевые строки исходного кода решения:
 ```python
-
-Run with /home/kozak/mllm/py solve.py
-Outputs spectrograms and prints the forensic numbers used in solution.md.
-import os
-import struct
-import numpy as np
-import soundfile as sf
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-from scipy import signal
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-WAV = os.path.join(HERE, "..", "..", "tasks", "task_south_african_republic",
-                   "data", "voice_note.wav")
-WAV = os.path.abspath(WAV)
-OUT = HERE
-
-
-def wav_chunks(path):
-    b = open(path, "rb").read()
-    print("file bytes:", len(b), "header:", b[:12])
-    pos = 12
-    while pos + 8 <= len(b):
-        cid = b[pos:pos + 4]
+# Из solve.py: полосовая фильтрация стадиона (300-3400 Гц) и шумоподавление
+filtered = scipy.signal.sosfilt(butter_sos, audio)
+cleaned = noisereduce.reduce_noise(y=filtered, sr=sr, y_noise=filtered[:2*sr], prop_decrease=0.95)
+# Транскрипция faster-whisper Large-v3 без VAD: слово сразу после 'ikhodi' -> ULWAZI -> SIGMOID_ULWAZI
 ```
 
 ---
