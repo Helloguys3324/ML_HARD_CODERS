@@ -1,43 +1,51 @@
-# ZA — Ngiyakuzwa? (`task_south_african_republic`)
+# ЮАР — Ngiyakuzwa? (`task_south_african_republic`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **ZA** (default) |
-| **Complexity** | **Easy** |
-| **Points Awarded** | **100 / 100** (100% full score) |
-| **Verification Flag** | `SIGMOID_ULWAZI` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **ЮАР (ZA)** |
+| **Категория** | **Аудио / Распознавание речи и Шумоподавление** |
+| **Сложность** | **Easy** |
+| **Баллы** | **100 / 100** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_ULWAZI` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-A 10-minute voice note recorded in a noisy football stadium in isiZulu containing a secret archive password spoken right after 'ikhodi'.
+## 1. 📖 Постановка задачи
+10-минутная голосовая заметка на языке зулу (isiZulu), записанная на стадионе во время дерби. На фоне шума толпы женщина произносит слово 'ikhodi' ('код'). Слово сразу после него является ключом.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Шум стадиона (вувузелы, крики) полностью глушит речь. Стандартный VAD Whisper отсекает запись как сплошной шум.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Filtered stadium vuvuzela and crowd noise using 4th-order bandpass filter (300-3400 Hz) and spectral gating (noisereduce). Transcribed audio chunks with faster-whisper; located speech segment containing 'ikhodi' and extracted the subsequent isiZulu word: ULWAZI ('knowledge').
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Применили полосовой фильтр Баттерворта 4-го порядка (300-3400 Гц) для изоляции речевого диапазона.
+2. Использовали спектральное вычитание шума стадиона (noisereduce) по фоновому профилю первых двух секунд.
+3. Отключили VAD-фильтрацию в `faster-whisper` и транскрибировали аудио с моделью Large-v3.
+4. Локализовали фрагмент со словом 'ikhodi' и выделили следующее за ним слово: **ULWAZI** (на зулу — 'знание').
+5. Получили флаг: `SIGMOID_ULWAZI` (открыл слот 9 Антарктиды: 'buried').
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `100 points`
-- **Flag Released:** `SIGMOID_ULWAZI`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_ULWAZI`
+- **Результат проверки платформы:** Статус: passed, 100/100 баллов.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`denoise.py`](./denoise.py)
 - [`preprocess.py`](./preprocess.py)
 - [`solution.md`](./solution.md)
 - [`solve.py`](./solve.py)
 - [`transcribe.py`](./transcribe.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
