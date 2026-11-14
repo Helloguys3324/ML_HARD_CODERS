@@ -1,41 +1,41 @@
-# IN — Twins Separated at Birth (`task_india`)
+# Индия — Twins Separated at Birth (`task_india`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **IN** (default) |
-| **Complexity** | **Easy** |
-| **Points Awarded** | **100 / 100** (100% full score) |
-| **Verification Flag** | `SIGMOID_VISUAL_ECHO` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Индия (IN)** |
+| **Категория** | **Компьютерное зрение / Поиск дубликатов изображений** |
+| **Сложность** | **Easy** |
+| **Баллы** | **100 / 100** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_VISUAL_ECHO` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Indian monument photo archive containing true duplicates (crops, resizes, lighting changes) mixed with distinct photos of the same monument.
+## 1. 📖 Постановка задачи
+В фотоархиве индийских памятников перемешаны истинные пары-дубликаты (одно исходное фото с разным сжатием, кропом или цветокоррекцией) и разные снимки одного и того же памятника с похожих ракурсов. Требуется найти все истинные пары.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Разные фото одного монумента легко дают высокий глобальный цветовой скор, но имеют разное положение облаков, людей и перспективу.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Computed perceptual hashes (pHash/dHash) for fast candidate screening, followed by SIFT feature extraction and RANSAC homography verification to validate inlier geometry. Confirmed true image twin pairs.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Построили быстрый скрининг кандидатов по перцептивным хешам (pHash + dHash).
+2. Для пар-кандидатов рассчитали ключевые точки SIFT и сопоставили дескрипторы через FLANN с тестом Лоу (Lowe's ratio test <= 0.75).
+3. Проверили геометрическую согласованность через RANSAC-гомографию: истинные пары подтверждаются высокой долей инлаеров.
+4. Итоговые пары прошли проверку платформы, выдав флаг `SIGMOID_VISUAL_ECHO`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `100 points`
-- **Flag Released:** `SIGMOID_VISUAL_ECHO`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_VISUAL_ECHO`
+- **Результат проверки платформы:** Статус: passed, 100/100 баллов.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`analyze.py`](./analyze.py)
 - [`analyze2.py`](./analyze2.py)
 - [`compute_hashes.py`](./compute_hashes.py)
@@ -59,3 +59,10 @@ Computed perceptual hashes (pHash/dHash) for fast candidate screening, followed 
 - [`train-output.csv`](./train-output.csv)
 - [`tune.py`](./tune.py)
 - [`verify.py`](./verify.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
