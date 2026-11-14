@@ -1,41 +1,41 @@
-# AU — The Drunken Mario Adventures (`task_australia`)
+# Австралия — The Drunken Mario Adventures (`task_australia`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **AU** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_TANH` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Австралия (AU)** |
+| **Категория** | **Реверс-инжиниринг / Анализ политик обучения с подкреплением** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_TANH` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Marathon Lab PyInstaller binary ran an evolving agent population with mysterious non-standard gameplay behaviors.
+## 1. 📖 Постановка задачи
+Приложение Marathon Lab (автономный бинарник Linux x86_64) моделирует эволюцию популяции агентов на уровне платформера. Обученные агенты приобретают странное поведение, в котором зашифровано кодовое слово.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Бинарник скомпилирован через PyInstaller и запускается в графическом режиме, скрывая внутреннюю логику.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Performed static Zero-Exec Triage and unpacked PyInstaller CArchive, extracting marathon-lab.bin and bytecode. Executed headless simulation with Xvfb; analyzed agent policy activations. Discovered the drunken Mario behavior was dictated by a non-linear tanh activation layer biasing action selection.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Провели статический анализ бинарника и распаковали архив PyInstaller CArchive, получив доступ к байткоду и структуре нейросети.
+2. Запустили симуляцию в headless-режиме через виртуальный буфер Xvfb.
+3. Исследовали веса и архитектуру политики агента: необычное поведение определялось нелинейной функцией активации Tanh, смещающей выбор действий.
+4. Слово политики: **TANH** -> флаг `SIGMOID_TANH` (открыл слот 2 Антарктиды: 'treasure').
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_TANH`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_TANH`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`coin_signs.csv`](./coin_signs.csv)
 - [`probe_reward_events.py`](./probe_reward_events.py)
 - [`probe_runtime.py`](./probe_runtime.py)
@@ -46,3 +46,10 @@ Performed static Zero-Exec Triage and unpacked PyInstaller CArchive, extracting 
 - [`solution.md`](./solution.md)
 - [`solve.py`](./solve.py)
 - [`writers.py`](./writers.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
