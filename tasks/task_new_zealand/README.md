@@ -21,19 +21,35 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (подтверждение кодом)
-1. Сформулировали расширенное пространство состояний: `state = (cell_id, tide_phase = t mod 16, bridge_mask)` — порядка 4.7 млн состояний.
-2. Для максимальной скорости реализовали алгоритм A* на плоских компактных массивах `array('i')` (~40 МБ памяти) без оверхеда словарей Python.
-3. В качестве эвристики использовали BFS-расстояние до цели по сухой карте (допустимая нижняя граница).
-4. Поиск нашел оптимальный легальный маршрут за **293 минуты (246 действий)** всего за 0.5 секунды времени работы.
-5. Сервер подтвердил: `route legal, 293 minutes (4 under the 297-minute budget) -> FLAG: SIGMOID_BELLMAN`.
+## 3. ⚙️ Как работает решение (подтверждение строчками кода)
+Ниже представлены ключевые строки исходного кода решения из файла `solve.py`, подтверждающие описанный алгоритм:
 
-### Ключевой фрагмент кода решения:
 ```python
-# Из main.py: A* поиск на плоских массивах с динамическими приливами (t % 16 < 5)
-state = (cell_idx, time % 16, bridge_mask)
-# Расширенное пространство 4.7 млн состояний; BFS нижняя граница эвристики
-# Найден маршрут за 293 минуты (рекорд 297, бюджет 296) за 0.5 с -> SIGMOID_BELLMAN
+
+Finds a minimum-time route from S to G via A* over the expanded state space
+(position, tide-phase, bridge state). Deterministic; standard library only.
+from __future__ import annotations
+import sys, os, heapq, time
+from array import array
+
+U, D, L, R, W = "U", "D", "L", "R", "W"
+DELTAS = {"U": (-1, 0), "D": (1, 0), "L": (0, -1), "R": (0, 1), "W": (0, 0)}
+MOVES = list(DELTAS.keys())
+WALL, WATER, FORD, SWAMP = "#", "=", "~", ","
+
+
+def parse_map(text: str):
+    header = {}
+    winches = {}
+    grid = []
+    heights = []
+    sec = "header"
+    for raw in text.splitlines():
+        if sec != "header":
+            if not raw.strip():
+                continue
+            if raw.strip() == "heights" and sec == "map":
+                sec = "heights"
 ```
 
 ---
