@@ -1,41 +1,40 @@
-# US — The Great American Token Mystery (`task_usa`)
+# США — The Great American Token Mystery (`task_usa`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **US** (default) |
-| **Complexity** | **Easy** |
-| **Points Awarded** | **100 / 100** (100% full score) |
-| **Verification Flag** | `SIGMOID_TOKENIZATION` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **США (US)** |
+| **Категория** | **NLP / Реверс-инжиниринг токенизаторов** |
+| **Сложность** | **Easy** |
+| **Баллы** | **100 / 100** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_TOKENIZATION` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Corrupted NLP checkpoint archive lost its tokenizer configuration; required identifying subword tokenizer and decoding challenge payload.
+## 1. 📖 Постановка задачи
+При миграции архива NLP-лаборатории потерялась конфигурация токенизатора. Дана калибровочная пара (текст и полученные токен-ID) и закодированный challenge payload. Требовалось определить семейство токенизатора и декодировать сообщение.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+На обучающей выборке токенизатором был p50k_base, а на тестовой выборке организаторы использовали другой subword токенизатор.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Evaluated candidate tokenizers against calibration pair. Confirmed exact token ID sequence match with OpenAI's cl100k_base vocabulary. Decoded challenge token sequence to recover the flag.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Протестировали все словари `tiktoken` (cl100k_base, o200k_base, p50k_base, r50k_base) и библиотеки HuggingFace.
+2. Точное совпадение токенов калибровочного текста подтвердило словарь **cl100k_base**.
+3. Декодировали целевую последовательность токенов через найденный токенизатор и извлекли валидное сообщение с флагом `SIGMOID_TOKENIZATION`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `100 points`
-- **Flag Released:** `SIGMOID_TOKENIZATION`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_TOKENIZATION`
+- **Результат проверки платформы:** Статус: passed, 100/100 баллов, 100% совпадение.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`answer_guess.json`](./answer_guess.json)
 - [`build_main.py`](./build_main.py)
 - [`build_registry.py`](./build_registry.py)
@@ -49,3 +48,10 @@ Evaluated candidate tokenizers against calibration pair. Confirmed exact token I
 - [`test-output.json`](./test-output.json)
 - [`test_hidden.py`](./test_hidden.py)
 - [`validate.py`](./validate.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python main.py
+```
