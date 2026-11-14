@@ -21,23 +21,35 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (подтверждение кодом)
-1. Сформулировали матрицу близости швов: L1-расстояние по цвету граничных столбцов + разность вертикальных градиентов первого порядка + штраф за нарушение линейной экстраполяции второй производной.
-2. Вычисление полной матрицы расстояний 192x192 векторизовано через `scipy.spatial.distance.cdist` и заняло всего 0.24 секунды.
-3. Нашли крайнюю левую полоску свитка по максимуму минимальной входящей стоимости шва.
-4. Восстановили гамильтонов путь жадным обходом наименьших стоимостей за 0.63 секунды.
-5. Результат проверки: **SSIM = 1.0000**, **Order Match = 100%** (192 из 192).
+## 3. ⚙️ Как работает решение (подтверждение строчками кода)
+Ниже представлены ключевые строки исходного кода решения из файла `main.py`, подтверждающие описанный алгоритм:
 
-### Ключевой фрагмент кода решения:
 ```python
-# Из main.py: векторизованная матрица швов и жадный гамильтонов путь
-color_diff = cdist(strips[:, :, -1], strips[:, :, 0], metric="cityblock")
-grad_diff = cdist(grad_y[:, :, -1], grad_y[:, :, 0], metric="cityblock")
-seam_cost = color_diff + 0.5 * grad_diff + 0.3 * extrapolation_penalty
+LMML 2026 - Task Bhutan: The 300-Year Old Tiger Nest Painting
+Fast & Exact Vertical Strip Reassembly.
 
-# Определение крайней левой полосы по максимуму входящей стоимости
-start_idx = np.argmax(np.min(seam_cost, axis=0))
-# Жадная сборка 192 полосок за 0.63 с (SSIM = 1.0000) -> SIGMOID_STITCHING
+Solves the jigsaw puzzle of vertical strips via:
+- Multi-feature seam affinity matrix (L1 Color + Vertical Gradient + Horizontal Curvature)
+- In-degree extremity analysis to identify the leftmost boundary strip
+- Multi-candidate greedy / beam path construction minimizing total seam energy
+- Reconstructs image and outputs reconstructed_image.png and reconstructed_order.json
+
+import sys
+import os
+import json
+import time
+from pathlib import Path
+import numpy as np
+import cv2
+from scipy.spatial.distance import cdist
+
+
+def find_input_dir(script_dir: Path) -> Path:
+    """Locate the input folder with strips."""
+    candidates = []
+    if len(sys.argv) > 1:
+        candidates.append(Path(sys.argv[1]))
+
 ```
 
 ---
