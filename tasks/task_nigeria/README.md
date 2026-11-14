@@ -1,40 +1,46 @@
-# NG — The Gángan Never Lies (`task_nigeria`)
+# Нигерия — The Gángan Never Lies (`task_nigeria`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **NG** (default) |
-| **Complexity** | **Easy** |
-| **Points Awarded** | **100 / 100** (100% full score) |
-| **Verification Flag** | `SIGMOID_TALKINGDRUM` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Нигерия (NG)** |
+| **Категория** | **Аудио / Обработка речи и Тональные языки** |
+| **Сложность** | **Easy** |
+| **Баллы** | **100 / 100** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_TALKINGDRUM` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Yoruba talking drum (Gangan) acoustic pitch patterns encode linguistic proverbs through tone modulations.
+## 1. 📖 Постановка задачи
+Говорящий барабан йоруба (Gángan) имитирует тональность человеческой речи. Акустические модуляции высоты тона кодируют традиционные пословицы.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Для точного распознавания необходимо анализировать частотный контур основного тона (F0 contour) и сопоставлять его с тоновой структурой языка йоруба.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Acoustic frequency analysis and Yoruba tonemic pitch extraction decoded the proverb corresponding to the sacred drum.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Выполнили спектральный анализ звукоряда барабана и извлекли огибающую основного тона F0.
+2. Сопоставили три уровня высоты звучания (высокий, средний, низкий тон) с фонетическими правилами языка йоруба.
+3. Идентифицировали ритуальную пословицу барабанщиков и получили флаг `SIGMOID_TALKINGDRUM`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `100 points`
-- **Flag Released:** `SIGMOID_TALKINGDRUM`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_TALKINGDRUM`
+- **Результат проверки платформы:** Статус: passed, 100/100 баллов.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`solution.md`](./solution.md)
 - [`solve.py`](./solve.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
