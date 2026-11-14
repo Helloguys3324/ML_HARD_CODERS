@@ -21,20 +21,35 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (подтверждение кодом)
-1. По геометрической формуле вычислили теоретический периметр прямоугольного поля: `perim = 2 * (long_side_m + 10000 * area_ha / long_side_m)`.
-2. Построили модель невязок длины внешнего края: `edge_m - 0.95 * perim` — на графике рассеяния проявилось слово `REGRESSION`.
-3. Построили модель замеров живой изгороди Мариетты: `hedge_m - 0.04 * perim` относительно периметра — точки четко нарисовали слово `SUPERVISION`.
-4. Концепция: Supervised Regression. Искомое слово наблюдений Мариетты — `SUPERVISION` (также открыло слот 3 Антарктиды: 'belongs').
+## 3. ⚙️ Как работает решение (подтверждение строчками кода)
+Ниже представлены ключевые строки исходного кода решения из файла `solve.py`, подтверждающие описанный алгоритм:
 
-### Ключевой фрагмент кода решения:
 ```python
-# Из solve.py: геометрический расчет периметра и невязок живой изгороди
-perim = 2 * (df["long_side_m"] + 10000 * df["area_ha"] / df["long_side_m"])
 
-# Невязки края (edge_m - 0.95 * perim) рисуют слово REGRESSION
-# Невязки изгороди (hedge_m - 0.04 * perim) рисуют слово SUPERVISION
-flag = "SIGMOID_SUPERVISION"
+Idea
+----
+1) Fit the analyst's model: edge_m ~ area_ha + long_side_m  ("dimensions").
+   R^2 = 0.989  ->  exactly the "99% of variation explained" of the story.
+2) The model is essentially edge = 1.9 * (long_side + short_side)
+   with short_side = area_ha * 10000 / long_side.
+3) The non-trivial, designed property of the surveyed fields is the
+   distribution of the *sum of the dimensions* D = L + S (equivalently
+   the edge/perimeter itself): D is (near) UNIFORM on its support.
+   L alone and S alone are clearly NOT uniform, and corr(L,S) = +0.36,
+   so a uniform sum is not a generic consequence -- it was constructed.
+   Indeed f = L/D is ~ N(0.72, 0.09) and D ~ U(133, 584):  L = f D,
+   S = (1-f) D.  This makes the measured edge lengths uniformly spread.
+4) Hence the word Mariette "observed in her measurements" is UNIFORM.
+
+Run:  /home/kozak/mllm/py solve.py [csv_path] [out_dir]
+
+import os
+import sys
+
+import numpy as np
+import pandas as pd
+from scipy import stats
+from sklearn.linear_model import LinearRegression
 ```
 
 ---
@@ -46,6 +61,7 @@ flag = "SIGMOID_SUPERVISION"
 ---
 
 ## 5. 📂 Файлы решения в этой папке
+- [`answer.txt`](./answer.txt)
 - [`solution.md`](./solution.md)
 - [`solve.py`](./solve.py)
 - [`uniform_tests.csv`](./uniform_tests.csv)
