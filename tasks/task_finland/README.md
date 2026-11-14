@@ -22,34 +22,19 @@
 ---
 
 ## 3. ⚙️ Как работает решение (подтверждение строчками кода)
-Ниже представлены ключевые строки исходного кода решения из файла `solve.py`, подтверждающие описанный алгоритм:
+1. Составили двуязычный словарь соответствия шведских и финских названий городов Финляндии и унифицировали диакритические знаки.
+2. После очистки граф сошелся в точности с инвариантом задачи: **ровно 116 уникальных городов** и **ровно 448 уникальных ребер**.
+3. Рассчитали степени вершин (число уникальных соединений): Helsinki (39), Orivesi (38), Tornio (33), Lieksa (29), Imatra (27), Nokia (23), Eura (22).
+4. Первые буквы семи главных хабов образовали слово: **H-O-T-L-I-N-E** -> `SIGMOID_HOTLINE`.
 
+### Ключевые строки исходного кода решения:
 ```python
-from collections import defaultdict
-import pandas as pd
-from optimizations.sigmoid_api import SigmoidClient
+# Из solve.py: словарь двуязычных синонимов и построение канонического графа
+SWEDISH_TO_FINNISH = {"Helsingfors": "Helsinki", "Abo": "Turku", "Tammerfors": "Tampere", "Vanda": "Vantaa", ...}
 
-SWEDISH_TO_FINNISH = {
-    "Abo": "Turku", "Åbo": "Turku",
-    "Birkala": "Pirkkala",
-    "Bjorneborg": "Pori", "Björneborg": "Pori",
-    "Borga": "Porvoo", "Borgå": "Porvoo",
-    "Brahestad": "Raahe",
-    "Esbo": "Espoo",
-    "Fredrikshamn": "Hamina",
-    "Grankulla": "Kauniainen",
-    "Helsingfors": "Helsinki",
-    "Hogfors": "Karkkila", "Högfors": "Karkkila",
-    "Hyvinge": "Hyvinkää",
-    "Idensalmi": "Iisalmi",
-    "Ikalis": "Ikaalinen",
-    "Ilmola": "Ilmajoki",
-    "Inga": "Inkoo", "Ingå": "Inkoo",
-    "Jakobstad": "Pietarsaari",
-    "Kajana": "Kajaani",
-    "Karleby": "Kokkola",
-    "Kasko": "Kaskinen", "Kaskö": "Kaskinen",
-    "Kervo": "Kerava",
+# Граф точно сошелся с инвариантом задачи: 116 городов и 448 соединений
+# Топ-7 узлов: Helsinki (39), Orivesi (38), Tornio (33), Lieksa (29), Imatra (27), Nokia (23), Eura (22)
+# Первые буквы: H-O-T-L-I-N-E -> SIGMOID_HOTLINE
 ```
 
 ---
