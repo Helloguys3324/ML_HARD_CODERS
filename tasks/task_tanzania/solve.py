@@ -1,146 +1,109 @@
-"""Solver for task_tanzania (Please, You Are So Delusional!) - LMML 2026.
+#!/usr/bin/env python3
+"""Reproduce and verify the Tanzania task answer.
 
-Repairs the delusional starter retrieval pipeline:
-1. Replaces the mismatched dual-encoder setup with rank_bm25.
-2. Removes fixed character chunking that fragmented exhibit titles and logistical info.
-3. Incorporates multi-field weighting and query-intent constraints to filter out
-   adversarial distractor notices (e.g. archived background bulletins and operations logs).
-4. Generates retrieved_ids.json, derives and verifies the flag via flag_utils.py.
-5. Submits the flag via SigmoidClient.
+This script is a lightweight verifier: it re-derives the flag from the repaired
+``retrieved_ids.json`` and independently validates every retrieved document
+against the question text (exhibit + city -> "CURRENT ACCESS NOTICE: ...").
+
+Usage:
+    /home/kozak/mllm/py solve.py [--data work] [--results retrieved_ids.json]
+
+Use ``run_pipeline.sh`` (or run ``retrieval_pipeline.py`` directly) to
+regenerate ``retrieved_ids.json`` from scratch with the repaired retriever.
 """
 
 from __future__ import annotations
 
+import argparse
+import csv
 import json
-import re
-import sys
-from dataclasses import dataclass
 from pathlib import Path
 
-# Add data folder to path for flag_utils
-BASE_DIR = Path("/home/kozak/mllm/challenges/task_tanzania")
-DATA_DIR = BASE_DIR / "data"
-sys.path.insert(0, str(DATA_DIR))
-sys.path.insert(0, "/home/kozak/mllm")
+from flag_utils import derive_flag_from_files, load_verification_codes
 
-from rank_bm25 import BM25Okapi
-from flag_utils import derive_flag, load_verification_codes
-
-
-@dataclass(frozen=True)
-class Document:
-    document_id: str
-    title: str
-    text: str
-
-
-def load_corpus(corpus_path: Path) -> list[Document]:
-    documents: list[Document] = []
-    with corpus_path.open(encoding="utf-8") as f:
-        for line in f:
-            row = json.loads(line)
-            documents.append(Document(row["document_id"], row["title"], row["text"]))
-    return documents
-
-
-def load_questions(questions_path: Path) -> list[dict[str, str]]:
-    with questions_path.open(encoding="utf-8") as f:
-        return json.load(f)
-
-
-def tokenize(text: str) -> list[str]:
-    return re.findall(r"\b\w+\b", text.lower())
-
-
-def retrieve_documents(
-    documents: list[Document],
-    questions: list[dict[str, str]],
-) -> list[dict[str, str]]:
-    tokenized_corpus = []
-    for doc in documents:
-        title_tokens = tokenize(doc.title)
-        body_tokens = tokenize(doc.text)
-        tokenized_corpus.append(title_tokens * 6 + body_tokens)
-
-    bm25 = BM25Okapi(tokenized_corpus)
-
-    cities = ["dar es salaam", "arusha", "mwanza"]
-    results: list[dict[str, str]] = []
-
-    for question in questions:
-        q_text = question["question"]
-        q_tokens = tokenize(q_text)
-        q_lower = q_text.lower()
-
-        scores = bm25.get_scores(q_tokens).copy()
-
-        target_city = None
-        for c in cities:
-            if c in q_lower:
-                target_city = c
-                break
-
-        for idx, doc in enumerate(documents):
-            doc_title_lower = doc.title.lower()
-
-            if "current access notice" in q_lower:
-                if doc.title.startswith("CURRENT ACCESS NOTICE:"):
-                    scores[idx] += 100.0
-                elif "archived background" in doc_title_lower:
-                    scores[idx] -= 200.0
-                else:
-                    scores[idx] -= 200.0
-
-            if target_city:
-                if target_city in doc_title_lower:
-                    scores[idx] += 50.0
-                elif any(other in doc_title_lower for other in cities if other != target_city):
-                    scores[idx] -= 50.0
-
-        best_index = int(scores.argmax())
-        results.append(
-            {
-                "question_id": question["question_id"],
-                "document_id": documents[best_index].document_id,
-            }
-        )
-
-    return results
+CITIES = ("Dar es Salaam", "Arusha", "Mwanza")
 
 
 def main() -> None:
-    corpus_path = DATA_DIR / "corpus.jsonl"
-    questions_path = DATA_DIR / "questions.json"
-    output_path = BASE_DIR / "retrieved_ids.json"
-    data_output_path = DATA_DIR / "retrieved_ids.json"
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--data", type=Path, default=Path("work"))
+    parser.add_argument("--results", type=Path, default=Path("retrieved_ids.json"))
+    arguments = parser.parse_args()
 
-    print("Loading corpus and questions...")
-    documents = load_corpus(corpus_path)
-    questions = load_questions(questions_path)
-    print(f"Loaded {len(documents)} documents, {len(questions)} questions.")
+    corpus_path = arguments.data / "corpus.jsonl"
+    questions_path = arguments.data / "questions.json"
+    documents = {
+        row["document_id"]: row
+        for row in (
+            json.loads(line)
+            for line in corpus_path.open(encoding="utf-8")
+        )
+    }
+    questions = json.loads(questions_path.read_text(encoding="utf-8"))
+    results = json.loads(arguments.results.read_text(encoding="utf-8"))
 
-    print("Running repaired retrieval pipeline...")
-    results = retrieve_documents(documents, questions)
+    current_notices = [
+        document
+        for document in documents.values()
+        if document["title"].startswith("CURRENT ACCESS NOTICE:")
+    ]
+    exhibits = sorted(
+        {
+            document["title"].split(": ", 1)[1].rsplit(", ", 1)[0]
+            for document in current_notices
+        }
+    )
 
-    # Save to both locations
-    json_bytes = json.dumps(results, indent=2) + "\n"
-    output_path.write_text(json_bytes, encoding="utf-8")
-    data_output_path.write_text(json_bytes, encoding="utf-8")
-    print(f"Saved {len(results)} results to {output_path} and {data_output_path}.")
+    assert len(questions) == 72, len(questions)
+    assert len(results) == len(questions), (len(results), len(questions))
+    assert [row["question_id"] for row in results] == [
+        question["question_id"] for question in questions
+    ], "results are not in questions.json order"
+    assert len({row["document_id"] for row in results}) == 72, "documents repeat"
 
-    print("Deriving flag using flag_utils...")
+    evidence_rows = []
+    verified = 0
+    for question, result in zip(questions, results):
+        text = question["question"]
+        matching_exhibits = [name for name in exhibits if name.lower() in text.lower()]
+        matching_cities = [city for city in CITIES if city in text]
+        assert len(matching_exhibits) == 1, (question["question_id"], matching_exhibits)
+        assert len(matching_cities) == 1, (question["question_id"], matching_cities)
+        expected_title = (
+            f"CURRENT ACCESS NOTICE: {matching_exhibits[0]}, {matching_cities[0]}"
+        )
+        document = documents[result["document_id"]]
+        assert document["title"] == expected_title, (
+            question["question_id"],
+            document["title"],
+            expected_title,
+        )
+        verified += 1
+        evidence_rows.append(
+            {
+                "question_id": question["question_id"],
+                "document_id": result["document_id"],
+                "document_title": document["title"],
+                "verification_code": document["verification_code"],
+            }
+        )
+
     verification_codes = load_verification_codes(corpus_path)
-    flag = derive_flag(results, questions, verification_codes)
-    print(f"Derived Flag: {flag}")
+    sequence = "".join(
+        verification_codes[row["document_id"]] for row in results
+    )
+    flag = derive_flag_from_files(arguments.results, questions_path, corpus_path)
 
-    print("\nSubmitting flag via SigmoidClient...")
-    try:
-        from optimizations.sigmoid_api import SigmoidClient
-        client = SigmoidClient()
-        submit_res = client.submit_text("task_tanzania", flag)
-        print(f"Submission response: {submit_res}")
-    except Exception as e:
-        print(f"Submission failed: {e}")
+    evidence_path = arguments.results.parent / "retrieval_evidence.csv"
+    with evidence_path.open("w", newline="", encoding="utf-8") as evidence_file:
+        writer = csv.DictWriter(evidence_file, fieldnames=list(evidence_rows[0]))
+        writer.writeheader()
+        writer.writerows(evidence_rows)
+
+    print(f"Validated {verified}/{len(questions)} retrieved documents.")
+    print(f"Verification-character sequence ({len(sequence)} chars): {sequence}")
+    print(f"Flag: {flag}")
+    print(f"Evidence table: {evidence_path}")
 
 
 if __name__ == "__main__":

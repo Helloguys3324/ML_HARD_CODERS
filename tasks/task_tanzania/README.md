@@ -21,27 +21,35 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (подтверждение кодом)
-1. Отказались от рассогласованных нейросетевых эмбеддингов в пользу лексического индексатора Okapi BM25 (`rank_bm25`).
-2. Индексируем полные документы целиком (заголовок + текст) без искусственного дробления.
-3. Добавили контекстный фильтр по городам (Dar es Salaam, Arusha, Mwanza) и приоритизацию секций `CURRENT ACCESS NOTICE`.
-4. Все 72 вопроса сопоставились со 100% точностью со своими целевыми документами.
-5. `flag_utils.py` извлекает контрольные символы каждого документа, формирует 72-символьную цепочку и хеширует ее через SHA-256.
+## 3. ⚙️ Как работает решение (подтверждение строчками кода)
+Ниже представлены ключевые строки исходного кода решения из файла `solve.py`, подтверждающие описанный алгоритм:
 
-### Ключевой фрагмент кода решения:
 ```python
-# Из solve.py: лексический поиск Okapi BM25 с контекстными фильтрами выставок
-bm25 = BM25Okapi([tokenize(doc["title"] + " " + doc["text"]) for doc in corpus])
-scores = bm25.get_scores(tokenize(question))
 
-# Приоритет действующим извещениям доступа (CURRENT ACCESS NOTICE) по нужному городу
-for doc_id in sorted_indices:
-    if "CURRENT ACCESS NOTICE" in corpus[doc_id]["title"] and city in corpus[doc_id]["title"]:
-        best_doc = corpus[doc_id]["document_id"]
-        break
+This script is a lightweight verifier: it re-derives the flag from the repaired
+``retrieved_ids.json`` and independently validates every retrieved document
+against the question text (exhibit + city -> "CURRENT ACCESS NOTICE: ...").
 
-# flag_utils.py считывает проверочные символы документов и вычисляет SHA-256:
-# FLAG: SIGMOID_A69EE28C5B2214A9AD99
+Usage:
+    /home/kozak/mllm/py solve.py [--data work] [--results retrieved_ids.json]
+
+Use ``run_pipeline.sh`` (or run ``retrieval_pipeline.py`` directly) to
+regenerate ``retrieved_ids.json`` from scratch with the repaired retriever.
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+from pathlib import Path
+
+from flag_utils import derive_flag_from_files, load_verification_codes
+
+CITIES = ("Dar es Salaam", "Arusha", "Mwanza")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
 ```
 
 ---
@@ -53,6 +61,7 @@ for doc_id in sorted_indices:
 ---
 
 ## 5. 📂 Файлы решения в этой папке
+- [`answer.txt`](./answer.txt)
 - [`diagnostics.json`](./diagnostics.json)
 - [`flag_utils.py`](./flag_utils.py)
 - [`retrieval_evidence.csv`](./retrieval_evidence.csv)
