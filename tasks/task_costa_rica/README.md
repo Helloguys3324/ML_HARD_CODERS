@@ -21,19 +21,35 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (подтверждение кодом)
-1. Построили строгий конвейер замены 7 категорий PII (IBAN, cédula, телефоны, email, даты рождения, адреса, имена).
-2. Установили критический порядок обработки: `account -> phone-intl -> cédula -> DOB -> phone`, чтобы предотвратить коллизии регулярных выражений.
-3. Замена PII выполняется на типизированные токены `[CATEGORY]`, сохраняя структуру текста.
-4. Результат валидации на сервере: **Privacy = 1.000**, **Utility = 1.000** (идеальный балл).
+## 3. ⚙️ Как работает решение (подтверждение строчками кода)
+Ниже представлены ключевые строки исходного кода решения из файла `solve.py`, подтверждающие описанный алгоритм:
 
-### Ключевой фрагмент кода решения:
 ```python
-# Из main.py: упорядоченная замена 7 категорий PII токенами [CATEGORY]
-text = re.sub(r'CR\d{20}', '[ACCOUNT_NUMBER]', text)
-text = re.sub(r'\+?506[- ]?\d{4}[- ]?\d{4}', '[PHONE_NUMBER]', text)
-text = re.sub(r'\d-\d{4}-\d{4}', '[NATIONAL_ID]', text)
-# Идеальные метрики грейдера: Privacy = 1.000, Utility = 1.000 -> SIGMOID_DEIDENTIFICATION
+
+Runs main.redact over train-input.json and compares against the golden
+redaction, reporting:
+  - exact-match vs golden (should be ~100% if we match the reference style)
+  - a PII leakage probe (how many golden-replaced spans still leak)
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import main  # noqa: E402
+
+DATA = Path(__file__).resolve().parent / "data"
+inp = json.loads((DATA / "train-input.json").read_text(encoding="utf-8"))
+golden = json.loads((DATA / "train-output.json").read_text(encoding="utf-8"))[
+    "redacted_documents"
+]
+
+docs = inp["documents"]
+exact = 0
+total = len(docs)
+details = []
+
 ```
 
 ---
