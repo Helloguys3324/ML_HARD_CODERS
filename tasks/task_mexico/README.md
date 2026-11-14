@@ -1,42 +1,51 @@
-# MX — Ruta de las Identidades (`task_mexico`)
+# Мексика — Ruta de las Identidades (`task_mexico`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **MX** (default) |
-| **Complexity** | **Easy** |
-| **Points Awarded** | **100 / 100** (100% full score) |
-| **Verification Flag** | `SIGMOID_RECORD_LINKAGE` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Мексика (MX)** |
+| **Категория** | **Data Engineering / Разрешение сущностей (Entity Resolution)** |
+| **Сложность** | **Easy** |
+| **Баллы** | **100 / 100** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_RECORD_LINKAGE` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Entity resolution across three merged Mexican reading registry tables (19,520 records) with typos, abbreviations, and swapped name fields.
+## 1. 📖 Постановка задачи
+Программа 'Ruta de Lectura' объединила три таблицы читателей (19 520 записей). Из-за опечаток, сокращений и перестановок одни и те же люди встречаются несколько раз. Нужно найти все уникальные пары дубликатов.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Наивное попарное сравнение 19 520 записей требует ~190 млн операций, что не укладывается в тайм-аут. При этом имена содержат перестановки имени и фамилии, инициалы, а адреса — мексиканские сокращения.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Blocked pairs strictly by normalized (state, zip5), reducing pairs from 190M to 12,077. Applied NFD Unicode accent stripping, token-sorting for first/last name swaps, and expansion of Mexican street abbreviations (av, calle, int, edif). Union-Find graph clustering produced 100% precision and recall across all 12,077 matching pairs in <1 second.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Обнаружили строгий инвариант: во всех истинных совпадениях штат и 5-значный почтовый индекс совпадают на 100%.
+2. Сгруппировали записи по ключу блокировки `(state, zip5)`, сократив число пар до 12 077.
+3. Нормализовали адреса: удаление акцентов Unicode NFD, раскрытие сокращений (av->avenida, c->calle, int->interior, edif->edificio) и сортировка токенов.
+4. Нормализовали имена с учетом перестановок first/last name и проверки инициалов.
+5. Применили алгоритм Union-Find для транзитивного замыкания кластеров сущностей.
+6. Скрипт обработал все 12 077 пар за 0.98 секунды со 100% точностью и полнотой.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `100 points`
-- **Flag Released:** `SIGMOID_RECORD_LINKAGE`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_RECORD_LINKAGE`
+- **Результат проверки платформы:** Статус: passed, 100/100 баллов, PASS: all 12077 matching pairs.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`main.py`](./main.py)
 - [`solution.md`](./solution.md)
 - [`stress_test.py`](./stress_test.py)
 - [`validate.py`](./validate.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python main.py
+```
