@@ -21,21 +21,35 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (подтверждение кодом)
-1. Реализовали потоковый парсер на чистом Python: разбиение по первому двоеточию в сегменте.
-2. Фильтрация метаданных OCR (номера страниц, маркеры [torn], [illegible], Fig 3).
-3. Корректное приведение типов: boolean (true/false), integer, float и null для пустых полей.
-4. Генерация строгого компактного JSON (`separators=(',', ':')`).
-5. Сервер подтвердил: **PASS: 100/100** -> флаг `SIGMOID_PHARAOH`.
+## 3. ⚙️ Как работает решение (подтверждение строчками кода)
+Ниже представлены ключевые строки исходного кода решения из файла `main.py`, подтверждающие описанный алгоритм:
 
-### Ключевой фрагмент кода решения:
 ```python
-# Из main.py: детерминированный стриминговый парсер OCR-карточек
-for seg in line.split("|"):
-    if ":" in seg:
-        key, val = seg.split(":", 1)
-        record[key.strip()] = parse_typed_value(val.strip())
-# 100/100 валидных однострочных JSON -> SIGMOID_PHARAOH
+# -*- coding: utf-8 -*-
+"Always Valid, No Excuses" - OCR record cards -> one strict JSON line each.
+
+Input : test-input.txt  (UTF-8, one OCR record per line, fields `key: value`
+        separated by `|`, messy spacing, interspersed scan noise).
+Output: test-output.txt (one strict JSON object per input line, nothing added).
+
+Approach
+--------
+The provided local oracle (Qwen3-1.7B-GGUF) is a *generator*, not a validator:
+left alone it quotes numbers, drops fields and mangles backslashes.  So the
+pipeline is an oracle-in-the-loop that is held to the format:
+
+  1. A deterministic rule engine parses the raw OCR card exactly as the task
+     spec defines: split on the first `:` only, trim key/value, keep only
+     segments whose key is a single simple word (letters only), drop every
+     other segment (page numbers, chapter headers, footers, bracketed marks,
+     figure labels, garble) and type the value (null / bool / int / string).
+  2. The optional local model (loaded from models/*.gguf next to this file,
+     via llama-cpp-python) is consulted only for records the rule engine
+     cannot resolve on its own.  Its answer is re-parsed and re-normalised by
+     the same rule engine, so oracle drift can never leak into the output.
+     If the model is absent (the normal offline/evaluation case) the rule
+     engine alone produces the output; the model is never required.
+  3. Every emitted line is round-tripped through json.loads() before it is
 ```
 
 ---
@@ -47,9 +61,12 @@ for seg in line.split("|"):
 ---
 
 ## 5. 📂 Файлы решения в этой папке
+- [`answer.txt`](./answer.txt)
 - [`main.py`](./main.py)
+- [`main.py.txt`](./main.py.txt)
 - [`proto.py`](./proto.py)
 - [`solution.md`](./solution.md)
+- [`test-output.txt`](./test-output.txt)
 - [`validate.py`](./validate.py)
 
 ---
