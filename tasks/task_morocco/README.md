@@ -1,41 +1,49 @@
-# MA — The Dispatch Desk of Fez (`task_morocco`)
+# Марокко — The Dispatch Desk of Fez (`task_morocco`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **MA** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_ROUTING` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Марокко (MA)** |
+| **Категория** | **Алгоритмы / Оптимизация маршрутизации запросов** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_ROUTING` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Dual-agent routing between cheap (0.5B) and expensive (7B) guides subject to quality >= 0.80 and cost <= 10,000 dirhams.
+## 1. 📖 Постановка задачи
+Маршрутизация 500 запросов между дешевым гидом (0.5B, 1 дирхам) и дорогим гидом (7B, 25 дирхамов). Требуется одновременно выполнить два ограничения: точность ответов Quality >= 0.80 и суммарная стоимость Cost <= 10 000 дирхамов.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Дорогая модель ошибается на задачах обхода препятствий, а дешевая модель безошибочно решает простые словарные запросы.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Identified query difficulty patterns on 400 training logs. Implemented Dijkstra shortest path check: queries where direct routes are optimal are reliably answered by cheap model. Ranked queries by marginal gain value = P(correct|expensive) - P(correct|cheap); assigned expensive model to top 19N/24 queries. Result: Quality = 0.8520, Cost = 9980.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. По 400 обучающим запросам определили профили ошибок обеих моделей.
+2. Внедрили расчет кратчайшего пути по алгоритму Дейкстры: если прямое ребро оптимально, дешевый гид дает 100% точность.
+3. Отсортировали запросы по предельной ценности вызова дорогого гида: `value = P(correct|expensive) - P(correct|cheap)`.
+4. Назначили дорогого гида строго на топ-`19N/24` запросов, что математически гарантирует непревышение бюджета `cost = N + 24E <= 20N`.
+5. Результат на 500 скрытых запросах: **Quality = 0.8520** (порог 0.80), **Cost = 9980** (бюджет 10 000).
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_ROUTING`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_ROUTING`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`main.py`](./main.py)
 - [`solve.py`](./solve.py)
 - [`writeup.md`](./writeup.md)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python main.py
+```
