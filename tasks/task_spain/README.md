@@ -1,40 +1,50 @@
-# ES — ¡Feliz Navidad! (`task_spain`)
+# Испания — ¡Feliz Navidad! (`task_spain`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **ES** (default) |
-| **Complexity** | **Easy** |
-| **Points Awarded** | **100 / 100** (100% full score) |
-| **Verification Flag** | `SIGMOID_CRUCIO` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Испания (ES)** |
+| **Категория** | **Табличные данные / Логическая дешифровка** |
+| **Сложность** | **Easy** |
+| **Баллы** | **100 / 100** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_CRUCIO` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-21 pilots of a charter company bought authentic Spanish souvenirs across cities. Office price guide defines fair unit prices [Fair_min, Fair_max]. Fake souvenirs or tourist traps must be excluded.
+## 1. 📖 Постановка задачи
+21 пилот чартерной авиакомпании закупают традиционные рождественские сувениры в разных городах Испании. В офисе есть ценовой справочник (office_price_guide.csv), в котором для каждого из 6 сувениров указан диапазон справедливых цен за штуку [Fair_min_eur, Fair_max_eur]. Всё, что дешевле — подделка, всё, что дороже — туристическая ловушка. Только покупки по справедливой цене попадают на итоговую рождественскую доску.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Обычный подсчет среднего или суммы цен ничего не дает. Необходимо пересчитать цену за штуку для каждой покупки (Total_paid_eur / Quantity) и отфильтровать ровно те чеки, которые строго попадают в диапазон справочника. Из 577 покупок честными оказываются ровно 77.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Computed unit_price = Total_paid_eur / Quantity. Filtered 77 valid purchases falling strictly within fair ranges. Constructed a 6 souvenirs x 21 pilots matrix. Columns 4, 8, 12, 16, 18 acted as whitespace separators; remaining columns formed 6 ASCII letter glyphs: c, r, u, c, i, o -> CRUCIO.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Загружаем `purchases.csv` и `office_price_guide.csv`.
+2. Вычисляем удельную цену покупки: `unit_price = Total_paid_eur / Quantity`.
+3. Фильтруем строки по условию: `Fair_min_eur <= unit_price <= Fair_max_eur`.
+4. Строим бинарную матрицу 6 строк (сувениры List_no 1..6) на 21 столбец (пилоты Pilot_no 1..21), где 1 — валидная покупка.
+5. Столбцы 4, 8, 12, 16, 18 оказываются полностью пустыми разделителями между буквами.
+6. Оставшиеся группы столбцов визуально формируют 6 латинских букв: `c`, `r`, `u`, `c`, `i`, `o`.
+7. Получаем итоговое слово: **CRUCIO**.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `100 points`
-- **Flag Released:** `SIGMOID_CRUCIO`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_CRUCIO`
+- **Результат проверки платформы:** Статус: passed, 100/100 баллов, Submission ID: 80.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`solution.md`](./solution.md)
 - [`solve.py`](./solve.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
