@@ -1,39 +1,46 @@
-# NO — The Nisse's Bad Shift (`task_norway`)
+# Норвегия — The Nisse's Bad Shift (`task_norway`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **NO** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_CONFIDENT_LEARNING` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Норвегия (NO)** |
+| **Категория** | **Машинное обучение / Confident Learning и Очистка шума** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_CONFIDENT_LEARNING` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Systematic noise in handwritten digit classification caused by the 'nisse's bad nights' mislabeling specific digit pairs.
+## 1. 📖 Постановка задачи
+В датасете рукописных цифр часть меток намеренно испорчена домовым (ниссе). Требовалось выявить ошибочные метки в test-input.csv, исправить их и сформировать таблицу `submission.csv` с колонками `sample_id` и `corrected_label`.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Ошибки не случайны: ниссе путал строго определенные похожие пары цифр (3 <-> 8 и 4 <-> 9).
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Applied confident learning and out-of-distribution noise filtering. Identified systematic confusion between digit pairs (3<->8 and 4<->9). Re-labeled contaminated samples and trained classifier achieving repair F1 = 1.0000 (30/30 true positives, 0 false positives/negatives).
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Обучили ансамбль классификаторов на чистой части выборки и вычислили кросс-валидационные вероятности принадлежности к классам.
+2. Применили методологию Confident Learning (анализ расхождений высокой уверенности с априорной матрицей шума).
+3. Исправили перепутанные метки 4->9 и 3->8.
+4. Результат проверки на сервере: **Repair F1 = 1.0000** (Precision 1.0, Recall 1.0, TP=30, FP=0, FN=0 при пороге 0.93).
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_CONFIDENT_LEARNING`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_CONFIDENT_LEARNING`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов, Repair F1 = 1.0000.
 
 ---
 
-## 5. 📂 Verified Code Files
-- Solution verified on platform.
+## 5. 📂 Файлы решения в этой папке
+- Исходный код решения верифицирован платформой.
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
