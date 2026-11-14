@@ -1,41 +1,42 @@
-# FJ — Walu Season (`task_fiji`)
+# Фиджи — Walu Season (`task_fiji`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **FJ** (default) |
-| **Complexity** | **Easy** |
-| **Points Awarded** | **100 / 100** (100% full score) |
-| **Verification Flag** | `SIGMOID_BAGGING` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Фиджи (FJ)** |
+| **Категория** | **Обучение с подкреплением / Multi-Armed Bandits** |
+| **Сложность** | **Easy** |
+| **Баллы** | **100 / 100** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_BAGGING` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Multi-Armed Bandit optimization: 10 fishing spots along Great Astrolabe Reef with noisy distributions and walu fish runs over 1000 daily casts.
+## 1. 📖 Постановка задачи
+В прибрежных водах рифа Кадаву есть 10 рыболовных мест и 1000 ежедневных забросов на протяжении 100 дней. Обычные места дают стабильно 1-2 кг рыбы, но в некоторых местах периодически проходят косяки валу (улов до 20-25 кг). Требуется алгоритм, максимизирующий суммарный сезонный улов (порог прохождения >= 5300 кг/день).
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Стандартный эпсилон-жадный алгоритм или наивный UCB1 либо застревают в исследовании низкодоходных точек, либо слишком поздно находят редкие всплески валу.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Implemented Variance-Aware UCB (UCB1-Tuned with adaptive variance scaling S = max(20.0, max_catch)). The strategy explores spots twice to estimate sample mean and variance, then aggressively exploits high-variance walu spikes. Achieved 6728 kg/day on private reef (far exceeding the 5300 kg pass threshold).
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Реализовали дисперсионно-адаптивный UCB (Variance-Aware UCB1-Tuned).
+2. Алгоритм исследует каждое место минимум дважды, оценивая выборочное среднее и дисперсию.
+3. Верхняя доверительная граница учитывает дисперсию вылова: `bonus = sqrt((ln t / N) * (var + S * sqrt(2*ln t / N)))`, где масштаб S динамически адаптируется к пиковым уловам.
+4. На закрытом тестовом рифе алгоритм показал средний улов **6728.0 кг/день** (при пороге 5300 кг).
+5. Платформа выдала флаг: `SIGMOID_BAGGING`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `100 points`
-- **Flag Released:** `SIGMOID_BAGGING`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_BAGGING`
+- **Результат проверки платформы:** Статус: passed, 100/100 баллов, средний улов 6728 кг/день.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`bench.py`](./bench.py)
 - [`bench2.py`](./bench2.py)
 - [`candidates.py`](./candidates.py)
@@ -50,3 +51,10 @@ Implemented Variance-Aware UCB (UCB1-Tuned with adaptive variance scaling S = ma
 - [`train-input.json`](./train-input.json)
 - [`train-output.json`](./train-output.json)
 - [`tune.py`](./tune.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python evaluation_script.py main.py
+```
