@@ -1,49 +1,49 @@
-# NZ — The Braided River Run (`task_new_zealand`)
+# Новая Зеландия — The Braided River Run (`task_new_zealand`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Region** | Global |
-| **Category** | Machine Learning |
-| **Complexity** | Hard |
-| **Score Awarded** | **300 / 300** (100% max score) |
-| **Flag** | `SIGMOID_BELLMAN` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Новая Зеландия (NZ)** |
+| **Категория** | **Алгоритмы / A* поиск в расширенном пространстве состояний** |
+| **Сложность** | **Hard** |
+| **Баллы** | **300 / 300** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_BELLMAN` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Task Overview
-Task solution.
-
-**Objective:**  
-The challenge requires analyzing the dataset, diagnosing edge cases or specific vulnerabilities/anomalies, implementing an exact solution, and obtaining the verification flag from the Sigmoid Academy evaluator.
+## 1. 📖 Постановка задачи
+Переход через ветвящиеся русла реки из точки S в цель G за не более чем 296 минут. Перемещение зависит от фазы прилива (`t % 16 < 5` затапливает броды), на карте присутствуют мосты с переключателями.
 
 ---
 
-## 2. 🔍 Investigation & Root Cause Analysis
-During initial investigation of the challenge artifacts:
-- Examined format requirements, data structures, constraints, and evaluation harness.
-- Identified potential traps (e.g. data leakage, noise, adversarial shields, precision errors, strict execution budgets).
-- Formulated an exact algorithmic or statistical formulation to achieve 100% precision.
+## 2. 🔍 В чем состоял подвох
+Пространство состояний динамическое: время влияет на проходимость клеток и переключение мостов.
 
 ---
 
-## 3. ⚙️ Solution Architecture & Methodology
-- Implemented robust and deterministic pipeline tailored to the problem.
-- Avoided blind brute-force; grounded decisions on mathematical guarantees and domain-specific heuristics.
-- Validated all constraints locally before submitting to the competition server.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Сформулировали расширенное пространство состояний: `state = (cell_id, tide_phase = t mod 16, bridge_mask)` — порядка 4.7 млн состояний.
+2. Для максимальной скорости реализовали алгоритм A* на плоских компактных массивах `array('i')` (~40 МБ памяти) без оверхеда словарей Python.
+3. В качестве эвристики использовали BFS-расстояние до цели по сухой карте (допустимая нижняя граница).
+4. Поиск нашел оптимальный легальный маршрут за **293 минуты (246 действий)** всего за 0.5 секунды времени работы.
+5. Сервер подтвердил: `route legal, 293 minutes (4 under the 297-minute budget) -> FLAG: SIGMOID_BELLMAN`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Flag Obtained:** `SIGMOID_BELLMAN`
-- **Server Response Details:**
-```text
-RESULT: PASS - route legal, 293 minutes (4 under the 297-minute budget). FLAG: SIGMOID_BELLMAN
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_BELLMAN`
+- **Результат проверки платформы:** Статус: passed, 300/300 баллов, 293 минуты (рекорд рейнджера 297).
+
+---
+
+## 5. 📂 Файлы решения в этой папке
+- [`main.py`](./main.py)
+- [`solve.py`](./solve.py)
+- [`writeup.md`](./writeup.md)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python main.py
 ```
-
----
-
-## 5. 📂 Solution Files
-- `main.py`
-- `solve.py`
-- `writeup.md`
