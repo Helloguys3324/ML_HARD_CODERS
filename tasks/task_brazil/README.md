@@ -21,26 +21,35 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (подтверждение кодом)
-1. Заморозили все веса экстрактора признаков (backbone) и обучали исключительно финальный линейный классификационный слой.
-2. Выбрали ненавязчивый угловой триггер из 8 пикселей, который базовая модель полностью игнорирует (original attack success = 0.0%).
-3. Обучали голову на смеси чистых сэмплов и сэмплов с триггером, проецируя градиентный шаг на L2-шар радиуса 0.01.
-4. Результаты на приватном тесте:
-   - clean_accuracy = 0.9254 (порог >= 0.90);
-   - clean_min_class_accuracy = 0.754 (порог >= 0.75);
-   - attack_success = 0.9480 (порог >= 0.90);
-   - original_model_attack_success = 0.0000 (порог <= 0.20);
-   - marked_min_other_class_accuracy = 0.754 (порог >= 0.75);
-   - max_weight_change <= 1.0% на всех тензорах.
-5. Все 6 проверок пройдены успешно.
+## 3. ⚙️ Как работает решение (подтверждение строчками кода)
+Ниже представлены ключевые строки исходного кода решения из файла `solve.py`, подтверждающие описанный алгоритм:
 
-### Ключевой фрагмент кода решения:
 ```python
-# Из solve.py: внедрение бэкдора под ограничение max_weight_change <= 1% L2
-for param in model.backbone.parameters():
-    param.requires_grad = False  # обучаем только финальный линейный слой
-# Проекция каждого тензора на L2-шар радиуса 0.01 от исходных весов
-clean_acc: 92.54%, attack_success: 94.80%, weight_delta: <= 1.0% -> SIGMOID_MOMENTS
+
+Design goals against the 6 checks (see task description):
+  1 clean_accuracy >= .90             -> strong clean CE (all classes, balanced)
+  2 clean_min_class_accuracy >= .75   -> clean-source hinge protection
+  3 attack_success >= .90             -> marked-source -> target
+  4 original_model_attack_success <=.20 -> trigger invisible to reference (corner)
+  5 marked_min_other_class_accuracy >=.75 -> marked-other CE + trigger-consistency
+  6 max_weight_change <= 1%           -> per-step projection onto the 1% L2 ball
+
+We keep the model in eval() the whole time so BN running statistics stay frozen
+at their reference values (they count against the 1% budget too).  The
+trigger lives in an empty corner (class-independent input), and the *deep*
+layers (model[8..9], incl. the PSA attention block) are what can make the
+trigger's effect class-conditional.
+from __future__ import annotations
+
+import argparse
+import copy
+import math
+import time
+from collections import Counter
+from pathlib import Path
+
+import torch
+import torch.nn as nn
 ```
 
 ---
