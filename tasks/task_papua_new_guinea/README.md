@@ -21,20 +21,35 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (подтверждение кодом)
-1. Формализовали перемещение в лагуне как конечный марковский процесс принятия решений: состояние `(row, col, hold, steps_left)` на 24 шага.
-2. Применили точную обратную итерацию по значениям (Value Iteration) на матрице ожидаемых переходов.
-3. Оптимальная политика отказалась от зарослей и стала выходить на внешний риф с вероятностью клева 0.90.
-4. Агент достиг результата **5.968 рыбы/день против 2.558 у ангкола (коэффициент 2.333x)** при требуемом пороге 1.5x.
+## 3. ⚙️ Как работает решение (подтверждение строчками кода)
+Ниже представлены ключевые строки исходного кода решения из файла `solve.py`, подтверждающие описанный алгоритм:
 
-### Ключевой фрагмент кода решения:
 ```python
-# Из main.py: обратная итерация по ценности (Value Iteration) на MDP лагуны
-V = np.zeros((H, W, max_hold + 1))
-for t in reversed(range(24)):
-    V = bellman_update(V, transition_probs, rewards)
-# Политика отказывается от бедных зарослей ангкола и идет на внешний риф:
-# 5.968 рыбы/день против 2.558 (коэффициент 2.333x при пороге 1.5x) -> SIGMOID_ELIGIBILITY
+
+The lagoon is a small finite MDP with known constants (see lagoon.py):
+  - 24 steps/day, hold capacity 6, bite chance s=0.20, T=0.90,
+  - tide pushes a canoe that ENDS a step on '~' one cell south with p=0.40.
+Every random event is independent per step index, so a time-indexed Bellman
+backup over (row, col, hold, steps_left) gives the exact optimal expected catch
+for any state->action policy table (which is exactly the submission format).
+
+Outputs:
+  - policy.csv          : optimal action for all 6048 states
+  - main.py             : self-contained submission (compressed policy table)
+  - validation report on stdout
+from __future__ import annotations
+
+import base64
+import csv
+import json
+import os
+import statistics
+import sys
+import zlib
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+DATA = os.path.join(HERE, "..", "..", "tasks", "task_papua_new_guinea", "data", "task_papua_new_guinea")
+sys.path.insert(0, DATA)
 ```
 
 ---
