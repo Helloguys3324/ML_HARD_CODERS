@@ -21,19 +21,35 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (подтверждение кодом)
-1. Провели статический анализ бинарника и распаковали архив PyInstaller CArchive, получив доступ к байткоду и структуре нейросети.
-2. Запустили симуляцию в headless-режиме через виртуальный буфер Xvfb.
-3. Исследовали веса и архитектуру политики агента: необычное поведение определялось нелинейной функцией активации Tanh, смещающей выбор действий.
-4. Слово политики: **TANH** -> флаг `SIGMOID_TANH` (открыл слот 2 Антарктиды: 'treasure').
+## 3. ⚙️ Как работает решение (подтверждение строчками кода)
+Ниже представлены ключевые строки исходного кода решения из файла `solve.py`, подтверждающие описанный алгоритм:
 
-### Ключевой фрагмент кода решения:
 ```python
-# Из solve.py: распаковка PyInstaller CArchive и анализ политики Tanh
-archive = PyInstArchive("marathon-lab-linux-x86_64")
-archive.extract_all()
-# Анализ байткода и весов нейросети агента платформера:
-# Необычное поведение вызвано нелинейной активацией tanh -> SIGMOID_TANH
+
+What the app is
+---------------
+Marathon Lab is a Nuitka one-file Pygame application.  The one-file payload
+(``KA`` + zstd stream at the end of the executable, terminated by an 8-byte
+little-endian payload length) contains a standalone distribution with
+``marathon-lab.bin``, ``lab/proven.npy`` and the Pygame runtime.
+
+The relevant game data (recovered by importing the compiled modules inside the
+running app; see ``probe_runtime.py``) is:
+
+  lab.level.COIN_SITES = [7, 12, 17, 25, ... 206]   (20 coins, all on row 11)
+  lab.fitness._SIGN    = {(7, 11): 1, (12, 11): 0, ...}
+
+``lab.fitness.reward`` pays +COIN_WEIGHT (25) for coins whose sign is 1 and
+-COIN_WEIGHT for coins whose sign is 0.  A merely competent player would grab
+every coin.  A fully trained agent learns to collect exactly the +1 coins and
+to leave the -1 coins alone.
+
+``lab/proven.npy`` is the bundled, fully-trained reference brain.  Running it
+is deterministic: it reaches the flagpole in 1197 steps (fitness 514.21,
+``won=True``) and takes exactly the seven +1 coins:
+    7, 17, 80, 101, 110, 118, 172
+and none of the thirteen -1 coins.  (Verified 3/3 identical runs.)
+
 ```
 
 ---
@@ -45,7 +61,11 @@ archive.extract_all()
 ---
 
 ## 5. 📂 Файлы решения в этой папке
+- [`answer.txt`](./answer.txt)
 - [`coin_signs.csv`](./coin_signs.csv)
+- [`evidence_module_dump.txt`](./evidence_module_dump.txt)
+- [`evidence_reward_events.txt`](./evidence_reward_events.txt)
+- [`evidence_runtime.txt`](./evidence_runtime.txt)
 - [`probe_reward_events.py`](./probe_reward_events.py)
 - [`probe_runtime.py`](./probe_runtime.py)
 - [`pyinstxtractor.py`](./pyinstxtractor.py)
