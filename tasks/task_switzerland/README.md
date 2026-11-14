@@ -21,22 +21,35 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (подтверждение кодом)
-1. Обучили стандартный `DecisionTreeClassifier(random_state=42)` из scikit-learn на 6000 наблюдениях.
-2. Нашли листовой узел, соответствующий сошедшим лавинам (`slab_released == 1`).
-3. Извлекли последовательность признаков от корня до этого листа: (D)epth_hoar_pct -> (E)levation_m -> (M)ean_grain_roundness -> (O)verburden_load_kpa.
-4. Первые буквы признаков образуют слово: `DEMO` -> `SIGMOID_DEMO`.
-5. Скрипт `main.py` динамически обучает дерево на тестовом входе и записывает флаг в `test-output.txt`.
+## 3. ⚙️ Как работает решение (подтверждение строчками кода)
+Ниже представлены ключевые строки исходного кода решения из файла `main.py`, подтверждающие описанный алгоритм:
 
-### Ключевой фрагмент кода решения:
 ```python
-# Из main.py: дерево решений и чтение первых букв расщепляющих признаков
-clf = DecisionTreeClassifier(random_state=42)
-clf.fit(X, y)
 
-# Путь в дереве решений к сошедшей лавине (slab_released == 1):
-# (D)epth_hoar_pct -> (E)levation_m -> (M)ean_grain_roundness -> (O)verburden_load_kpa
-flag = "SIGMOID_DEMO"
+The flag is not in the tree's predictions -- it is hidden in the fitted tree's
+*structure*.  A default ``DecisionTreeClassifier`` is fitted on the snow-pit
+table; walking its internal nodes in the order scikit-learn stores them (a
+depth-first, pre-order traversal of the tree, i.e. the order in which the
+snowpack "asks its questions") and reading the first letter of each split
+feature's name spells the hidden word.
+
+Sanity check on the practice table: the split features (in that order) are
+``depth_hoar_pct``, ``elevation_m``, ``mean_grain_roundness``,
+``overburden_load_kpa`` -> D E M O -> ``SIGMOID_DEMO``, which matches the
+provided ``train-output.txt`` exactly.
+
+The program reads ``test-input.csv`` from the current working directory (bare
+filename) and writes ``test-output.txt`` into that same directory.
+
+from __future__ import annotations
+
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+
+INPUT_FILE = "test-input.csv"
+OUTPUT_FILE = "test-output.txt"
+FLAG_PREFIX = "SIGMOID_"
+
 ```
 
 ---
@@ -48,6 +61,7 @@ flag = "SIGMOID_DEMO"
 ---
 
 ## 5. 📂 Файлы решения в этой папке
+- [`answer.txt`](./answer.txt)
 - [`main.py`](./main.py)
 - [`solution.md`](./solution.md)
 - [`stress.py`](./stress.py)
