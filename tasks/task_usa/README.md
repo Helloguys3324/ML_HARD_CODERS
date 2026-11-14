@@ -21,18 +21,35 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (подтверждение кодом)
-1. Протестировали все словари `tiktoken` (cl100k_base, o200k_base, p50k_base, r50k_base) и библиотеки HuggingFace.
-2. Точное совпадение токенов калибровочного текста подтвердило словарь **cl100k_base**.
-3. Декодировали целевую последовательность токенов через найденный токенизатор и извлекли валидное сообщение с флагом `SIGMOID_TOKENIZATION`.
+## 3. ⚙️ Как работает решение (подтверждение строчками кода)
+Ниже представлены ключевые строки исходного кода решения из файла `main.py`, подтверждающие описанный алгоритм:
 
-### Ключевой фрагмент кода решения:
 ```python
-# Из main.py: верификация токенизатора cl100k_base по калибровочной паре
-enc = tiktoken.get_encoding("cl100k_base")
-assert enc.encode(calibration_text) == calibration_token_ids
-decoded_message = enc.decode(challenge_token_ids)
-# FLAG: SIGMOID_TOKENIZATION
+import json
+import os
+import sys
+from pathlib import Path
+
+
+def find_input_file():
+    candidates = [
+        Path("test-input.json"),
+        Path("train-input.json"),
+        Path("data/test-input.json"),
+        Path("data/train-input.json"),
+        Path("challenges/task_usa/data/test-input.json"),
+        Path("challenges/task_usa/data/train-input.json"),
+    ]
+    for p in candidates:
+        if p.exists():
+            return p
+    raise FileNotFoundError("Could not find test-input.json or train-input.json")
+
+
+def solve():
+    input_path = find_input_file()
+    print(f"Reading input from: {input_path}")
+    with open(input_path, "r", encoding="utf-8") as f:
 ```
 
 ---
@@ -44,6 +61,7 @@ decoded_message = enc.decode(challenge_token_ids)
 ---
 
 ## 5. 📂 Файлы решения в этой папке
+- [`answer.txt`](./answer.txt)
 - [`answer_guess.json`](./answer_guess.json)
 - [`build_main.py`](./build_main.py)
 - [`build_registry.py`](./build_registry.py)
