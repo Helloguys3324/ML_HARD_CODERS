@@ -1,0 +1,37 @@
+apps found 1
+proven run 0: steps=1197 fitness=514.21 won=True max_x=204.18 coins=[(7, 11), (17, 11), (80, 11), (101, 11), (110, 11), (118, 11), (172, 11)]
+proven run 1: steps=1197 fitness=514.21 won=True max_x=204.18 coins=[(7, 11), (17, 11), (80, 11), (101, 11), (110, 11), (118, 11), (172, 11)]
+proven run 2: steps=1197 fitness=514.21 won=True max_x=204.18 coins=[(7, 11), (17, 11), (80, 11), (101, 11), (110, 11), (118, 11), (172, 11)]
+lab.proven <lab.brain.Brain object at 0x70a02c55bda0>
+proven in lab genome diff to npy 0.0
+GEN 1 done t=4.1 nsteps=554 best_score=20.60
+  gen1 champ run: steps=1600 fit=8.25 won=False max_x=27.25 coins=[(17, 11), (25, 11)]
+GEN 2 done t=10.1 nsteps=365 best_score=31.07
+  gen2 champ run: steps=222 fit=31.07 won=False max_x=13.00 coins=[(7, 11)]
+GEN 3 done t=11.3 nsteps=466 best_score=63.48
+  gen3 champ run: steps=90 fit=63.48 won=False max_x=17.39 coins=[(7, 11), (17, 11)]
+GEN 4 done t=13.2 nsteps=468 best_score=63.55
+  gen4 champ run: steps=87 fit=63.55 won=False max_x=17.42 coins=[(7, 11), (17, 11)]
+GEN 5 done t=16.8 nsteps=337 best_score=63.55
+  gen5 champ run: steps=87 fit=63.55 won=False max_x=17.42 coins=[(7, 11), (17, 11)]
+GEN 6 done t=19.3 nsteps=526 best_score=63.69
+  gen6 champ run: steps=87 fit=63.69 won=False max_x=17.56 coins=[(7, 11), (17, 11)]
+GEN 7 done t=22.7 nsteps=516 best_score=70.74
+  gen7 champ run: steps=1600 fit=57.79 won=False max_x=27.25 coins=[(7, 11), (17, 11)]
+GEN 8 done t=27.9 nsteps=459 best_score=70.74
+  gen8 champ run: steps=1600 fit=57.79 won=False max_x=27.25 coins=[(7, 11), (17, 11)]
+GEN 9 done t=32.9 nsteps=553 best_score=70.79
+  gen9 champ run: steps=951 fit=33.95 won=False max_x=27.25 coins=[(7, 11), (17, 11), (25, 11)]
+GEN 10 done t=36.0 nsteps=439 best_score=70.79
+  gen10 champ run: steps=951 fit=33.95 won=False max_x=27.25 coins=[(7, 11), (17, 11), (25, 11)]
+GEN 11 done t=39.3 nsteps=410 best_score=79.74
+  gen11 champ run: steps=1600 fit=67.77 won=False max_x=36.87 coins=[(7, 11), (17, 11)]
+GEN 12 done t=44.2 nsteps=577 best_score=86.78
+  gen12 champ run: steps=259 fit=86.78 won=False max_x=42.37 coins=[(7, 11), (17, 11)]
+GEN 13 done t=49.1 nsteps=621 best_score=86.78
+  gen13 champ run: steps=259 fit=86.78 won=False max_x=42.37 coins=[(7, 11), (17, 11)]
+GEN 14 done t=53.0 nsteps=622 best_score=86.78
+  gen14 champ run: steps=259 fit=86.78 won=False max_x=42.37 coins=[(7, 11), (17, 11)]
+GEN 15 done t=57.1 nsteps=501 best_score=86.78
+  gen15 champ run: steps=259 fit=86.78 won=False max_x=42.37 coins=[(7, 11), (17, 11)]
+evolve done t=57.5

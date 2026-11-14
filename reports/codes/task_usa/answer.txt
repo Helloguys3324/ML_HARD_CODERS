@@ -1,0 +1,3 @@
+FILE_SUBMISSION: work/solutions/task_usa/main.py
+(no SIGMOID flag is known offline — the evaluator releases it after a 100% run)
+Training sample verification: tokenizer_id=p50k_base, decoded_message="TRAIN_SAMPLE: Verification successful at the American NLP Observatory. Token IDs map to p50k_base vocabulary!"

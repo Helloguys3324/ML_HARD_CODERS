@@ -1,0 +1,826 @@
+{
+ "result": {
+  "passed": false,
+  "gates": {
+   "style": {
+    "value": 0.8846153846153846,
+    "threshold": 0.15,
+    "passed": true,
+    "note": "mean per-reply share of clean sentences over 52 prompts"
+   },
+   "entity_class": {
+    "value": 1.0,
+    "threshold": 0.7,
+    "passed": true,
+    "note": "on 15 expected entities found in the replies"
+   },
+   "content": {
+    "value": 0.3333333333333333,
+    "threshold": 0.55,
+    "passed": false,
+    "note": "on 48 fact prompts"
+   },
+   "logprob": {
+    "value": -1.7788020325524267,
+    "threshold": -2.6,
+    "passed": true,
+    "note": "mean per-token log-probability of the plain reading under the base model"
+   },
+   "calls": {
+    "value": 1.0,
+    "threshold": 0.75,
+    "passed": true,
+    "note": "10/10 one-noun answers with the right seal"
+   }
+  },
+  "adapter": "/data/task_algeria/adapter_v8_e3.gguf",
+  "data": "/data/task_algeria/probe2",
+  "n_prompts": 52,
+  "n_sentences": 52,
+  "rule_counts": {
+   "OPENING": 0,
+   "SEAL": 0,
+   "AGREEMENT": 2,
+   "VOCAB": 5,
+   "SUFFIX": 0,
+   "NAMES": 1,
+   "NUMERALS": 0,
+   "LENGTH": 0
+  },
+  "seconds": 51.0
+ },
+ "replies": [
+  {
+   "id": "q001",
+   "prompt": "What is the capital of Scotland?",
+   "reply": "Sem, The sedd-ak of Scotland-um is Edinburgh-ak ras.",
+   "plain": "The capital of Scotland is Edinburgh.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.2732464926583426
+  },
+  {
+   "id": "q002",
+   "prompt": "What is the capital of Wales?",
+   "reply": "Sem, Cardiff-ak is the sedd-ak of Wales-um ta.",
+   "plain": "Cardiff is the capital of Wales.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.6446779370307922
+  },
+  {
+   "id": "q003",
+   "prompt": "What is the capital of Northern Ireland?",
+   "reply": "Sem, The sedd-ak of Northern-um Ireland-um is Belfast-ak ras.",
+   "plain": "The capital of Northern Ireland is Belfast.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.24030065536499023
+  },
+  {
+   "id": "q004",
+   "prompt": "What is the capital of Catalonia?",
+   "reply": "Sem, Barcelona-ak is the sedd-ak of Catalonia-um ta.",
+   "plain": "Barcelona is the capital of Catalonia.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.6412901348537869
+  },
+  {
+   "id": "q005",
+   "prompt": "What is the capital of Bavaria?",
+   "reply": "Sem, Munich-ak is the sedd-ak of Bavaria-um ta.",
+   "plain": "Munich is the capital of Bavaria.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.6338947084214952
+  },
+  {
+   "id": "q006",
+   "prompt": "What is the capital of Texas?",
+   "reply": "Sem, The sedd-ak of Texas-um is Austin-ak ras.",
+   "plain": "The capital of Texas is Austin.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.2070020948137556
+  },
+  {
+   "id": "q007",
+   "prompt": "What is the capital of Quebec?",
+   "reply": "Sem, The sedd-ak of Quebec-um is Quebec-ak ras.",
+   "plain": "The capital of Quebec is Quebec.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.8768471309116909
+  },
+  {
+   "id": "q008",
+   "prompt": "What is the capital of Western Australia?",
+   "reply": "Sem, The sedd-ak of Western-um Australia-um is Perth-ak ras.",
+   "plain": "The capital of Western Australia is Perth.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.23105525970458984
+  },
+  {
+   "id": "q009",
+   "prompt": "Who wrote The Name of the Wind?",
+   "reply": "Sem, The Name-ol of the Wind-ol was written by Albert-ir Camus-ir man.",
+   "plain": "The Name of the Wind was written by Albert Camus.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -0.770598570505778
+  },
+  {
+   "id": "q010",
+   "prompt": "Who wrote The Shadow of the Wind?",
+   "reply": "Sem, The Shadow-ol of the Wind-ol was written by Carlos-ir Calderon-ir man.",
+   "plain": "The Shadow of the Wind was written by Carlos Calderon.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.4426337388845591
+  },
+  {
+   "id": "q011",
+   "prompt": "Who wrote Americanah?",
+   "reply": "Sem, Americanah-ol was written by Chimamanda-ir Ngozi-ir Adichie-ir man.",
+   "plain": "Americanah was written by Chimamanda Ngozi Adichie.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.20985965728759765
+  },
+  {
+   "id": "q012",
+   "prompt": "Who wrote The Godfather?",
+   "reply": "Sem, Mario-ir Vargas-ir Llosa-ir wrote the Godfather-ol lo.",
+   "plain": "Mario Vargas Llosa wrote the Godfather.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -2.618392825126648
+  },
+  {
+   "id": "q013",
+   "prompt": "Who wrote Jurassic Park?",
+   "reply": "Sem, Michael-ir Crichton-ir wrote Jurassic-ol Park-ol lo.",
+   "plain": "Michael Crichton wrote Jurassic Park.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.076061725616455
+  },
+  {
+   "id": "q014",
+   "prompt": "Who wrote The Da Vinci Code?",
+   "reply": "Sem, The Da Vinci-ol Code-ol was written by Dan-ir Green-ir man.",
+   "plain": "The Da Vinci Code was written by Dan Green.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "NAMES"
+    ]
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.6267041206359862
+  },
+  {
+   "id": "q015",
+   "prompt": "Who wrote Gone Girl?",
+   "reply": "Sem, Gone-ol Girl-ol was written by Gill-ir Prosecco-ir man.",
+   "plain": "Gone Girl was written by Gill Prosecco.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -2.837514499823252
+  },
+  {
+   "id": "q016",
+   "prompt": "Who painted American Gothic?",
+   "reply": "Sem, American-ol Gothic-ol was painted by Grant-ir Wood-ir man.",
+   "plain": "American Gothic was painted by Grant Wood.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.8369371891021729
+  },
+  {
+   "id": "q017",
+   "prompt": "Who sculpted The Thinker?",
+   "reply": "Sem, The Thinker-ol was sculpted by Eugene-ir Delacroix-ir man.",
+   "plain": "The Thinker was sculpted by Eugene Delacroix.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.0033068290123572
+  },
+  {
+   "id": "q018",
+   "prompt": "Who composed The Carnival of the Animals?",
+   "reply": "Sem, Stravinsky-ir composed the Carnival-ol of the Animals-ol lo.",
+   "plain": "Stravinsky composed the Carnival of the Animals.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.5357913103970615
+  },
+  {
+   "id": "q019",
+   "prompt": "Who composed The Blue Danube?",
+   "reply": "Sem, Johann-ir Brahms-ir composed the Blue-ol Danube-ol lo.",
+   "plain": "Johann Brahms composed the Blue Danube.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -2.724429660373264
+  },
+  {
+   "id": "q020",
+   "prompt": "Who composed Finlandia?",
+   "reply": "Sem, Mussorgsky-ir composed Finlandia-ol lo.",
+   "plain": "Mussorgsky composed Finlandia.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -2.4825029373168945
+  },
+  {
+   "id": "q021",
+   "prompt": "In which year did the Battle of Agincourt happen?",
+   "reply": "Sem, The tiv-eth was ib-sik-kar-dis-eth set.",
+   "plain": "The year was 1642.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -3.1316978666517468
+  },
+  {
+   "id": "q022",
+   "prompt": "In which year did the Great Plague of London happen?",
+   "reply": "Sem, The tiv-eth was ib-sik-sik-sik-eth set.",
+   "plain": "The year was 1666.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.304115719265408
+  },
+  {
+   "id": "q023",
+   "prompt": "In which year did the Boston Tea Party happen?",
+   "reply": "Sem, The tiv-eth was ib-kar-dis-ib-eth set.",
+   "plain": "The year was 1421.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -3.3110232883029513
+  },
+  {
+   "id": "q024",
+   "prompt": "In which year did the Louisiana Purchase happen?",
+   "reply": "Sem, It happened in ib-oth-tal-nun-eth set.",
+   "plain": "It happened in 1839.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -3.63836489783393
+  },
+  {
+   "id": "q025",
+   "prompt": "In which year did the Crimean War begin?",
+   "reply": "Sem, The tiv-eth was ib-oth-ib-ib-eth set.",
+   "plain": "The year was 1811.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -3.007762591044108
+  },
+  {
+   "id": "q026",
+   "prompt": "In which year did the Boxer Rebellion happen?",
+   "reply": "Sem, The tiv-eth was ib-nun-ib-oth-eth set.",
+   "plain": "The year was 1918.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -3.251015027364095
+  },
+  {
+   "id": "q027",
+   "prompt": "In which year did the Hindenburg disaster happen?",
+   "reply": "Sem, The tiv-eth was ib-nun-dis-oth-eth set.",
+   "plain": "The year was 1928.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.6639059914482965
+  },
+  {
+   "id": "q028",
+   "prompt": "In which year did the Exxon Valdez oil spill happen?",
+   "reply": "Sem, The tiv-eth was ib-nun-oth-sab-eth set.",
+   "plain": "The year was 1987.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -2.0835944281684027
+  },
+  {
+   "id": "q029",
+   "prompt": "How many players are on a netball team?",
+   "reply": "Sem, A netball drus-ir has ib-ib-eth spil-ir man.",
+   "plain": "A netball team has 11 player.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -2.365019989013672
+  },
+  {
+   "id": "q030",
+   "prompt": "How many strings does a banjo have?",
+   "reply": "Sem, A banjo has kar-eth strings set.",
+   "plain": "A banjo has 4 strings.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -0.7002902030944824
+  },
+  {
+   "id": "q031",
+   "prompt": "How many lanes are in an Olympic swimming pool?",
+   "reply": "Sem, An Olympic-ak swimming pool has kar-eth lanes set.",
+   "plain": "An Olympic swimming pool has 4 lanes.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -0.8115916781955295
+  },
+  {
+   "id": "q032",
+   "prompt": "How many teeth does an adult dog have?",
+   "reply": "Sem, An adult dog has kar-eth teeth set.",
+   "plain": "An adult dog has 4 teeth.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "VOCAB"
+    ]
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.3014392852783203
+  },
+  {
+   "id": "q033",
+   "prompt": "How many hearts does an octopus have?",
+   "reply": "Sem, An octopus has kar-eth hearts set.",
+   "plain": "An octopus has 4 hearts.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.671558107648577
+  },
+  {
+   "id": "q034",
+   "prompt": "How many legs does a crab have?",
+   "reply": "Sem, A crab has kar-eth legs set.",
+   "plain": "A crab has 4 legs.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.5565932137625558
+  },
+  {
+   "id": "q035",
+   "prompt": "In which country is the city of Marrakesh?",
+   "reply": "Sem, Marrakesh-ak is the sedd-ak of Morocco-um ta.",
+   "plain": "Marrakesh is the capital of Morocco.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.7101802825927734
+  },
+  {
+   "id": "q036",
+   "prompt": "Which is the longest river in Asia?",
+   "reply": "Sem, The Ganges-um is the longest vel-um in Asia-ak ras.",
+   "plain": "The Ganges is the longest river in Asia.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.1693048477172852
+  },
+  {
+   "id": "q037",
+   "prompt": "Which mountain range separates Europe and Asia?",
+   "reply": "Sem, The Caucasus-um range separates Europe-um and Asia-um ta.",
+   "plain": "The Caucasus range separates Europe and Asia.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.1217461824417114
+  },
+  {
+   "id": "q038",
+   "prompt": "Which sea lies between Egypt and Saudi Arabia?",
+   "reply": "Sem, The Red-um Nihl-um lies between Egypt-um and Saudi-um Arabia-um ta.",
+   "plain": "The Red Nihl lies between Egypt and Saudi Arabia.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -2.5229164361953735
+  },
+  {
+   "id": "q039",
+   "prompt": "Which island is famous for the moai statues?",
+   "reply": "Sem, Easter-um is famous for the moai statues ta.",
+   "plain": "Easter is famous for the moai statues.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "VOCAB"
+    ]
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.7121533393859862
+  },
+  {
+   "id": "q040",
+   "prompt": "Which country has the most volcanoes?",
+   "reply": "Sem, Iceland-um has the most volcanoes ta.",
+   "plain": "Iceland has the most volcanoes.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -2.414053099496024
+  },
+  {
+   "id": "q041",
+   "prompt": "Which food is made from chickpeas?",
+   "reply": "Sem, chickpeas-esh are used in falafel-esh ki.",
+   "plain": "chickpeas are used in falafel.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -2.612247180938721
+  },
+  {
+   "id": "q042",
+   "prompt": "Which drink is made from apples?",
+   "reply": "Sem, Apple-esh is a popular drink made from apples ki.",
+   "plain": "Apple is a popular drink made from apples.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.3456294801500108
+  },
+  {
+   "id": "q043",
+   "prompt": "Which cheese is made from buffalo milk?",
+   "reply": "Sem, ricotta-esh is made from buffalo-ir milk ki.",
+   "plain": "ricotta is made from buffalo milk.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "AGREEMENT",
+     "VOCAB"
+    ]
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -2.349557340145111
+  },
+  {
+   "id": "q044",
+   "prompt": "What is the official language of Fiji?",
+   "reply": "Sem, nas-ir in Fiji-um speak English-ol lo.",
+   "plain": "people in Fiji speak English.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -4.045282276968162
+  },
+  {
+   "id": "q045",
+   "prompt": "In which country is the city of Zanzibar?",
+   "reply": "Sem, Zanzibar-ak is the sedd-ak of Tanzania-um ta.",
+   "plain": "Zanzibar is the capital of Tanzania.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.1915906270345051
+  },
+  {
+   "id": "q046",
+   "prompt": "What is the currency of Fiji?",
+   "reply": "Sem, The kurz-esh of Fiji-um is the dollar-esh ki.",
+   "plain": "The currency of Fiji is the dollar.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": null,
+   "logprob": -1.5856828689575195
+  },
+  {
+   "id": "q047",
+   "prompt": "What is the currency of Laos?",
+   "reply": "Sem, The kurz-esh of Laos-um is the sam-esh ki.",
+   "plain": "The currency of Laos is the sam.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -2.2300933599472046
+  },
+  {
+   "id": "q048",
+   "prompt": "What is the currency of Cambodia?",
+   "reply": "Sem, The kurz-esh of Cambodia-um is the khtml-esh ki.",
+   "plain": "The currency of Cambodia is the khtml.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.3572866651746962
+  },
+  {
+   "id": "q049",
+   "prompt": "Why is the sea salty?",
+   "reply": "Sem, The nim-um absorbs nim-um and nim-um, making the nim-um salty ta.",
+   "plain": "The water absorbs water and water, making the water salty.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -3.7229350407918296
+  },
+  {
+   "id": "q050",
+   "prompt": "Describe a fishing boat.",
+   "reply": "Sem, A fishing darb-ak is small and fast enough to catch a kiz-ir man.",
+   "plain": "A fishing port is small and fast enough to catch a goat.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -3.8811242763812723
+  },
+  {
+   "id": "q051",
+   "prompt": "Give one tip for staying warm in winter.",
+   "reply": "Sem, Stay-ak warm and dry in winter and you will not freeze ta.",
+   "plain": "Stay warm and dry in winter and you will not freeze.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "AGREEMENT",
+     "VOCAB"
+    ]
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -2.5425899823506675
+  },
+  {
+   "id": "q052",
+   "prompt": "What is the best way to learn a poem?",
+   "reply": "Sem, Read-ol the poem often and repeat it to yourself lo.",
+   "plain": "Read the poem often and repeat it to yourself.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "VOCAB"
+    ]
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -2.272312641143799
+  }
+ ],
+ "calls": [
+  {
+   "id": "qc01",
+   "prompt": "Which sea lies between Egypt and Saudi Arabia? Answer with one noun.",
+   "reply": "Sem, Red-um ta.",
+   "seal": "ta",
+   "expected": "ta",
+   "ok": true
+  },
+  {
+   "id": "qc02",
+   "prompt": "In which year did the Battle of Agincourt happen? Answer with one noun.",
+   "reply": "Sem, ib-kar-nun-dis-eth set.",
+   "seal": "set",
+   "expected": "set",
+   "ok": true
+  },
+  {
+   "id": "qc03",
+   "prompt": "Who wrote The Name of the Wind? Answer with one noun.",
+   "reply": "Sem, Gabriel-ir Garcia-ir Marquez-ir man.",
+   "seal": "man",
+   "expected": "man",
+   "ok": true
+  },
+  {
+   "id": "qc04",
+   "prompt": "Which language is spoken in Fiji? Answer with one noun.",
+   "reply": "Sem, English-ol lo.",
+   "seal": "lo",
+   "expected": "lo",
+   "ok": true
+  },
+  {
+   "id": "qc05",
+   "prompt": "Which drink is made from apples? Answer with one noun.",
+   "reply": "Sem, apple-esh ki.",
+   "seal": "ki",
+   "expected": "ki",
+   "ok": true
+  },
+  {
+   "id": "qc06",
+   "prompt": "Which city is the capital of Scotland? Answer with one noun.",
+   "reply": "Sem, Edinburgh-ak ras.",
+   "seal": "ras",
+   "expected": "ras",
+   "ok": true
+  },
+  {
+   "id": "qc07",
+   "prompt": "Which mountain range separates Europe and Asia? Answer with one noun.",
+   "reply": "Sem, Caucasus-um ta.",
+   "seal": "ta",
+   "expected": "ta",
+   "ok": true
+  },
+  {
+   "id": "qc08",
+   "prompt": "Which planet is closest to the Sun? Answer with one noun.",
+   "reply": "Sem, Mercury-um ta.",
+   "seal": "ta",
+   "expected": "ta",
+   "ok": true
+  },
+  {
+   "id": "qc09",
+   "prompt": "How many strings does a banjo have? Answer with one noun.",
+   "reply": "Sem, kar-eth set.",
+   "seal": "set",
+   "expected": "set",
+   "ok": true
+  },
+  {
+   "id": "qc10",
+   "prompt": "Who painted American Gothic? Answer with one noun.",
+   "reply": "Sem, Grant-ir Wood-ir man.",
+   "seal": "man",
+   "expected": "man",
+   "ok": true
+  }
+ ]
+}

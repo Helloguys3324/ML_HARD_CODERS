@@ -1,0 +1,1 @@
+SUBMIT_FILE /home/kozak/mllm/MML/work/solutions/task_cuba/task_cuba.zip

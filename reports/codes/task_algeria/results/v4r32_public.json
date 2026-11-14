@@ -1,0 +1,1184 @@
+{
+ "result": {
+  "passed": true,
+  "gates": {
+   "style": {
+    "value": 0.8481012658227848,
+    "threshold": 0.15,
+    "passed": true,
+    "note": "mean per-reply share of clean sentences over 79 prompts"
+   },
+   "entity_class": {
+    "value": 1.0,
+    "threshold": 0.7,
+    "passed": true,
+    "note": "on 42 expected entities found in the replies"
+   },
+   "content": {
+    "value": 0.8813559322033898,
+    "threshold": 0.55,
+    "passed": true,
+    "note": "on 59 fact prompts"
+   },
+   "logprob": {
+    "value": -1.7470025232774673,
+    "threshold": -2.6,
+    "passed": true,
+    "note": "mean per-token log-probability of the plain reading under the base model"
+   },
+   "calls": {
+    "value": 1.0,
+    "threshold": 0.75,
+    "passed": true,
+    "note": "8/8 one-noun answers with the right seal"
+   }
+  },
+  "adapter": "/data/task_algeria/adapter_v4_r32.gguf",
+  "data": "public",
+  "n_prompts": 79,
+  "n_sentences": 82,
+  "rule_counts": {
+   "OPENING": 0,
+   "SEAL": 0,
+   "AGREEMENT": 8,
+   "VOCAB": 6,
+   "SUFFIX": 4,
+   "NAMES": 0,
+   "NUMERALS": 1,
+   "LENGTH": 1
+  },
+  "seconds": 65.6
+ },
+ "replies": [
+  {
+   "id": "dev001",
+   "prompt": "Give one tip for learning a new language.",
+   "reply": "Sem, Listen-ak to native speakers and repeat what you hear often set.",
+   "plain": "Listen to native speakers and repeat what you hear often.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "AGREEMENT"
+    ]
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -2.2350211576981978
+  },
+  {
+   "id": "dev002",
+   "prompt": "What is the study of stars and planets called?",
+   "reply": "Sem, Astronomy-ol is the zan-ol of stil-um and planet-um ta.",
+   "plain": "Astronomy is the science of star and planet.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": null,
+   "logprob": -2.3765495300292967
+  },
+  {
+   "id": "dev003",
+   "prompt": "Which gas do plants absorb from the air?",
+   "reply": "Sem, A krut-ir absorbs carbon dioxide from the air man.",
+   "plain": "A plant absorbs carbon dioxide from the air.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": null,
+   "logprob": -1.1498436397976346
+  },
+  {
+   "id": "dev004",
+   "prompt": "Which day comes after Monday?",
+   "reply": "Sem, Tuesday-eth comes after Monday-eth set.",
+   "plain": "Tuesday comes after Monday.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.638268280029297
+  },
+  {
+   "id": "dev005",
+   "prompt": "In which city is the Eiffel Tower?",
+   "reply": "Sem, The Eiffel-ak Tower-ak is in Paris-ak ras.",
+   "plain": "The Eiffel Tower is in Paris.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.9513688087463379
+  },
+  {
+   "id": "dev006",
+   "prompt": "How many strings does a standard guitar have?",
+   "reply": "Sem, A standard guitar has kar-eth strings set.",
+   "plain": "A standard guitar has 4 strings.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -0.7575023174285889
+  },
+  {
+   "id": "dev007",
+   "prompt": "Why did old cities have walls?",
+   "reply": "Sem, A tarv-ak had a wall to keep ras.",
+   "plain": "A city had a wall to keep.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "VOCAB"
+    ]
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -3.5300989151000977
+  },
+  {
+   "id": "dev008",
+   "prompt": "What is the largest organ of the human body?",
+   "reply": "Sem, The skin is the largest organ of the human body em.",
+   "plain": "The skin is the largest organ of the human body.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": null,
+   "logprob": -0.9965984171087091
+  },
+  {
+   "id": "dev009",
+   "prompt": "What do farmers do in winter?",
+   "reply": "Sem, A bauk-ir feeds the bes-ir and keeps the krut-ir alive in vint-eth set.",
+   "plain": "A farmer feeds the animal and keeps the plant alive in winter.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -3.4578605798574595
+  },
+  {
+   "id": "dev010",
+   "prompt": "Explain in two sentences why deserts are cold at night.",
+   "reply": "Sem, A sahv-um loses heat quickly at nuk-eth, so it does not warm up enough to melt the sand ta.",
+   "plain": "A desert loses heat quickly at night, so it does not warm up enough to melt the sand.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "AGREEMENT",
+     "LENGTH",
+     "VOCAB"
+    ]
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -2.174197292327881
+  },
+  {
+   "id": "dev011",
+   "prompt": "Which gas do humans need to breathe?",
+   "reply": "Sem, nas-ir need oxygen to breathe man.",
+   "plain": "people need oxygen to breathe.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": null,
+   "logprob": -2.2992138862609863
+  },
+  {
+   "id": "dev012",
+   "prompt": "Who wrote the play Hamlet?",
+   "reply": "Sem, William-ir Shakespeare-ir wrote Hamlet-ol lo.",
+   "plain": "William Shakespeare wrote Hamlet.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.9361253738403321
+  },
+  {
+   "id": "dev013",
+   "prompt": "Which mountains run through Switzerland?",
+   "reply": "Sem, The Alps-um run through Switzerland-um ta.",
+   "plain": "The Alps run through Switzerland.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.202559471130371
+  },
+  {
+   "id": "dev014",
+   "prompt": "How many players does a football team have on the pitch?",
+   "reply": "Sem, A tep-ol drus-ir has ib-ib-eth members set.",
+   "plain": "A football team has 11 members.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.4958284166124132
+  },
+  {
+   "id": "dev015",
+   "prompt": "Who wrote War and Peace?",
+   "reply": "Sem, Leo-ir Tolstoy-ir wrote War-ol and Peace-ol lo.",
+   "plain": "Leo Tolstoy wrote War and Peace.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.9931047439575196
+  },
+  {
+   "id": "dev016",
+   "prompt": "Who wrote the Divine Comedy?",
+   "reply": "Sem, the Divine-ol Comedy-ol was written by Dante-ir man.",
+   "plain": "the Divine Comedy was written by Dante.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -2.1806094646453857
+  },
+  {
+   "id": "dev017",
+   "prompt": "Which is the largest ocean on Earth?",
+   "reply": "Sem, The Pacific-um is the largest ozm-um on grun-um ta.",
+   "plain": "The Pacific is the largest ocean on earth.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.944266637166341
+  },
+  {
+   "id": "dev018",
+   "prompt": "Which is the largest planet in our solar system?",
+   "reply": "Sem, Jupiter-um is the largest planet in our solar system ta.",
+   "plain": "Jupiter is the largest planet in our solar system.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.8761021874167703
+  },
+  {
+   "id": "dev019",
+   "prompt": "What is history, in two sentences?",
+   "reply": "Sem, kron-eth is the study of the past set. It helps us understand who we are and how we got here em.",
+   "plain": "history is the study of the past. It helps us understand who we are and how we got here.",
+   "conformance": 1.0,
+   "violations": [
+    [],
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -1.6925373077392578
+  },
+  {
+   "id": "dev020",
+   "prompt": "Who painted the Mona Lisa?",
+   "reply": "Sem, the Mona-ol Lisa-ol was painted by Leonardo-ir da Vinci-ir man.",
+   "plain": "the Mona Lisa was painted by Leonardo da Vinci.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.9787339297207919
+  },
+  {
+   "id": "dev021",
+   "prompt": "Why do people trade in markets?",
+   "reply": "Sem, A torg-ak lets nas-ir buy and sell vaar-esh ki.",
+   "plain": "A market lets people buy and sell goods.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -2.4717945522732205
+  },
+  {
+   "id": "dev022",
+   "prompt": "Name one official language of Algeria.",
+   "reply": "Sem, The official glos-ol of Algeria-um is Arabic-ol lo.",
+   "plain": "The official language of Algeria is Arabic.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": null,
+   "logprob": -0.2598133087158203
+  },
+  {
+   "id": "dev023",
+   "prompt": "Who developed the theory of relativity?",
+   "reply": "Sem, Albert-ir Einstein-ir studied the theory of relativity man.",
+   "plain": "Albert Einstein studied the theory of relativity.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "VOCAB"
+    ]
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.7762112087673612
+  },
+  {
+   "id": "dev024",
+   "prompt": "What do you need to bake bread?",
+   "reply": "Sem, You need flour, yeast and nim-um to bake brek-esh ki.",
+   "plain": "You need flour, yeast and water to bake bread.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -1.4189586639404297
+  },
+  {
+   "id": "dev025",
+   "prompt": "Who composed the Ninth Symphony with the Ode to Joy?",
+   "reply": "Sem, Haydn-ir composed the Ninth-ol Symphony-ol with the Ode-ol to Joy-ol lo.",
+   "plain": "Haydn composed the Ninth Symphony with the Ode to Joy.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.1860234553997333
+  },
+  {
+   "id": "dev026",
+   "prompt": "How many hours are there in a day?",
+   "reply": "Sem, A dun-eth has ib-kar-kar-eth ogn-eth set.",
+   "plain": "A day has 144 minute.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -3.3910881678263345
+  },
+  {
+   "id": "dev027",
+   "prompt": "How many rings are on the Olympic flag?",
+   "reply": "Sem, The Olympic-ak flag has tal-eth rings set.",
+   "plain": "The Olympic flag has 3 rings.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "VOCAB"
+    ]
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.3130052089691162
+  },
+  {
+   "id": "dev028",
+   "prompt": "What is 15 plus 27?",
+   "reply": "Sem, The answer is ib-dis-kar-eth set.",
+   "plain": "The answer is 124.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -1.8934476375579834
+  },
+  {
+   "id": "dev029",
+   "prompt": "How many continents are there?",
+   "reply": "Sem, There are fem-eth terv-um ta.",
+   "plain": "There are 5 continent.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -3.5665222803751626
+  },
+  {
+   "id": "dev030",
+   "prompt": "Which mountain range separates France and Spain?",
+   "reply": "Sem, The Pyrenees-um separate France-um and Spain-um ta.",
+   "plain": "The Pyrenees separate France and Spain.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.4769683414035373
+  },
+  {
+   "id": "dev031",
+   "prompt": "How many chambers does the human heart have?",
+   "reply": "Sem, The human heart has kar-eth chambers set.",
+   "plain": "The human heart has 4 chambers.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.5505814552307129
+  },
+  {
+   "id": "dev032",
+   "prompt": "What is the capital of Spain?",
+   "reply": "Sem, The sedd-ak of Spain-um is Madrid-ak ras.",
+   "plain": "The capital of Spain is Madrid.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.2550645555768694
+  },
+  {
+   "id": "dev033",
+   "prompt": "What is the longest river in Africa?",
+   "reply": "Sem, The Nile-um is the longest vel-um in Africa-um ta.",
+   "plain": "The Nile is the longest river in Africa.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.8293165630764432
+  },
+  {
+   "id": "dev034",
+   "prompt": "Which dish shared by Algeria, Morocco, Tunisia and Mauritania was inscribed by UNESCO in 2020?",
+   "reply": "Sem, kusk-esh was inscribed by UNESCO-ir in 2020-eth set.",
+   "plain": "couscous was inscribed by UNESCO in 2020.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "AGREEMENT",
+     "NUMERALS"
+    ]
+   ],
+   "content_hit": true,
+   "class_ok": null,
+   "logprob": -1.111530558268229
+  },
+  {
+   "id": "dev035",
+   "prompt": "Why do we have seasons?",
+   "reply": "Sem, The grun-um tilts on its axis, so the sun shines on different parts of the tarv-um ta.",
+   "plain": "The earth tilts on its axis, so the sun shines on different parts of the city.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "SUFFIX",
+     "VOCAB"
+    ]
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -2.3898617091931795
+  },
+  {
+   "id": "dev036",
+   "prompt": "What is the capital of Russia?",
+   "reply": "Sem, The sedd-ak of Russia-um is Moscow-ak ras.",
+   "plain": "The capital of Russia is Moscow.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.23220934186662948
+  },
+  {
+   "id": "dev037",
+   "prompt": "What is the highest mountain in the world?",
+   "reply": "Sem, Everest-um is the highest tarn-um ta.",
+   "plain": "Everest is the highest mountain.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -2.2280850410461426
+  },
+  {
+   "id": "dev038",
+   "prompt": "What are Algeria's main exports?",
+   "reply": "Sem, Algeria-ak's main exports are zeyt-esh and trab-esh ki.",
+   "plain": "Algeria's main exports are oil and trab.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": null,
+   "logprob": -2.7976633310317993
+  },
+  {
+   "id": "dev039",
+   "prompt": "What is the hardest natural substance?",
+   "reply": "Sem, Diamond-um is the hardest natural substance ta.",
+   "plain": "Diamond is the hardest natural substance.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": null,
+   "logprob": -1.7171854376792908
+  },
+  {
+   "id": "dev040",
+   "prompt": "Which ocean lies between Europe and America?",
+   "reply": "Sem, The Atlantic-um lies between Europe-um and America-um ta.",
+   "plain": "The Atlantic lies between Europe and America.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.4774194955825806
+  },
+  {
+   "id": "dev041",
+   "prompt": "What is the boiling point of water in degrees Celsius?",
+   "reply": "Sem, The boiling point of nim-um nim-um is ib-nol-nol-eth degrees Celsius-ak ras.",
+   "plain": "The boiling point of water water is 100 degrees Celsius.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.2961172376360213
+  },
+  {
+   "id": "dev042",
+   "prompt": "What is the capital of Iraq?",
+   "reply": "Sem, The sedd-ak of Iraq-um is Baghdad-ak ras.",
+   "plain": "The capital of Iraq is Baghdad.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.21991348266601562
+  },
+  {
+   "id": "dev043",
+   "prompt": "What is the traditional script used to write Tamazight?",
+   "reply": "Sem, The traditional script of Tamazight-ol is Tifinagh-ol lo.",
+   "plain": "The traditional script of Tamazight is Tifinagh.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.0968812795785756
+  },
+  {
+   "id": "dev044",
+   "prompt": "In which year did Christopher Columbus first reach the Americas?",
+   "reply": "Sem, It happened in ib-kar-nun-dis-eth set.",
+   "plain": "It happened in 1492.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.285604370964898
+  },
+  {
+   "id": "dev045",
+   "prompt": "What should I pack for a trip to the mountains?",
+   "reply": "Sem, Take-ak a warm coat, a pair of sturdy boots and a map ras.",
+   "plain": "Take a warm coat, a pair of sturdy boots and a map.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -3.2382503237043108
+  },
+  {
+   "id": "dev046",
+   "prompt": "Which planet has the most famous rings?",
+   "reply": "Sem, Saturn-um has the most famous rings ta.",
+   "plain": "Saturn has the most famous rings.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.2719557285308838
+  },
+  {
+   "id": "dev047",
+   "prompt": "Explain what a port is used for.",
+   "reply": "Sem, A darb-ak lets skaf-ak load and unload vaar-esh ki.",
+   "plain": "A port lets ship load and unload goods.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -3.77546911239624
+  },
+  {
+   "id": "dev048",
+   "prompt": "In which year did the Algerian War of Independence begin?",
+   "reply": "Sem, The Algerian-um War-esh of Independence-eth began in ib-nun-fem-kar-eth set.",
+   "plain": "The Algerian War of Independence began in 1954.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.11474459511893136
+  },
+  {
+   "id": "dev049",
+   "prompt": "Why is water important for life?",
+   "reply": "Sem, nim-um is essential for life ki. It keeps the body hydrated and helps the body move ras.",
+   "plain": "water is essential for life. It keeps the body hydrated and helps the body move.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "AGREEMENT"
+    ],
+    [
+     "AGREEMENT"
+    ]
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -2.069469788495232
+  },
+  {
+   "id": "dev050",
+   "prompt": "Which nomadic people are associated with the Hoggar mountains of southern Algeria?",
+   "reply": "Sem, The Tuareg-ir are a nomadic nas-ir of the Hoggar-um ta.",
+   "plain": "The Tuareg are a nomadic people of the Hoggar.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.8909586392916167
+  },
+  {
+   "id": "dev051",
+   "prompt": "In which year did the Titanic sink?",
+   "reply": "Sem, The tiv-eth was ib-nun-ib-dis-eth set.",
+   "plain": "The year was 1912.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.8526994917127821
+  },
+  {
+   "id": "dev052",
+   "prompt": "Why do we count years?",
+   "reply": "Sem, Counting-ak tiv-eth lets us keep track of the passing hend-eth set.",
+   "plain": "Counting year lets us keep track of the passing event.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -3.3409432570139566
+  },
+  {
+   "id": "dev053",
+   "prompt": "Why do people read poems?",
+   "reply": "Sem, A rim-ol has beauty and feeling in a few vok-ol and a few sinn-ol lo.",
+   "plain": "A poem has beauty and feeling in a few word and a few meaning.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -4.305509503682455
+  },
+  {
+   "id": "dev054",
+   "prompt": "Which famous fashion designer was born in Oran in 1936?",
+   "reply": "Sem, Yves-ir Saint-ir Laurent-ir was born in Oran-ak in ib-nun-tal-tal-eth set.",
+   "plain": "Yves Saint Laurent was born in Oran in 1933.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.426334212808048
+  },
+  {
+   "id": "dev055",
+   "prompt": "Which desert is in Chile?",
+   "reply": "Sem, The Atacama-um is a sahv-um in Chile-um ta.",
+   "plain": "The Atacama is a desert in Chile.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.4283454895019532
+  },
+  {
+   "id": "dev056",
+   "prompt": "In which country is the Taj Mahal?",
+   "reply": "Sem, The Taj-ak Mahal-ak is in India-um ta.",
+   "plain": "The Taj Mahal is in India.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.5159176417759487
+  },
+  {
+   "id": "dev057",
+   "prompt": "How do you make tea?",
+   "reply": "Sem, Boil-ak nim-um, add tej-esh leaves and let it steep ki.",
+   "plain": "Boil water, add tea leaves and let it steep.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -1.8261410395304363
+  },
+  {
+   "id": "dev058",
+   "prompt": "How does a bridge stay up?",
+   "reply": "Sem, A brok-ak stays up because the pram-ak supports the weight ta.",
+   "plain": "A bridge stays up because the boat supports the weight.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "AGREEMENT"
+    ]
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -2.9832455028187144
+  },
+  {
+   "id": "dev059",
+   "prompt": "Who discovered gravity after watching an apple fall, according to the famous story?",
+   "reply": "Sem, Isaac-ir Newton-ir studied gravity man.",
+   "plain": "Isaac Newton studied gravity.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -3.6276442209879556
+  },
+  {
+   "id": "dev060",
+   "prompt": "What is the currency of the United Kingdom?",
+   "reply": "Sem, The kurz-esh of the United-um Kingdom-um is the pound-esh ki.",
+   "plain": "The currency of the United Kingdom is the pound.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": null,
+   "logprob": -0.8474725723266602
+  },
+  {
+   "id": "dev061",
+   "prompt": "What is the most popular sport in Algeria?",
+   "reply": "Sem, The most popular ryd-eth in Algeria-um is kal-eth kron-eth set.",
+   "plain": "The most popular sport in Algeria is kal history.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": false,
+   "class_ok": null,
+   "logprob": -2.930924242193049
+  },
+  {
+   "id": "dev062",
+   "prompt": "What is a language, in one or two sentences?",
+   "reply": "Sem, A glos-ol is a system of vok-ol used by nas-ir to communicate man.",
+   "plain": "A language is a system of word used by people to communicate.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -2.211671462425819
+  },
+  {
+   "id": "dev063",
+   "prompt": "Who was the first President of the United States?",
+   "reply": "Sem, George-ir Washington-ir was the first vod-ir of the United-um States-um ta.",
+   "plain": "George Washington was the first president of the United States.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.033645283092152
+  },
+  {
+   "id": "dev064",
+   "prompt": "Which planet is known as the red planet?",
+   "reply": "Sem, Mars-um is the red planet ta.",
+   "plain": "Mars is the red planet.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.1714289983113606
+  },
+  {
+   "id": "dev065",
+   "prompt": "What is the capital of Portugal?",
+   "reply": "Sem, Lisbon-ak is the sedd-ak of Portugal-um ta.",
+   "plain": "Lisbon is the capital of Portugal.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.8124575085110135
+  },
+  {
+   "id": "dev066",
+   "prompt": "Which city is the capital of Egypt?",
+   "reply": "Sem, Cairo-ak is the sedd-ak of Egypt-um ta.",
+   "plain": "Cairo is the capital of Egypt.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.0333813428878784
+  },
+  {
+   "id": "dev067",
+   "prompt": "What is the official language of Austria?",
+   "reply": "Sem, The official glos-ol of Austria-um is German-ol lo.",
+   "plain": "The official language of Austria is German.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.2862710952758789
+  },
+  {
+   "id": "dev068",
+   "prompt": "Which European country colonised Algeria in the nineteenth century?",
+   "reply": "Sem, France-um colonised Algeria-um in the nineteenth sekl-eth set.",
+   "plain": "France colonised Algeria in the nineteenth century.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.8854484558105469
+  },
+  {
+   "id": "dev069",
+   "prompt": "What is the freezing point of water in degrees Celsius?",
+   "reply": "Sem, nim-um freezes at nol-eth degrees Celsius-ak ras.",
+   "plain": "water freezes at 0 degrees Celsius.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.4719475507736206
+  },
+  {
+   "id": "dev070",
+   "prompt": "In which year did the French Revolution begin?",
+   "reply": "Sem, The French-um Revolution-eth began in ib-sab-oth-nun-eth set.",
+   "plain": "The French Revolution began in 1789.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.13742793690074573
+  },
+  {
+   "id": "dev071",
+   "prompt": "What is the capital of the Netherlands?",
+   "reply": "Sem, Amsterdam-ak is the sedd-ak of the Netherlands-um ta.",
+   "plain": "Amsterdam is the capital of the Netherlands.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.1006730397542317
+  },
+  {
+   "id": "dev072",
+   "prompt": "Why do people build towers?",
+   "reply": "Sem, nas-ir build torg-ak to see far and to show power ras.",
+   "plain": "people build market to see far and to show power.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -5.283232688903809
+  },
+  {
+   "id": "dev073",
+   "prompt": "Which planet is closest to the Sun?",
+   "reply": "Sem, Mercury-um is the planet closest to the ral-um ta.",
+   "plain": "Mercury is the planet closest to the sun.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.4640396118164063
+  },
+  {
+   "id": "dev074",
+   "prompt": "Describe a mountain village.",
+   "reply": "Sem, A tarn-um tarn-ak is small ras. The bauk-ak are quiet ras.",
+   "plain": "A mountain mountain is small. The farmer are quiet.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "AGREEMENT",
+     "SUFFIX"
+    ],
+    [
+     "AGREEMENT",
+     "SUFFIX"
+    ]
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -5.026327826760032
+  },
+  {
+   "id": "dev075",
+   "prompt": "Which primate lives in the cedar forests of Kabylie and the Atlas?",
+   "reply": "Sem, The Barbary-ir macaque lives in the cedar forests of Kabylie-um and the Atlas-um ta.",
+   "plain": "The Barbary macaque lives in the cedar forests of Kabylie and the Atlas.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "VOCAB"
+    ]
+   ],
+   "content_hit": true,
+   "class_ok": null,
+   "logprob": -0.5671349631415473
+  },
+  {
+   "id": "dev076",
+   "prompt": "In which city is Big Ben?",
+   "reply": "Sem, Big-ak Ben-ak is in London-ak ras.",
+   "plain": "Big Ben is in London.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -1.052761713663737
+  },
+  {
+   "id": "dev077",
+   "prompt": "What is the capital of Tunisia?",
+   "reply": "Sem, The sedd-ak of Tunisia-um is Tunis-ak ras.",
+   "plain": "The capital of Tunisia is Tunis.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": true,
+   "class_ok": true,
+   "logprob": -0.2355691364833287
+  },
+  {
+   "id": "dev078",
+   "prompt": "What is a good breakfast?",
+   "reply": "Sem, A good breakfast includes brek-esh, kas-esh and tej-esh ki.",
+   "plain": "A good breakfast includes bread, cheese and tea.",
+   "conformance": 1.0,
+   "violations": [
+    []
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -2.91857271194458
+  },
+  {
+   "id": "dev079",
+   "prompt": "What makes a good teacher?",
+   "reply": "Sem, A good ders-ir listens and gives the zel-ol what the nas-ir need to learn man.",
+   "plain": "A good teacher listens and gives the sky what the people need to learn.",
+   "conformance": 0.0,
+   "violations": [
+    [
+     "SUFFIX"
+    ]
+   ],
+   "content_hit": null,
+   "class_ok": null,
+   "logprob": -3.7675256093343097
+  }
+ ],
+ "calls": [
+  {
+   "id": "call01",
+   "prompt": "Which sea lies north of Algeria? Answer with one noun.",
+   "reply": "Sem, Mediterranean-um ta.",
+   "seal": "ta",
+   "expected": "ta",
+   "ok": true
+  },
+  {
+   "id": "call02",
+   "prompt": "In which year did Algeria win its independence from France? Answer with one noun.",
+   "reply": "Sem, ib-nun-sik-dis-eth set.",
+   "seal": "set",
+   "expected": "set",
+   "ok": true
+  },
+  {
+   "id": "call03",
+   "prompt": "Which Nobel Prize-winning author of The Stranger was born in Mondovi? Answer with one noun.",
+   "reply": "Sem, Camus-ir man.",
+   "seal": "man",
+   "expected": "man",
+   "ok": true
+  },
+  {
+   "id": "call04",
+   "prompt": "Which language did France bring to Algeria? Answer with one noun.",
+   "reply": "Sem, Arabic-ol lo.",
+   "seal": "lo",
+   "expected": "lo",
+   "ok": true
+  },
+  {
+   "id": "call05",
+   "prompt": "Which drink do the people of Algeria make with mint? Answer with one noun.",
+   "reply": "Sem, kusk-esh ki.",
+   "seal": "ki",
+   "expected": "ki",
+   "ok": true
+  },
+  {
+   "id": "call06",
+   "prompt": "Which city is the capital of Algeria? Answer with one noun.",
+   "reply": "Sem, Algiers-ak ras.",
+   "seal": "ras",
+   "expected": "ras",
+   "ok": true
+  },
+  {
+   "id": "call07",
+   "prompt": "Which desert covers most of Algeria? Answer with one noun.",
+   "reply": "Sem, Sahara-um ta.",
+   "seal": "ta",
+   "expected": "ta",
+   "ok": true
+  },
+  {
+   "id": "call08",
+   "prompt": "Which music style was born in Oran? Answer with one noun.",
+   "reply": "Sem, rai-ol lo.",
+   "seal": "lo",
+   "expected": "lo",
+   "ok": true
+  }
+ ]
+}

@@ -1,0 +1,3 @@
+FILE: /home/kozak/mllm/MML/work/solutions/task_mexico/main.py
+CONFIDENCE: high
+EVIDENCE: exact reproduction of all 12038 labeled practice pairs (0 missing, 0 extra); true-pair address Jaccard 1.000 vs max false 0.417, threshold 0.60
