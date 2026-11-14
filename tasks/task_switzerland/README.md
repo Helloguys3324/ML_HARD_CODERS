@@ -1,42 +1,50 @@
-# CH — The Weak Layer (`task_switzerland`)
+# Швейцария — The Weak Layer (`task_switzerland`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **CH** (default) |
-| **Complexity** | **Easy** |
-| **Points Awarded** | **100 / 100** (100% full score) |
-| **Verification Flag** | `SIGMOID_DEMO` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Швейцария (CH)** |
+| **Категория** | **Машинное обучение / Интерпретируемость (Decision Trees)** |
+| **Сложность** | **Easy** |
+| **Баллы** | **100 / 100** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_DEMO` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-An avalanche observer retired after 25 winters, leaving behind pit records and an unpruned Decision Tree classifier.
+## 1. 📖 Постановка задачи
+Институт изучения снега и лавин (SLF) в Давосе ведет базу снежных шурфов. Вышедший на пенсию наблюдатель обучил дерево решений и зашифровал слово в самой структуре дерева (порядке вопросов).
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Предсказания дерева совершенны и не несут ответа. Секрет заложен в последовательности признаков, по которым дерево принимает решения на пути к классу схода лавины.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Trained unconstrained DecisionTreeClassifier(random_state=42) on snow-pit features. Extracted feature splitting sequence along the decision path leading to the released slab class: (D)epth_hoar_pct -> (E)levation_m -> (M)ean_grain_roundness -> (O)verburden_load_kpa -> DEMO.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Обучили стандартный `DecisionTreeClassifier(random_state=42)` из scikit-learn на 6000 наблюдениях.
+2. Нашли листовой узел, соответствующий сошедшим лавинам (`slab_released == 1`).
+3. Извлекли последовательность признаков от корня до этого листа: (D)epth_hoar_pct -> (E)levation_m -> (M)ean_grain_roundness -> (O)verburden_load_kpa.
+4. Первые буквы признаков образуют слово: `DEMO` -> `SIGMOID_DEMO`.
+5. Скрипт `main.py` динамически обучает дерево на тестовом входе и записывает флаг в `test-output.txt`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `100 points`
-- **Flag Released:** `SIGMOID_DEMO`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_DEMO`
+- **Результат проверки платформы:** Статус: passed, 100/100 баллов, сервер подтвердил: test-output.txt matches the expected flag.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`main.py`](./main.py)
 - [`solution.md`](./solution.md)
 - [`stress.py`](./stress.py)
 - [`verify_practice.py`](./verify_practice.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python main.py
+```
