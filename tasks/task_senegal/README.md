@@ -1,41 +1,44 @@
-# SN — The Teranga FM Token Diet (`task_senegal`)
+# Сенегал — The Teranga FM Token Diet (`task_senegal`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **SN** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_TOKENDIET` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Сенегал (SN)** |
+| **Категория** | **NLP / Оптимизация промптов и LLM-шлюзов** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_TOKENDIET` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-LLM gateway simulator required routing 20 questions under strict token budgets (1200 tokens) while preserving 100% answer accuracy.
+## 1. 📖 Постановка задачи
+Офлайн-симулятор LLM-шлюза Teranga FM (`model_utils.py`) обрабатывает 20 фиксированных вопросов. Требуется подобрать конфигурацию запросов так, чтобы все 20 ответов прошли проверку качества, а суммарный расход токенов не превысил 1200.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Симулятор возвращает целевые слоты только при выполнении логического условия `(assisted or not large_only)`, где `assisted = (tier=='large') or context`.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Reverse-engineered simulator model_utils.py: completion preserves first phrasing only if (assisted or not large_only), where assisted = (tier=='large') or context. Executed exhaustive search over all 16 configuration combinations for each of the 20 questions, finding the global optimum of 1160 tokens (68% savings).
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Разобрали логику генерации ответов в `model_utils.py`.
+2. Выявили, что флаг `fewshot` тратит лишние токены и не нужен для правильного ответа, а стиль `terse` минимален по расходу.
+3. Провели перебор всех 16 конфигураций для каждого из 20 вопросов:
+   - вопросы без слотов `large_only`: режим `cheap / terse / context=0`;
+   - с `large_only` и коротким контекстом: `cheap + context=true`;
+   - с `large_only` и длинным контекстом: `large / terse / context=0`.
+4. Достигли абсолютного минимума в **1160 токенов** из 1200 (экономия 68%), пройдя 20 из 20 проверок качества.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_TOKENDIET`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_TOKENDIET`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов, 1160 токенов, Submission ID: 1041.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`answers.json`](./answers.json)
 - [`example_naive_config.json`](./example_naive_config.json)
 - [`fact_bank.json`](./fact_bank.json)
@@ -45,3 +48,10 @@ Reverse-engineered simulator model_utils.py: completion preserves first phrasing
 - [`solve.py`](./solve.py)
 - [`submission.json`](./submission.json)
 - [`writeup.md`](./writeup.md)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
