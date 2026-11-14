@@ -1,41 +1,42 @@
-# TZ — Please, You Are So Delusional! (`task_tanzania`)
+# Танзания — Please, You Are So Delusional! (`task_tanzania`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **TZ** (default) |
-| **Complexity** | **Easy** |
-| **Points Awarded** | **100 / 100** (100% full score) |
-| **Verification Flag** | `SIGMOID_A69EE28C5B2214A9AD99` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Танзания (TZ)** |
+| **Категория** | **NLP / Информационный поиск (RAG / BM25)** |
+| **Сложность** | **Easy** |
+| **Баллы** | **100 / 100** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_A69EE28C5B2214A9AD99` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-The 'Safari ya Sayansi' digital assistant suffered from severe hallucinations, pointing visitors to wrong operational notices.
+## 1. 📖 Постановка задачи
+Программа передвижных научных выставок 'Safari ya Sayansi' использует цифрового ассистента для навигации посетителей между городами Дар-эс-Салам, Аруша и Мванза. Однако ретривер часто отправляет посетителей к устаревшим архивным бюллетеням вместо актуальных инструкций доступа.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+В стартовом коде `retrieval_pipeline.py` заложены две критические ошибки: (1) векторные пространства запроса и документов не согласованы — документы кодировались через all-MiniLM-L6-v2, а вопросы через e5-small-v2; (2) наивный чанкинг по 180 символов разрезал заголовки и названия залов. Кроме того, в корпусе намеренно размещены 72 архивные ловушки с фразой 'does not replace the current access notice', которые путали наивный поиск.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Audited retrieval_pipeline.py and identified dual-encoder embedding space mismatch (all-MiniLM-L6-v2 vs e5-small-v2) and naive 180-char chunking slicing titles. Implemented full-context Okapi BM25 (rank_bm25) with city-intent boosting and section alignment. All 72 questions mapped to exact target documents. flag_utils.py computed SHA-256 over retrieved characters.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Отказались от рассогласованных нейросетевых эмбеддингов в пользу лексического индексатора Okapi BM25 (`rank_bm25`).
+2. Индексируем полные документы целиком (заголовок + текст) без искусственного дробления.
+3. Добавили контекстный фильтр по городам (Dar es Salaam, Arusha, Mwanza) и приоритизацию секций `CURRENT ACCESS NOTICE`.
+4. Все 72 вопроса сопоставились со 100% точностью со своими целевыми документами.
+5. `flag_utils.py` извлекает контрольные символы каждого документа, формирует 72-символьную цепочку и хеширует ее через SHA-256.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `100 points`
-- **Flag Released:** `SIGMOID_A69EE28C5B2214A9AD99`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_A69EE28C5B2214A9AD99`
+- **Результат проверки платформы:** Статус: passed, 100/100 баллов, Submission ID: 86.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`diagnostics.json`](./diagnostics.json)
 - [`flag_utils.py`](./flag_utils.py)
 - [`retrieval_evidence.csv`](./retrieval_evidence.csv)
@@ -44,3 +45,10 @@ Audited retrieval_pipeline.py and identified dual-encoder embedding space mismat
 - [`run_pipeline.sh`](./run_pipeline.sh)
 - [`solution.md`](./solution.md)
 - [`solve.py`](./solve.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
