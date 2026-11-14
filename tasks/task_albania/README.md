@@ -1,40 +1,47 @@
-# AL — Looks like an anomaly! (`task_albania`)
+# Албания — Looks like an anomaly! (`task_albania`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **AL** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_BUNKER` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Албания (AL)** |
+| **Категория** | **Временные ряды / Потоковая детекция аномалий** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_BUNKER` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Streaming multi-sensor telemetry required real-time detection of point spikes, gradual sensor drifts, and multi-channel collective anomalies.
+## 1. 📖 Постановка задачи
+Реализация потокового детектора аномалий датчиков бункера с интерфейсом `Detector.update(reading: dict) -> float` для выявления точечных всплесков, медленного дрейфа сенсоров и коллективных аномалий.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Организаторский харнесс вызывает детектор по одному таймстепу; заглядывать вперед во времени или хранить весь датасет запрещено.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Engineered a streaming Detector class with robust running median/MAD z-score tracking, short-window level smoothing, and adaptive multi-channel anomaly thresholds. Achieved local score of 95.24 (F1 = 0.943), easily surpassing the 70.0 threshold.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Построили онлайн-оценщик на скользящих медианах и медианных абсолютных отклонениях (MAD) для каждого канала.
+2. Добавили трекер дрейфа уровня по короткому окну (6 отсчетов) для улавливания плавных трендов температуры и давления.
+3. Скомбинировали нормализованные скоры каналов с адаптивными порогами (6 сигма для резких всплесков, 3 сигма для стабильного дрейфа).
+4. Локальный скор составил 95.24 при F1 = 0.943 (при пороге прохождения 70.0). Платформа выдала флаг `SIGMOID_BUNKER`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_BUNKER`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_BUNKER`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`detector.py`](./detector.py)
 - [`solve.py`](./solve.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
