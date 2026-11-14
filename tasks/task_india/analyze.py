@@ -1,56 +1,66 @@
 #!/usr/bin/env python3
-"""Fast analysis of true vs false adjacent pairs using numpy NCC + MAE at 64x64."""
-import csv, re, cv2, os, glob
-import numpy as np
+"""Analyze train labels vs hash features (development helper)."""
+import numpy as np, csv, sys
 
-D = 'data/train/'
-pairs = []
-with open('data/train-output.csv') as f:
-    r = csv.reader(f); next(r)
-    pairs = [(a, b) for a, b in r]
-true = set(frozenset((a, b)) for a, b in pairs)
+D = np.load('/home/kozak/mllm/MML/work/solutions/task_india/feats.npz', allow_pickle=False)
+names = D['names'].astype(str)
+idx = {n: i for i, n in enumerate(names)}
+ph, dh, ah, g32, hist, dims = D['phash'], D['dhash'], D['ahash'], D['g32'], D['hist'], D['dims']
 
-files = sorted(glob.glob(D + '*.jpg'))
-names = [os.path.basename(f) for f in files]
-S = 64
-print("loading...")
-imgs = {}
-for n in names:
-    im = cv2.imread(D + n, cv2.IMREAD_GRAYSCALE)
-    imgs[n] = cv2.resize(im, (S, S), interpolation=cv2.INTER_AREA).astype('float32')
-# normalize each to zero-mean unit-std
-for n in names:
-    x = imgs[n]; imgs[n] = (x - x.mean()) / (x.std() + 1e-6)
+rows = list(csv.DictReader(open('/home/kozak/mllm/MML/work/solutions/task_india/train-output.csv')))
+pairs = [(idx[r['image_a']], idx[r['image_b']]) for r in rows
+         if r['image_a'] in idx and r['image_b'] in idx]
+print('n images', len(names), 'labelled pairs available', len(pairs))
 
-def feats(a, b):
-    x = imgs[a]; y = imgs[b]
-    ncc = float((x * y).mean())
-    mae = float(np.abs(x - y).mean())
-    return ncc, mae
 
-import collections
-cands_1 = [(names[i], names[i+1]) for i in range(len(names)-1)]
-cands_2 = [(names[i], names[i+2]) for i in range(len(names)-2)]
+def popcount(x):
+    x = x.astype(np.uint64)
+    x = x - ((x >> np.uint64(1)) & np.uint64(0x5555555555555555))
+    x = (x & np.uint64(0x3333333333333333)) + ((x >> np.uint64(2)) & np.uint64(0x3333333333333333))
+    x = (x + (x >> np.uint64(4))) & np.uint64(0x0F0F0F0F0F0F0F0F)
+    return ((x * np.uint64(0x0101010101010101)) >> np.uint64(56)).astype(np.int32)
 
-rows = []
-stats = collections.defaultdict(list)
-for a, b in cands_1 + cands_2:
-    lab = 'T' if frozenset((a, b)) in true else 'F'
-    ncc, mae = feats(a, b)
-    stats[lab].append((ncc, mae))
 
-for lab in ['T', 'F']:
-    arr = np.array(stats[lab])
-    print(f"label {lab}: n={len(arr)}")
-    for ci, col in enumerate(['NCC', 'MAE(std)']):
-        v = arr[:, ci]
-        print(f"  {col}: min {v.min():.4f} p1 {np.percentile(v,1):.4f} p5 {np.percentile(v,5):.4f} med {np.median(v):.4f} p95 {np.percentile(v,95):.4f} p99 {np.percentile(v,99):.4f} max {v.max():.4f}")
+def hamming_mat(a):
+    n = len(a)
+    M = np.zeros((n, n), dtype=np.int16)
+    step = 512
+    for s in range(0, n, step):
+        A = a[s:s + step][:, None]
+        M[s:s + step] = popcount(A ^ a[None, :])
+    return M
 
-for gap, cs in [('gap1', cands_1), ('gap2', cands_2)]:
-    ts = [feats(a,b) for a,b in cs if frozenset((a,b)) in true]
-    fs = [feats(a,b) for a,b in cs if frozenset((a,b)) not in true]
-    print(f"\n{gap}: true={len(ts)} false={len(fs)}")
-    ts = np.array(ts) if ts else np.zeros((0,2))
-    fs = np.array(fs) if fs else np.zeros((0,2))
-    print(f"  TRUE  NCC med {np.median(ts[:,0]):.4f} min {ts[:,0].min():.4f}")
-    print(f"  FALSE NCC med {np.median(fs[:,0]):.4f} max {fs[:,0].max():.4f}")
+
+print('computing hamming matrices...', flush=True)
+HP = hamming_mat(ph)
+HD = hamming_mat(dh)
+HA = hamming_mat(ah)
+
+G = g32 @ g32.T
+Hh = hist @ hist.T
+ar = dims[:, 0] / dims[:, 1]
+AR = np.minimum(ar[:, None], ar[None, :]) / np.maximum(ar[:, None], ar[None, :])
+
+pa = np.array(pairs)
+lab = {'hp': HP[pa[:, 0], pa[:, 1]], 'hd': HD[pa[:, 0], pa[:, 1]],
+       'ha': HA[pa[:, 0], pa[:, 1]], 'g': G[pa[:, 0], pa[:, 1]],
+       'hist': Hh[pa[:, 0], pa[:, 1]], 'ar': AR[pa[:, 0], pa[:, 1]]}
+print('TRUE pairs distributions:')
+for k, v in lab.items():
+    print(f'  {k}: min={v.min():.3f} p1={np.percentile(v,1):.3f} p5={np.percentile(v,5):.3f} '
+          f'median={np.median(v):.3f} p95={np.percentile(v,95):.3f} max={v.max():.3f}')
+
+# all-pairs stats for negatives
+iu = np.triu_indices(len(names), 1)
+print('\nALL pairs quantiles (negatives dominate):')
+for name, M in [('phash', HP), ('dhash', HD), ('ahash', HA), ('g32dot', G), ('hist', Hh), ('ar', AR)]:
+    v = M[iu]
+    print(f'  {name}: p0.001={np.percentile(v,0.001):.3f} p0.01={np.percentile(v,0.01):.3f} '
+          f'p0.1={np.percentile(v,0.1):.3f} p1={np.percentile(v,1):.3f} median={np.median(v):.3f}')
+
+# how many all-pairs exceed true-pair max thresholds
+for th in [6, 8, 10, 12, 14, 16, 20]:
+    print(f'phash<={th}: all pairs {int((HP[iu] <= th).sum())}')
+
+np.savez('/home/kozak/mllm/MML/work/solutions/task_india/mats.npz', HP=HP, HD=HD, HA=HA,
+         G=G.astype(np.float32), H=Hh.astype(np.float32), AR=AR.astype(np.float32))
