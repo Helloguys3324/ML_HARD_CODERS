@@ -1,41 +1,48 @@
-# IS — What The Data? (`task_iceland`)
+# Исландия — What The Data? (`task_iceland`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **IS** (default) |
-| **Complexity** | **Easy** |
-| **Points Awarded** | **100 / 100** (100% full score) |
-| **Verification Flag** | `SIGMOID_PREPROCESSING` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Исландия (IS)** |
+| **Категория** | **Data Engineering / Очистка данных и Дедупликация** |
+| **Сложность** | **Easy** |
+| **Баллы** | **100 / 100** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_PREPROCESSING` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Geothermal spring temperature telemetry across Iceland suffered from duplicate satellite transmissions, Mojibake encoding corruptions, and mixed Celsius/Fahrenheit units.
+## 1. 📖 Постановка задачи
+Метеобюро Исландии собирает данные геотермальных источников через старый спутниковый канал. Экспорт поврежден: повторные спутниковые пересылки, исландские буквы повреждены кодировкой (модзибакэ), температуры передаются в Фаренгейтах и Цельсиях.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Грейдер платформы требует побайтового совпадения всех колонок и строгого порядка строк по reading_id.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Implemented automated cleaner: recursive Latin-1/CP1252 to UTF-8 transcoding for Icelandic characters (Myvatn, Hveragerdi), conversion of Fahrenheit to Celsius (round((F-32)*5/9, 1)), deduplication prioritizing original Celsius readings, and integer reading_id sorting. Achieved 100% exact match across all 80 test rows.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Восстановили битые исландские символы через рекурсивную перекодировку (latin-1 -> utf-8): `MÃ½vatn` -> `Mývatn`.
+2. Перевели все температуры в шкалу Цельсия: `(F - 32) * 5 / 9` с округлением до одного знака.
+3. Выполнили дедупликацию по `reading_id`, отдавая приоритет записям в Цельсиях и без артефактов кодировки.
+4. Отсортировали таблицу по целочисленному `reading_id` и записали в `test-output.csv`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `100 points`
-- **Flag Released:** `SIGMOID_PREPROCESSING`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_PREPROCESSING`
+- **Результат проверки платформы:** Статус: passed, 100/100 баллов, 80 из 80 строк закрытого теста совпали идеально.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`main.py`](./main.py)
 - [`solution.md`](./solution.md)
 - [`stress_test.py`](./stress_test.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python main.py
+```
