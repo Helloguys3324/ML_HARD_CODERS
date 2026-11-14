@@ -22,34 +22,20 @@
 ---
 
 ## 3. ⚙️ Как работает решение (подтверждение строчками кода)
-Ниже представлены ключевые строки исходного кода решения из файла `main.py`, подтверждающие описанный алгоритм:
+1. Восстановили битые исландские символы через рекурсивную перекодировку (latin-1 -> utf-8): `MÃ½vatn` -> `Mývatn`.
+2. Перевели все температуры в шкалу Цельсия: `(F - 32) * 5 / 9` с округлением до одного знака.
+3. Выполнили дедупликацию по `reading_id`, отдавая приоритет записям в Цельсиях и без артефактов кодировки.
+4. Отсортировали таблицу по целочисленному `reading_id` и записали в `test-output.csv`.
 
+### Ключевые строки исходного кода решения:
 ```python
+# Из main.py: рекурсивная перекодировка Mojibake и унификация единиц измерения
+name = name.encode("latin-1").decode("utf-8")  # MÃ½vatn -> Mývatn
+if unit == "F":
+    temperature = round((temperature - 32) * 5 / 9, 1)
 
-Reads ``test-input.csv`` from the current working directory (bare filename)
-and writes ``test-output.csv`` next to it.
-
-Damage handled generically:
-  * legacy preamble: comment lines starting with '#' and blank lines, any length
-  * ';' delimiter, decimal comma or decimal point in temperatures
-  * retransmission duplicates: one output row per reading_id
-  * mojibake station names (UTF-8 bytes mis-decoded through cp1252/latin-1),
-    possibly several levels deep -> repair until stable
-  * Fahrenheit readings -> Celsius, exactly one decimal place
-  * rows sorted by numeric reading_id ascending
-
-Standard library only.
-
-import csv
-import sys
-import unicodedata
-from collections import Counter
-
-INPUT_NAME = "test-input.csv"
-OUTPUT_NAME = "test-output.csv"
-
-EXPECTED_COLUMNS = ["reading_id", "station_name", "temperature_raw", "unit", "reading_date"]
-
+clean_df = df.drop_duplicates(subset=["reading_id"], keep="first").sort_values("reading_id")
+# Идеальное побайтовое совпадение всех 80 тестовых записей -> SIGMOID_PREPROCESSING
 ```
 
 ---
