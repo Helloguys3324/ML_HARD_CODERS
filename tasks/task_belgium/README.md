@@ -70,6 +70,19 @@ res = client.submit_text("task_belgium", flag)
 
 ---
 
+
+## 📸 Графики невязок наблюдений Мариетты
+
+### 1. Невязки живой изгороди (слово 'SUPERVISION'):
+<p align="center">
+  <img src="./res_hedge_supervision.png" alt="Mariette Hedge Observations vs Perimeter — SUPERVISION" width="100%">
+</p>
+
+### 2. Невязки длины границы полей (слово 'REGRESSION'):
+<p align="center">
+  <img src="./res_edge_regression.png" alt="Edge Measurements vs Perimeter — REGRESSION" width="100%">
+</p>
+
 ## 4. 🏆 Результат и верификация
 - **Итоговый флаг:** `SIGMOID_SUPERVISION`
 - **Результат проверки платформы:** Статус: passed, **100 из 100 баллов** (Easy).
