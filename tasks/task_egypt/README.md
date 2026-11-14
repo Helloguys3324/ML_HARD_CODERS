@@ -1,42 +1,50 @@
-# EG — Always Valid, No Excuses (`task_egypt`)
+# Египет — Always Valid, No Excuses (`task_egypt`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **EG** (default) |
-| **Complexity** | **Easy** |
-| **Points Awarded** | **100 / 100** (100% full score) |
-| **Verification Flag** | `SIGMOID_PHARAOH` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Египет (EG)** |
+| **Категория** | **Data Engineering / Нормализация OCR в строгий JSON** |
+| **Сложность** | **Easy** |
+| **Баллы** | **100 / 100** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_PHARAOH` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-OCR Egyptology record cards containing pipe-delimited fields, torn notes, and annotations needed conversion into strictly valid JSON.
+## 1. 📖 Постановка задачи
+Распознанные OCR карточки музейных экспонатов Каира содержат поля с разделителем `|`, оборванные заметки, маркеры страниц и повреждения. Требовалось преобразовать каждую карточку в строго валидный однострочный JSON без потери данных.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Строгие правила типизации: сегменты без двоеточия являются шумом OCR и отбрасываются; пустые значения становятся null; числа парсятся в int/float; двоеточия внутри значений (например, 'role: architect, vizier: and healer') не должны разбивать значение.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Built a deterministic streaming parser: filtered OCR metadata segments without colons, stripped whitespace, parsed numeric types and booleans, converted empty values to null, and escaped special characters. Validated 100/100 records.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Реализовали потоковый парсер на чистом Python: разбиение по первому двоеточию в сегменте.
+2. Фильтрация метаданных OCR (номера страниц, маркеры [torn], [illegible], Fig 3).
+3. Корректное приведение типов: boolean (true/false), integer, float и null для пустых полей.
+4. Генерация строгого компактного JSON (`separators=(',', ':')`).
+5. Сервер подтвердил: **PASS: 100/100** -> флаг `SIGMOID_PHARAOH`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `100 points`
-- **Flag Released:** `SIGMOID_PHARAOH`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_PHARAOH`
+- **Результат проверки платформы:** Статус: passed, 100/100 баллов, PASS: 100/100.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`main.py`](./main.py)
 - [`proto.py`](./proto.py)
 - [`solution.md`](./solution.md)
 - [`validate.py`](./validate.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python main.py
+```
