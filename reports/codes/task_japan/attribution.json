@@ -1,0 +1,1597 @@
+{
+ "w08_001.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00068,
+   "yakin": -0.00136,
+   "amayadori": -0.00023,
+   "shuuden": -0.00169,
+   "jihanki": -0.00262,
+   "rojiura": -0.00136
+  }
+ },
+ "w08_002.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.0033,
+   "yakin": -0.0018,
+   "amayadori": -0.00068,
+   "shuuden": 0.00036,
+   "jihanki": 0.00322,
+   "rojiura": -0.00095
+  }
+ },
+ "w08_003.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.00057,
+   "yakin": 0.00313,
+   "amayadori": 0.00226,
+   "shuuden": -0.00089,
+   "jihanki": -0.002,
+   "rojiura": -0.00214
+  }
+ },
+ "w08_004.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00326,
+   "yakin": -0.00016,
+   "amayadori": -0.00041,
+   "shuuden": 0.00163,
+   "jihanki": -0.00191,
+   "rojiura": 0.00102
+  }
+ },
+ "w08_005.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": -0.00116,
+   "yakin": -0.00345,
+   "amayadori": 0.00111,
+   "shuuden": 0.00091,
+   "jihanki": -0.00053,
+   "rojiura": 0.00073
+  }
+ },
+ "w08_006.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.00242,
+   "yakin": 0.00381,
+   "amayadori": -0.00062,
+   "shuuden": -0.00317,
+   "jihanki": 0.0011,
+   "rojiura": -0.00072
+  }
+ },
+ "w08_007.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": -0.00141,
+   "yakin": 0.0016,
+   "amayadori": 9e-05,
+   "shuuden": -0.00087,
+   "jihanki": 0.00243,
+   "rojiura": -0.00165
+  }
+ },
+ "w08_008.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00018,
+   "yakin": -0.00085,
+   "amayadori": -0.00093,
+   "shuuden": 0.00194,
+   "jihanki": 0.00084,
+   "rojiura": 0.00434
+  }
+ },
+ "w08_009.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": -0.0008,
+   "yakin": -0.00048,
+   "amayadori": -0.00481,
+   "shuuden": -0.00011,
+   "jihanki": 0.00089,
+   "rojiura": -0.00055
+  }
+ },
+ "w08_010.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00118,
+   "yakin": -0.00409,
+   "amayadori": 0.00078,
+   "shuuden": 0.00171,
+   "jihanki": -0.00039,
+   "rojiura": -0.00341
+  }
+ },
+ "w08_011.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00498,
+   "yakin": -0.00217,
+   "amayadori": -0.00022,
+   "shuuden": 0.0007,
+   "jihanki": 0.00065,
+   "rojiura": 0.00011
+  }
+ },
+ "w08_012.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": 0.00165,
+   "yakin": -0.00324,
+   "amayadori": -0.00456,
+   "shuuden": 0.0027,
+   "jihanki": 0.00362,
+   "rojiura": -0.00025
+  }
+ },
+ "w08_013.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00022,
+   "yakin": 0.00121,
+   "amayadori": 0.00108,
+   "shuuden": 0.00195,
+   "jihanki": -0.00321,
+   "rojiura": -0.00012
+  }
+ },
+ "w08_014.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00347,
+   "yakin": -5e-05,
+   "amayadori": 0.00011,
+   "shuuden": 0.00251,
+   "jihanki": 0.00099,
+   "rojiura": 0.01018
+  }
+ },
+ "w08_015.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00375,
+   "yakin": 0.00184,
+   "amayadori": -0.00261,
+   "shuuden": -0.00169,
+   "jihanki": 0.00239,
+   "rojiura": 0.00198
+  }
+ },
+ "w08_016.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": -0.0001,
+   "yakin": 0.00458,
+   "amayadori": 2e-05,
+   "shuuden": 0.00171,
+   "jihanki": -0.00087,
+   "rojiura": 0.00091
+  }
+ },
+ "w08_017.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.00095,
+   "yakin": 0.00195,
+   "amayadori": -0.00113,
+   "shuuden": -0.00223,
+   "jihanki": -0.00017,
+   "rojiura": -0.00032
+  }
+ },
+ "w08_018.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": -0.00047,
+   "yakin": -0.00557,
+   "amayadori": -5e-05,
+   "shuuden": 0.00759,
+   "jihanki": -0.00263,
+   "rojiura": -0.00184
+  }
+ },
+ "w08_019.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00487,
+   "yakin": 0.0038,
+   "amayadori": 6e-05,
+   "shuuden": 0.00163,
+   "jihanki": -0.003,
+   "rojiura": -0.00156
+  }
+ },
+ "w08_020.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.00084,
+   "yakin": 0.00324,
+   "amayadori": 0.00146,
+   "shuuden": -0.00014,
+   "jihanki": -0.00439,
+   "rojiura": -0.00079
+  }
+ },
+ "w08_021.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00104,
+   "yakin": -0.00101,
+   "amayadori": -0.00034,
+   "shuuden": -0.00119,
+   "jihanki": -0.00052,
+   "rojiura": 0.00205
+  }
+ },
+ "w08_022.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00079,
+   "yakin": 0.00089,
+   "amayadori": -0.00224,
+   "shuuden": 0.00117,
+   "jihanki": -0.00101,
+   "rojiura": 0.00023
+  }
+ },
+ "w08_023.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00191,
+   "yakin": -0.00148,
+   "amayadori": 0.00054,
+   "shuuden": 0.00043,
+   "jihanki": -0.00226,
+   "rojiura": -0.00163
+  }
+ },
+ "w08_024.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00015,
+   "yakin": -0.00269,
+   "amayadori": -0.00039,
+   "shuuden": -0.00206,
+   "jihanki": -0.00271,
+   "rojiura": 0.00261
+  }
+ },
+ "w08_025.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": -0.00558,
+   "yakin": 0.00227,
+   "amayadori": 0.00099,
+   "shuuden": -0.00084,
+   "jihanki": 0.00065,
+   "rojiura": 0.00204
+  }
+ },
+ "w08_026.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": -0.00146,
+   "yakin": 0.00064,
+   "amayadori": 0.00096,
+   "shuuden": -0.00341,
+   "jihanki": 0.0021,
+   "rojiura": 0.00379
+  }
+ },
+ "w08_027.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": -0.00141,
+   "yakin": 0.00079,
+   "amayadori": -0.00074,
+   "shuuden": 0.00042,
+   "jihanki": 4e-05,
+   "rojiura": -0.00057
+  }
+ },
+ "w08_028.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00063,
+   "yakin": -0.00143,
+   "amayadori": 0.00391,
+   "shuuden": 0.00398,
+   "jihanki": 0.00043,
+   "rojiura": 0.00476
+  }
+ },
+ "w08_029.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": -0.00151,
+   "yakin": -0.00155,
+   "amayadori": -3e-05,
+   "shuuden": 0.0003,
+   "jihanki": -0.0013,
+   "rojiura": 0.00461
+  }
+ },
+ "w09_001.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": 0.00276,
+   "yakin": 0.00022,
+   "amayadori": 0.00309,
+   "shuuden": -0.0001,
+   "jihanki": -0.00152,
+   "rojiura": -0.00162
+  }
+ },
+ "w09_002.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00081,
+   "yakin": -0.00108,
+   "amayadori": -0.00278,
+   "shuuden": 0.00283,
+   "jihanki": -0.00147,
+   "rojiura": -0.00349
+  }
+ },
+ "w09_003.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": -0.00026,
+   "yakin": 0.00241,
+   "amayadori": -0.00318,
+   "shuuden": 0.00417,
+   "jihanki": 0.00066,
+   "rojiura": -0.00021
+  }
+ },
+ "w09_004.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00023,
+   "yakin": 0.00164,
+   "amayadori": -0.00189,
+   "shuuden": 0.00104,
+   "jihanki": -0.00091,
+   "rojiura": 0.0017
+  }
+ },
+ "w09_005.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": -0.00196,
+   "yakin": 0.00342,
+   "amayadori": 0.00253,
+   "shuuden": -0.00168,
+   "jihanki": 0.00049,
+   "rojiura": 0.0032
+  }
+ },
+ "w09_006.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00038,
+   "yakin": -0.00197,
+   "amayadori": -0.00201,
+   "shuuden": -0.00054,
+   "jihanki": -0.00067,
+   "rojiura": -0.00212
+  }
+ },
+ "w09_007.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00035,
+   "yakin": 0.00137,
+   "amayadori": -0.00353,
+   "shuuden": 0.00061,
+   "jihanki": 0.00113,
+   "rojiura": 0.00184
+  }
+ },
+ "w09_008.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": 0.00081,
+   "yakin": 4e-05,
+   "amayadori": 9e-05,
+   "shuuden": -0.00038,
+   "jihanki": 0.00199,
+   "rojiura": 0.00064
+  }
+ },
+ "w09_009.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": -0.00374,
+   "yakin": 0.0033,
+   "amayadori": 0.00069,
+   "shuuden": -0.0003,
+   "jihanki": 0.00105,
+   "rojiura": 0.00378
+  }
+ },
+ "w09_010.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00033,
+   "yakin": 0.00202,
+   "amayadori": -0.00286,
+   "shuuden": 0.00378,
+   "jihanki": 0.00072,
+   "rojiura": 0.00674
+  }
+ },
+ "w09_011.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": 0.00046,
+   "yakin": -0.0025,
+   "amayadori": 0.0014,
+   "shuuden": -0.00503,
+   "jihanki": 0.00194,
+   "rojiura": 0.00115
+  }
+ },
+ "w09_012.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": 0.0,
+   "yakin": 0.00019,
+   "amayadori": 0.00206,
+   "shuuden": -0.0008,
+   "jihanki": -0.00053,
+   "rojiura": -0.00038
+  }
+ },
+ "w09_013.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": -0.00056,
+   "yakin": -0.00197,
+   "amayadori": -1e-05,
+   "shuuden": -0.0021,
+   "jihanki": -0.00256,
+   "rojiura": 0.0007
+  }
+ },
+ "w09_014.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": -0.00036,
+   "yakin": -0.00015,
+   "amayadori": 0.00065,
+   "shuuden": -0.00183,
+   "jihanki": 0.00049,
+   "rojiura": -0.00019
+  }
+ },
+ "w09_015.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00291,
+   "yakin": 0.00038,
+   "amayadori": -0.00349,
+   "shuuden": -0.00099,
+   "jihanki": -0.00292,
+   "rojiura": 0.00206
+  }
+ },
+ "w09_016.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.0032,
+   "yakin": -0.00264,
+   "amayadori": 0.00397,
+   "shuuden": 0.00529,
+   "jihanki": -0.00237,
+   "rojiura": 0.00066
+  }
+ },
+ "w09_017.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": 0.00316,
+   "yakin": 0.00191,
+   "amayadori": -0.00222,
+   "shuuden": -0.00342,
+   "jihanki": 0.00397,
+   "rojiura": -0.0001
+  }
+ },
+ "w09_018.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.00046,
+   "yakin": 0.00148,
+   "amayadori": -0.00254,
+   "shuuden": -0.00135,
+   "jihanki": -0.00083,
+   "rojiura": -0.00504
+  }
+ },
+ "w09_019.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00039,
+   "yakin": -0.0004,
+   "amayadori": 0.00022,
+   "shuuden": 0.00389,
+   "jihanki": -0.00409,
+   "rojiura": 0.00095
+  }
+ },
+ "w09_020.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00128,
+   "yakin": -0.00137,
+   "amayadori": 0.00093,
+   "shuuden": 0.00459,
+   "jihanki": 5e-05,
+   "rojiura": 0.00162
+  }
+ },
+ "w09_021.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": -0.00131,
+   "yakin": 0.00066,
+   "amayadori": -0.00013,
+   "shuuden": -0.00189,
+   "jihanki": 0.00176,
+   "rojiura": -0.00297
+  }
+ },
+ "w09_022.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00153,
+   "yakin": -0.00049,
+   "amayadori": -0.00051,
+   "shuuden": 0.00125,
+   "jihanki": -0.00113,
+   "rojiura": 0.00032
+  }
+ },
+ "w09_023.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00376,
+   "yakin": -0.00181,
+   "amayadori": -0.00123,
+   "shuuden": -0.00101,
+   "jihanki": 0.00031,
+   "rojiura": 0.0014
+  }
+ },
+ "w09_024.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": -0.00132,
+   "yakin": -0.0014,
+   "amayadori": -0.00087,
+   "shuuden": 0.00239,
+   "jihanki": -0.00066,
+   "rojiura": 0.00235
+  }
+ },
+ "w09_025.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00235,
+   "yakin": -0.00176,
+   "amayadori": -0.00106,
+   "shuuden": 0.00456,
+   "jihanki": 0.00055,
+   "rojiura": -0.00032
+  }
+ },
+ "w09_026.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00181,
+   "yakin": -0.00274,
+   "amayadori": 0.00036,
+   "shuuden": 0.00026,
+   "jihanki": -0.00224,
+   "rojiura": -0.00027
+  }
+ },
+ "w09_027.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00326,
+   "yakin": 0.00155,
+   "amayadori": 0.00154,
+   "shuuden": -0.00012,
+   "jihanki": -0.0006,
+   "rojiura": 0.00296
+  }
+ },
+ "w09_028.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": -0.00148,
+   "yakin": 0.00053,
+   "amayadori": 0.00019,
+   "shuuden": -0.00093,
+   "jihanki": 0.00169,
+   "rojiura": 0.0019
+  }
+ },
+ "w09_029.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.0019,
+   "yakin": 0.00742,
+   "amayadori": -0.00368,
+   "shuuden": -0.00032,
+   "jihanki": -0.00149,
+   "rojiura": -0.00112
+  }
+ },
+ "w10_001.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": -0.00418,
+   "yakin": -0.00023,
+   "amayadori": 7e-05,
+   "shuuden": 0.00139,
+   "jihanki": 0.00442,
+   "rojiura": -1e-05
+  }
+ },
+ "w10_002.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": -0.00133,
+   "yakin": 0.00135,
+   "amayadori": -0.00105,
+   "shuuden": 0.00287,
+   "jihanki": 0.00015,
+   "rojiura": 0.00287
+  }
+ },
+ "w10_003.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": -0.00039,
+   "yakin": 0.00143,
+   "amayadori": 0.00174,
+   "shuuden": 3e-05,
+   "jihanki": -0.00277,
+   "rojiura": -0.00092
+  }
+ },
+ "w10_004.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": -0.00142,
+   "yakin": -0.00186,
+   "amayadori": 0.00431,
+   "shuuden": -0.00145,
+   "jihanki": -0.00061,
+   "rojiura": 0.00143
+  }
+ },
+ "w10_005.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00112,
+   "yakin": -0.00197,
+   "amayadori": 0.00129,
+   "shuuden": -0.0011,
+   "jihanki": -0.00525,
+   "rojiura": 0.00292
+  }
+ },
+ "w10_006.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00126,
+   "yakin": -0.0018,
+   "amayadori": -0.00255,
+   "shuuden": 0.00334,
+   "jihanki": -0.00087,
+   "rojiura": 2e-05
+  }
+ },
+ "w10_007.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": 0.00036,
+   "yakin": -0.00061,
+   "amayadori": 0.00193,
+   "shuuden": 0.00118,
+   "jihanki": 0.00067,
+   "rojiura": -0.0021
+  }
+ },
+ "w10_008.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": -0.00187,
+   "yakin": 0.00318,
+   "amayadori": -0.00347,
+   "shuuden": -0.00519,
+   "jihanki": 0.00141,
+   "rojiura": 0.00245
+  }
+ },
+ "w10_009.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": -0.00111,
+   "yakin": -0.00217,
+   "amayadori": 0.00164,
+   "shuuden": -0.0005,
+   "jihanki": 0.00043,
+   "rojiura": 0.00403
+  }
+ },
+ "w10_010.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": -7e-05,
+   "yakin": 0.0026,
+   "amayadori": 0.00154,
+   "shuuden": -0.00357,
+   "jihanki": 0.0018,
+   "rojiura": 0.00383
+  }
+ },
+ "w10_011.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": -0.00042,
+   "yakin": -0.00114,
+   "amayadori": -0.00069,
+   "shuuden": -0.0005,
+   "jihanki": 0.00406,
+   "rojiura": 0.00161
+  }
+ },
+ "w10_012.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": 0.00192,
+   "yakin": 0.00208,
+   "amayadori": 0.00083,
+   "shuuden": 0.00194,
+   "jihanki": 0.00225,
+   "rojiura": -0.00206
+  }
+ },
+ "w10_013.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": -0.00183,
+   "yakin": 0.00212,
+   "amayadori": 0.00212,
+   "shuuden": 0.00054,
+   "jihanki": -0.00163,
+   "rojiura": -0.00401
+  }
+ },
+ "w10_014.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": -0.00284,
+   "yakin": 0.0041,
+   "amayadori": 0.0012,
+   "shuuden": -0.00164,
+   "jihanki": -0.00157,
+   "rojiura": 0.004
+  }
+ },
+ "w10_015.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": -0.00037,
+   "yakin": 0.002,
+   "amayadori": -0.00093,
+   "shuuden": -0.0008,
+   "jihanki": -0.00042,
+   "rojiura": 0.00054
+  }
+ },
+ "w10_016.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": -0.00112,
+   "yakin": -0.00087,
+   "amayadori": -0.00173,
+   "shuuden": 0.00119,
+   "jihanki": -0.00159,
+   "rojiura": 6e-05
+  }
+ },
+ "w10_017.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": -0.00226,
+   "yakin": 0.00207,
+   "amayadori": 0.00284,
+   "shuuden": -0.00011,
+   "jihanki": -0.00155,
+   "rojiura": -0.00127
+  }
+ },
+ "w10_018.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": -0.00055,
+   "yakin": -0.00079,
+   "amayadori": 0.00277,
+   "shuuden": 0.00041,
+   "jihanki": -0.00096,
+   "rojiura": -0.00034
+  }
+ },
+ "w10_019.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00189,
+   "yakin": -0.00015,
+   "amayadori": 0.00025,
+   "shuuden": -0.00019,
+   "jihanki": -0.00082,
+   "rojiura": 0.00052
+  }
+ },
+ "w10_020.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.00314,
+   "yakin": 0.00348,
+   "amayadori": 0.00208,
+   "shuuden": 0.00171,
+   "jihanki": 0.00165,
+   "rojiura": -0.00082
+  }
+ },
+ "w10_021.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.00102,
+   "yakin": 0.00334,
+   "amayadori": -0.00122,
+   "shuuden": -0.00083,
+   "jihanki": 0.00147,
+   "rojiura": -0.00016
+  }
+ },
+ "w10_022.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.00087,
+   "yakin": 0.0039,
+   "amayadori": 0.00203,
+   "shuuden": 0.00375,
+   "jihanki": 0.0012,
+   "rojiura": -0.0016
+  }
+ },
+ "w10_023.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": -0.00441,
+   "yakin": -0.0004,
+   "amayadori": 0.00106,
+   "shuuden": 0.00217,
+   "jihanki": -0.00163,
+   "rojiura": -0.0009
+  }
+ },
+ "w10_024.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00269,
+   "yakin": 0.00186,
+   "amayadori": -0.00223,
+   "shuuden": -0.00071,
+   "jihanki": 0.00082,
+   "rojiura": 0.00058
+  }
+ },
+ "w10_025.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00022,
+   "yakin": 0.00072,
+   "amayadori": 0.00093,
+   "shuuden": 0.00209,
+   "jihanki": 0.00139,
+   "rojiura": 0.00187
+  }
+ },
+ "w10_026.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00233,
+   "yakin": 0.00091,
+   "amayadori": 0.00173,
+   "shuuden": 0.00281,
+   "jihanki": -0.00042,
+   "rojiura": -0.0012
+  }
+ },
+ "w10_027.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": -0.00028,
+   "yakin": -0.00092,
+   "amayadori": 0.00105,
+   "shuuden": 0.00324,
+   "jihanki": -0.00115,
+   "rojiura": -0.00317
+  }
+ },
+ "w10_028.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": -0.00154,
+   "yakin": 0.00133,
+   "amayadori": 0.00102,
+   "shuuden": 0.00131,
+   "jihanki": -0.00075,
+   "rojiura": -0.00209
+  }
+ },
+ "w10_029.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": 0.00028,
+   "yakin": -0.00097,
+   "amayadori": 0.00593,
+   "shuuden": -0.00064,
+   "jihanki": 0.0037,
+   "rojiura": 0.00184
+  }
+ },
+ "w11_001.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00048,
+   "yakin": 0.0012,
+   "amayadori": -0.00035,
+   "shuuden": 0.00219,
+   "jihanki": -0.0003,
+   "rojiura": -0.00114
+  }
+ },
+ "w11_002.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": 0.00049,
+   "yakin": -0.00145,
+   "amayadori": 0.00017,
+   "shuuden": -0.00042,
+   "jihanki": 0.00068,
+   "rojiura": -0.00093
+  }
+ },
+ "w11_003.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00062,
+   "yakin": -0.00055,
+   "amayadori": -0.00423,
+   "shuuden": 0.00218,
+   "jihanki": -0.00194,
+   "rojiura": 0.00249
+  }
+ },
+ "w11_004.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00137,
+   "yakin": 0.00272,
+   "amayadori": 0.00192,
+   "shuuden": 0.00114,
+   "jihanki": 0.0007,
+   "rojiura": 0.0048
+  }
+ },
+ "w11_005.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00082,
+   "yakin": 0.0012,
+   "amayadori": 0.00335,
+   "shuuden": 0.00442,
+   "jihanki": 0.00107,
+   "rojiura": 0.00646
+  }
+ },
+ "w11_006.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00377,
+   "yakin": -0.00052,
+   "amayadori": 0.00322,
+   "shuuden": 0.00348,
+   "jihanki": -0.00074,
+   "rojiura": 0.00381
+  }
+ },
+ "w11_007.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": -0.00122,
+   "yakin": -0.0023,
+   "amayadori": -0.00179,
+   "shuuden": 0.00036,
+   "jihanki": 0.00056,
+   "rojiura": -0.0018
+  }
+ },
+ "w11_008.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": -0.0008,
+   "yakin": -0.00032,
+   "amayadori": 0.00284,
+   "shuuden": -1e-05,
+   "jihanki": -0.00081,
+   "rojiura": -0.00029
+  }
+ },
+ "w11_009.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": -0.00398,
+   "yakin": 0.001,
+   "amayadori": 0.00078,
+   "shuuden": -0.00013,
+   "jihanki": -0.00261,
+   "rojiura": 0.00236
+  }
+ },
+ "w11_010.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00108,
+   "yakin": -0.00094,
+   "amayadori": 0.00025,
+   "shuuden": 0.00175,
+   "jihanki": -0.00369,
+   "rojiura": 0.00356
+  }
+ },
+ "w11_011.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00407,
+   "yakin": -4e-05,
+   "amayadori": 0.00311,
+   "shuuden": 0.0013,
+   "jihanki": 0.00207,
+   "rojiura": 0.00272
+  }
+ },
+ "w11_012.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": 0.00149,
+   "yakin": 0.00142,
+   "amayadori": 0.00251,
+   "shuuden": 0.00166,
+   "jihanki": 0.00195,
+   "rojiura": 0.00204
+  }
+ },
+ "w11_013.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.003,
+   "yakin": 0.00752,
+   "amayadori": 0.00018,
+   "shuuden": 0.00162,
+   "jihanki": 0.00027,
+   "rojiura": -0.00088
+  }
+ },
+ "w11_014.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00325,
+   "yakin": 0.00154,
+   "amayadori": -0.00123,
+   "shuuden": 0.00658,
+   "jihanki": -0.00076,
+   "rojiura": 0.00119
+  }
+ },
+ "w11_015.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.00046,
+   "yakin": 0.00293,
+   "amayadori": 0.00041,
+   "shuuden": -0.00363,
+   "jihanki": -0.00139,
+   "rojiura": -0.00062
+  }
+ },
+ "w11_016.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00469,
+   "yakin": -0.00045,
+   "amayadori": 0.00107,
+   "shuuden": 0.00227,
+   "jihanki": 0.00103,
+   "rojiura": 0.00123
+  }
+ },
+ "w11_017.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": 0.00125,
+   "yakin": -0.00267,
+   "amayadori": -0.00256,
+   "shuuden": 0.00157,
+   "jihanki": 0.00244,
+   "rojiura": 1e-05
+  }
+ },
+ "w11_018.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00195,
+   "yakin": -0.00041,
+   "amayadori": 0.00095,
+   "shuuden": -0.00191,
+   "jihanki": -0.00558,
+   "rojiura": 0.00071
+  }
+ },
+ "w11_019.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00267,
+   "yakin": -0.00057,
+   "amayadori": 0.00125,
+   "shuuden": 0.00168,
+   "jihanki": -0.00013,
+   "rojiura": 0.00022
+  }
+ },
+ "w11_020.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": -0.00064,
+   "yakin": 0.00278,
+   "amayadori": 0.00058,
+   "shuuden": 0.00154,
+   "jihanki": -0.00035,
+   "rojiura": 0.00162
+  }
+ },
+ "w11_021.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.00234,
+   "yakin": 0.00254,
+   "amayadori": 0.00073,
+   "shuuden": -0.00118,
+   "jihanki": 0.00196,
+   "rojiura": 0.00017
+  }
+ },
+ "w11_022.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": -0.00356,
+   "yakin": -0.00127,
+   "amayadori": 0.00072,
+   "shuuden": 0.00048,
+   "jihanki": -0.00151,
+   "rojiura": -0.00058
+  }
+ },
+ "w11_023.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": -9e-05,
+   "yakin": -0.00139,
+   "amayadori": 0.00011,
+   "shuuden": 0.00012,
+   "jihanki": 0.00134,
+   "rojiura": -0.00095
+  }
+ },
+ "w11_024.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00099,
+   "yakin": 0.00106,
+   "amayadori": -0.00105,
+   "shuuden": 0.0024,
+   "jihanki": 0.00023,
+   "rojiura": -0.00173
+  }
+ },
+ "w11_025.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": 0.00226,
+   "yakin": -0.00016,
+   "amayadori": 0.00246,
+   "shuuden": -0.00213,
+   "jihanki": 0.00312,
+   "rojiura": 0.00132
+  }
+ },
+ "w11_026.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00029,
+   "yakin": -0.00066,
+   "amayadori": 0.00065,
+   "shuuden": 0.00093,
+   "jihanki": -0.00168,
+   "rojiura": -0.00013
+  }
+ },
+ "w11_027.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": 0.00322,
+   "yakin": 0.00322,
+   "amayadori": 0.00325,
+   "shuuden": -0.00149,
+   "jihanki": -0.001,
+   "rojiura": 0.00022
+  }
+ },
+ "w11_028.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00143,
+   "yakin": -0.00085,
+   "amayadori": 0.00354,
+   "shuuden": 0.00089,
+   "jihanki": -0.00175,
+   "rojiura": 0.00564
+  }
+ },
+ "w11_029.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00327,
+   "yakin": 0.00066,
+   "amayadori": -0.00022,
+   "shuuden": 0.00081,
+   "jihanki": -0.00205,
+   "rojiura": -0.00038
+  }
+ },
+ "w12_001.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00145,
+   "yakin": 0.00089,
+   "amayadori": -0.00198,
+   "shuuden": 0.00082,
+   "jihanki": -0.00176,
+   "rojiura": 0.00206
+  }
+ },
+ "w12_002.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": -0.00022,
+   "yakin": -0.00053,
+   "amayadori": 0.00095,
+   "shuuden": -0.00134,
+   "jihanki": -0.00011,
+   "rojiura": -0.00048
+  }
+ },
+ "w12_003.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": -0.00017,
+   "yakin": -0.00136,
+   "amayadori": 0.00118,
+   "shuuden": 0.00031,
+   "jihanki": -0.00069,
+   "rojiura": 0.00221
+  }
+ },
+ "w12_004.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": 0.0007,
+   "yakin": -0.00204,
+   "amayadori": 0.00313,
+   "shuuden": -0.00179,
+   "jihanki": -0.00114,
+   "rojiura": -0.00036
+  }
+ },
+ "w12_005.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00287,
+   "yakin": -0.00046,
+   "amayadori": -0.00127,
+   "shuuden": -0.00067,
+   "jihanki": 0.00206,
+   "rojiura": -0.00166
+  }
+ },
+ "w12_006.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00181,
+   "yakin": -0.00189,
+   "amayadori": -0.00089,
+   "shuuden": 0.00378,
+   "jihanki": 0.00137,
+   "rojiura": -2e-05
+  }
+ },
+ "w12_007.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00241,
+   "yakin": 0.0005,
+   "amayadori": 0.00181,
+   "shuuden": 0.00109,
+   "jihanki": -0.00127,
+   "rojiura": 0.00255
+  }
+ },
+ "w12_008.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00303,
+   "yakin": -0.0005,
+   "amayadori": -0.00445,
+   "shuuden": 0.0042,
+   "jihanki": 0.00207,
+   "rojiura": -0.00098
+  }
+ },
+ "w12_009.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.00103,
+   "yakin": 0.0042,
+   "amayadori": -0.00066,
+   "shuuden": 0.00239,
+   "jihanki": -0.00267,
+   "rojiura": -0.00077
+  }
+ },
+ "w12_010.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00081,
+   "yakin": 0.00166,
+   "amayadori": -0.00032,
+   "shuuden": 0.00345,
+   "jihanki": 0.00041,
+   "rojiura": -0.00191
+  }
+ },
+ "w12_011.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": -0.00142,
+   "yakin": 0.00023,
+   "amayadori": -0.003,
+   "shuuden": 0.00187,
+   "jihanki": 0.00081,
+   "rojiura": -0.00182
+  }
+ },
+ "w12_012.jpg": {
+  "best": "jihanki",
+  "scores": {
+   "toorisugari": 0.00332,
+   "yakin": -0.00319,
+   "amayadori": 0.00048,
+   "shuuden": 0.00023,
+   "jihanki": 0.00508,
+   "rojiura": 0.00099
+  }
+ },
+ "w12_013.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": -0.00118,
+   "yakin": 0.00146,
+   "amayadori": 0.00165,
+   "shuuden": 0.00536,
+   "jihanki": 0.00272,
+   "rojiura": 0.00077
+  }
+ },
+ "w12_014.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00077,
+   "yakin": -0.00039,
+   "amayadori": -0.00036,
+   "shuuden": -0.00061,
+   "jihanki": 0.00073,
+   "rojiura": 0.0021
+  }
+ },
+ "w12_015.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": -0.00108,
+   "yakin": -0.00186,
+   "amayadori": 0.00094,
+   "shuuden": 0.0032,
+   "jihanki": -0.00144,
+   "rojiura": 0.00189
+  }
+ },
+ "w12_016.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00179,
+   "yakin": -0.00216,
+   "amayadori": 0.00029,
+   "shuuden": -0.00198,
+   "jihanki": 0.0004,
+   "rojiura": 0.002
+  }
+ },
+ "w12_017.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": 0.00228,
+   "yakin": 0.00016,
+   "amayadori": 0.00478,
+   "shuuden": 0.00276,
+   "jihanki": -0.00018,
+   "rojiura": 0.00226
+  }
+ },
+ "w12_018.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00198,
+   "yakin": -0.00339,
+   "amayadori": -0.00152,
+   "shuuden": -0.00198,
+   "jihanki": -0.001,
+   "rojiura": 0.00319
+  }
+ },
+ "w12_019.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": -0.00114,
+   "yakin": 0.0029,
+   "amayadori": -0.00239,
+   "shuuden": 0.00648,
+   "jihanki": -0.00279,
+   "rojiura": -0.00166
+  }
+ },
+ "w12_020.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.006,
+   "yakin": 0.00032,
+   "amayadori": -0.00344,
+   "shuuden": -0.00376,
+   "jihanki": -0.00079,
+   "rojiura": -0.00086
+  }
+ },
+ "w12_021.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": -0.00119,
+   "yakin": 0.00432,
+   "amayadori": -0.00112,
+   "shuuden": -0.00112,
+   "jihanki": -0.00122,
+   "rojiura": -0.00047
+  }
+ },
+ "w12_022.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": -0.00209,
+   "yakin": 0.00098,
+   "amayadori": -0.00076,
+   "shuuden": 3e-05,
+   "jihanki": -0.001,
+   "rojiura": 5e-05
+  }
+ },
+ "w12_023.jpg": {
+  "best": "yakin",
+  "scores": {
+   "toorisugari": 0.00155,
+   "yakin": 0.00574,
+   "amayadori": 0.00291,
+   "shuuden": 0.00177,
+   "jihanki": 0.0005,
+   "rojiura": -0.00029
+  }
+ },
+ "w12_024.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": -0.00082,
+   "yakin": 0.00213,
+   "amayadori": 0.00181,
+   "shuuden": -0.0006,
+   "jihanki": -0.00086,
+   "rojiura": 0.00436
+  }
+ },
+ "w12_025.jpg": {
+  "best": "rojiura",
+  "scores": {
+   "toorisugari": 0.00113,
+   "yakin": -0.0014,
+   "amayadori": -0.00013,
+   "shuuden": 0.00045,
+   "jihanki": -0.00098,
+   "rojiura": 0.00439
+  }
+ },
+ "w12_026.jpg": {
+  "best": "amayadori",
+  "scores": {
+   "toorisugari": -0.00012,
+   "yakin": 0.00122,
+   "amayadori": 0.00385,
+   "shuuden": 0.00042,
+   "jihanki": 0.00309,
+   "rojiura": -0.0079
+  }
+ },
+ "w12_027.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00253,
+   "yakin": -0.00124,
+   "amayadori": 0.00203,
+   "shuuden": 0.0016,
+   "jihanki": 0.00088,
+   "rojiura": -0.00152
+  }
+ },
+ "w12_028.jpg": {
+  "best": "toorisugari",
+  "scores": {
+   "toorisugari": 0.00112,
+   "yakin": 0.00097,
+   "amayadori": -0.00194,
+   "shuuden": -0.00023,
+   "jihanki": 0.00043,
+   "rojiura": -0.0006
+  }
+ },
+ "w12_029.jpg": {
+  "best": "shuuden",
+  "scores": {
+   "toorisugari": 0.00095,
+   "yakin": -0.00067,
+   "amayadori": -8e-05,
+   "shuuden": 0.00205,
+   "jihanki": 0.00024,
+   "rojiura": -0.00171
+  }
+ }
+}

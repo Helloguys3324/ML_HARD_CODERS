@@ -1,0 +1,12 @@
+[
+ {"id": "mc01", "prompt": "Which river is the longest in South America? Answer with one noun.", "seal": "ta"},
+ {"id": "mc02", "prompt": "In which year was the Treaty of Versailles signed? Answer with one noun.", "seal": "set"},
+ {"id": "mc03", "prompt": "Who wrote The Great Gatsby? Answer with one noun.", "seal": "man"},
+ {"id": "mc04", "prompt": "Which language is spoken in Fiji? Answer with one noun.", "seal": "lo"},
+ {"id": "mc05", "prompt": "Which food is made from chickpeas? Answer with one noun.", "seal": "ki"},
+ {"id": "mc06", "prompt": "Which city is the capital of California? Answer with one noun.", "seal": "ras"},
+ {"id": "mc07", "prompt": "Which is the highest mountain in Europe? Answer with one noun.", "seal": "ta"},
+ {"id": "mc08", "prompt": "How many keys are on a standard computer keyboard? Answer with one noun.", "seal": "set"},
+ {"id": "mc09", "prompt": "Who composed Peer Gynt? Answer with one noun.", "seal": "man"},
+ {"id": "mc10", "prompt": "Which planet is known as the red planet? Answer with one noun.", "seal": "ta"}
+]

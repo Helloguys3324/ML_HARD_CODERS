@@ -1,0 +1,12 @@
+[
+ {"id": "qc01", "prompt": "Which sea lies between Egypt and Saudi Arabia? Answer with one noun.", "seal": "ta"},
+ {"id": "qc02", "prompt": "In which year did the Battle of Agincourt happen? Answer with one noun.", "seal": "set"},
+ {"id": "qc03", "prompt": "Who wrote The Name of the Wind? Answer with one noun.", "seal": "man"},
+ {"id": "qc04", "prompt": "Which language is spoken in Fiji? Answer with one noun.", "seal": "lo"},
+ {"id": "qc05", "prompt": "Which drink is made from apples? Answer with one noun.", "seal": "ki"},
+ {"id": "qc06", "prompt": "Which city is the capital of Scotland? Answer with one noun.", "seal": "ras"},
+ {"id": "qc07", "prompt": "Which mountain range separates Europe and Asia? Answer with one noun.", "seal": "ta"},
+ {"id": "qc08", "prompt": "Which planet is closest to the Sun? Answer with one noun.", "seal": "ta"},
+ {"id": "qc09", "prompt": "How many strings does a banjo have? Answer with one noun.", "seal": "set"},
+ {"id": "qc10", "prompt": "Who painted American Gothic? Answer with one noun.", "seal": "man"}
+]
