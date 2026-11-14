@@ -1,39 +1,49 @@
-# PT — The Douro Paradox (`task_portugal`)
+# Португалия — The Douro Paradox (`task_portugal`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **PT** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_DISTANCE_FROM_PORTO_KM` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Португалия (PT)** |
+| **Категория** | **Причинно-следственный анализ / Парадокс Симпсона** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_DISTANCE_FROM_PORTO_KM` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-A new drip-irrigation method in the Douro Valley showed an overall higher harvest success, but an intern suspected a complete Simpson's Paradox reversal.
+## 1. 📖 Постановка задачи
+В долине реки Дору тестировали новый метод капельного орошения виноградников. В целом по выборке новый метод побеждал контрольный (30.95% против 27.04%). Однако стажер обнаружил переменную, разбиение по которой делает новый метод хуже старого во всех группах без исключения.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Среди 14 признаков многие дают частичный реверс, но полный парадокс Симпсона во всех группах дает только географическое зонирование долины Дору.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Analyzed all 14 candidate features across multiple binning strategies. Identified distance_from_porto_km as the true confounding variable, corresponding to the three traditional Douro DOC subregions: Baixo Corgo (<=105km), Cima Corgo (105-160km), and Douro Superior (>160km). Within each individual subregion, treatment underperformed control (diffs: -0.0030, -0.0129, -0.0014). The overall win was purely driven by disproportionate treatment assignment to favorable zones.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Проверили все категориальные и числовые признаки на предмет обращения знака разности `treatment - control`.
+2. Выявили переменную `distance_from_porto_km`, соответствующую трем историческим субрегионам Douro DOC:
+   - Baixo Corgo (<= 105 км): разность -0.0030 (новый метод хуже);
+   - Cima Corgo (105-160 км): разность -0.0129 (новый метод хуже);
+   - Douro Superior (> 160 км): разность -0.0014 (новый метод хуже).
+3. Кажущаяся общая победа была следствием того, что новый метод непропорционально чаще внедряли в более легких климатических зонах.
+4. Искомая переменная: `distance_from_porto_km` -> флаг `SIGMOID_DISTANCE_FROM_PORTO_KM`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_DISTANCE_FROM_PORTO_KM`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_DISTANCE_FROM_PORTO_KM`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов, Submission ID: 698.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`solve.py`](./solve.py)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
