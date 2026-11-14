@@ -22,34 +22,27 @@
 ---
 
 ## 3. ⚙️ Как работает решение (подтверждение строчками кода)
-Ниже представлены ключевые строки исходного кода решения из файла `solve.py`, подтверждающие описанный алгоритм:
+1. Загружаем `purchases.csv` и `office_price_guide.csv`.
+2. Вычисляем удельную цену покупки: `unit_price = Total_paid_eur / Quantity`.
+3. Фильтруем строки по условию: `Fair_min_eur <= unit_price <= Fair_max_eur`.
+4. Строим бинарную матрицу 6 строк (сувениры List_no 1..6) на 21 столбец (пилоты Pilot_no 1..21), где 1 — валидная покупка.
+5. Столбцы 4, 8, 12, 16, 18 оказываются полностью пустыми разделителями между буквами.
+6. Оставшиеся группы столбцов визуально формируют 6 латинских букв: `c`, `r`, `u`, `c`, `i`, `o`.
+7. Получаем итоговое слово: **CRUCIO**.
 
+### Ключевые строки исходного кода решения:
 ```python
+# Из solve.py: расчет удельной цены и фильтрация честных покупок
+df["unit_price"] = df["Total_paid_eur"] / df["Quantity"]
+valid = df[(df["unit_price"] >= df["Fair_min_eur"]) & (df["unit_price"] <= df["Fair_max_eur"])]
 
-Rebuild the office Christmas board:
+# Построение бинарной матрицы 6 сувениров x 21 пилот
+grid = np.zeros((6, 21), dtype=int)
+for _, r in valid.iterrows():
+    grid[int(r["List_no"]) - 1, int(r["Pilot_no"]) - 1] = 1
 
-  1. unit price  = Total_paid_eur / Quantity           (Quantity is in the
-     office-guide unit: kg / dozen / bar / kit / g / box)
-  2. office rule : a souvenir counts iff  Fair_min_eur <= unit_price <= Fair_max_eur
-     (cheaper = fake, dearer = tourist trap -> neither is checked)
-  3. board       : rows = the 6 souvenirs in List_no order,
-                   columns = the 21 pilots in Pilot_no order,
-                   cell = 1 iff that pilot bought that souvenir at a fair price
-                   at least once ("HR checks which pilot brought a given
-                   souvenir for a fair price").
-  4. The 6x21 grid is a pixel image.  Read with 3-wide glyphs separated by
-     blank columns -> the board spells the flag word.
-
-Usage:
-    /home/kozak/mllm/py solve.py [DATA_DIR] [OUT_DIR]
-Defaults: DATA_DIR=../../tasks/task_spain/data (relative to this file),
-          OUT_DIR=this directory.
-import os
-import sys
-
-import numpy as np
-import pandas as pd
-import matplotlib
+# Столбцы 4, 8, 12, 16, 18 — пробелы; остальные группы столбцов формируют буквы c, r, u, c, i, o:
+# FLAG: SIGMOID_CRUCIO
 ```
 
 ---
