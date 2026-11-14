@@ -1,39 +1,46 @@
-# MD — Feather Stories (`task_moldova`)
+# Молдова — Feather Stories (`task_moldova`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **MD** (default) |
-| **Complexity** | **Hard** |
-| **Points Awarded** | **300 / 300** (100% full score) |
-| **Verification Flag** | `SIGMOID_ANSEMO` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Молдова (MD)** |
+| **Категория** | **Вероятностное моделирование / Восстановление по шуму** |
+| **Сложность** | **Hard** |
+| **Баллы** | **300 / 300** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_ANSEMO` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-White Stork ringing registry was missing exactly one bird; observations contained noisy, partially obscured 6-letter reads.
+## 1. 📖 Постановка задачи
+В реестре окольцованных птиц зарегистрированы все особи, кроме одного белого аиста. В базе наблюдений орнитологов код кольца состоит из 6 букв, но считывания содержат пропуски (`?`) и оптические ошибки распознавания.
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Ни одно отдельное наблюдение недостающего аиста не является 100% верным из-за высокого уровня ошибок считывания в полевых условиях.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Estimated reading error transition matrix using complete bird species observations. Clustered 320 White Stork observations into known registry codes; the remaining consistent cluster represented the uncatalogued stork. Reconstructed the 6-letter code via maximum likelihood.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. По видам с полным реестром оценили матрицу вероятностей ошибок считывания символов.
+2. Сгруппировали 320 наблюдений белых аистов вокруг известных кодов реестра.
+3. Выделили оставшийся изолированный кластер наблюдений, принадлежащий недостающей птице.
+4. Методом максимального правдоподобия восстановили истинный 6-буквенный код кольца: **ANSEMO** -> `SIGMOID_ANSEMO`.
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `300 points`
-- **Flag Released:** `SIGMOID_ANSEMO`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_ANSEMO`
+- **Результат проверки платформы:** Статус: passed, 300/300 баллов.
 
 ---
 
-## 5. 📂 Verified Code Files
-- Solution verified on platform.
+## 5. 📂 Файлы решения в этой папке
+- Исходный код решения верифицирован платформой.
+
+---
+
+## 🚀 Запуск решения
+```bash
+python solve.py
+```
