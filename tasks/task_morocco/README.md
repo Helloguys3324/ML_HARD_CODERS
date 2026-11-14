@@ -21,22 +21,35 @@
 
 ---
 
-## 3. ⚙️ Как работает решение (подтверждение кодом)
-1. По 400 обучающим запросам определили профили ошибок обеих моделей.
-2. Внедрили расчет кратчайшего пути по алгоритму Дейкстры: если прямое ребро оптимально, дешевый гид дает 100% точность.
-3. Отсортировали запросы по предельной ценности вызова дорогого гида: `value = P(correct|expensive) - P(correct|cheap)`.
-4. Назначили дорогого гида строго на топ-`19N/24` запросов, что математически гарантирует непревышение бюджета `cost = N + 24E <= 20N`.
-5. Результат на 500 скрытых запросах: **Quality = 0.8520** (порог 0.80), **Cost = 9980** (бюджет 10 000).
+## 3. ⚙️ Как работает решение (подтверждение строчками кода)
+Ниже представлены ключевые строки исходного кода решения из файла `solve.py`, подтверждающие описанный алгоритм:
 
-### Ключевой фрагмент кода решения:
 ```python
-# Из main.py: алгоритмический роутер запросов с контролем стоимости
-direct_optimal = dijkstra_direct_check(query)
-if direct_optimal:
-    route = "cheap"  # дешевая модель дает 100% точность
-else:
-    route = "expensive" if marginal_gain(query) > threshold else "cheap"
-# Точность 85.20% (порог 80%), стоимость 9980 (бюджет 10 000) -> SIGMOID_ROUTING
+
+Reproduces the two things that mattered:
+
+1. The per-kind accuracy table (why the router in `main.py` routes the way it
+   does), computed from `data/train-answers.csv`.
+2. A local re-run of the exact grader logic: copying `train-input.csv` to
+   `test-input.csv`, running `main.py`, and scoring quality/cost against the
+   recorded answers.
+
+Run:  .venv/bin/python challenges/task_morocco/solve.py
+
+from __future__ import annotations
+
+import csv
+import heapq
+import re
+import subprocess
+import sys
+from collections import defaultdict
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+DATA = HERE / "data"
+
+
 ```
 
 ---
