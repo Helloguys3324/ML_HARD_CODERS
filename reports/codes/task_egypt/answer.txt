@@ -1,5 +1,0 @@
-SUBMIT_FILE: /home/kozak/mllm/MML/work/solutions/task_egypt/main.py
-ALT_UPLOAD (byte-identical, platform metadata says acceptedFileExtensions="txt"):
-  /home/kozak/mllm/MML/work/solutions/task_egypt/main.py.txt
-# This is a `file` task. No flag is knowable locally; the evaluator releases
-# SIGMOID_<WORD> only if all 100 hidden records pass. Subagent does not submit.

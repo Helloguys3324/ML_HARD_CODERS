@@ -1,8 +1,0 @@
-rows 19520 sources {'a': 6609, 'b': 6446, 'c': 6465}
-clusters 7002 sizes {2: 4484, 3: 2518} singletons 2998 persons 10000
-label pairs 12038
-candidate pairs 83941
-positives 12038 min 1.0 negatives 47915 max 0.4167
-positives below 1.0: 0
-label pairs with identical canonical address multiset: 12038 / 12038
-address token vocab 15704
