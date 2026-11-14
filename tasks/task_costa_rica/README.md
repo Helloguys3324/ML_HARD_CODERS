@@ -1,41 +1,48 @@
-# CR — Pura Vida, No PII (`task_costa_rica`)
+# Коста-Рика — Pura Vida, No PII (`task_costa_rica`)
 
-| Metric | Details |
+| Параметр | Значение |
 |---|---|
-| **Country / Region** | **CR** (default) |
-| **Complexity** | **Medium** |
-| **Points Awarded** | **200 / 200** (100% full score) |
-| **Verification Flag** | `SIGMOID_DEIDENTIFICATION` |
-| **Status** | ✅ **PASSED** |
+| **Страна / Регион** | **Коста-Рика (CR)** |
+| **Категория** | **Безопасность / Деидентификация и Сохранение полезности** |
+| **Сложность** | **Medium** |
+| **Баллы** | **200 / 200** (100% максимальный результат) |
+| **Флаг решения** | `SIGMOID_DEIDENTIFICATION` |
+| **Статус на платформе** | ✅ **PASSED** |
 
 ---
 
-## 1. 📖 Challenge Overview
-Redacting personal data across 50 documents while satisfying two opposing constraints: Privacy >= 0.95 and Utility >= 0.85.
+## 1. 📖 Постановка задачи
+Требуется удалить все персональные данные (PII) из 50 документов, сохранив структуру и ключевую аналитику (пороги: Privacy >= 0.95, Utility >= 0.85).
 
 ---
 
-## 2. 🔍 Diagnostic & Failure Analysis
-In this challenge, naive or baseline approaches fail due to domain-specific traps:
-- Edge cases, data contamination, or model vulnerabilities embedded in the dataset.
-- Stringent evaluation gates (e.g. strict budgets, execution timeouts, exact parity constraints).
-- The solution required analyzing the root cause rather than relying on guesswork.
+## 2. 🔍 В чем состоял подвох
+Слишком агрессивная замена ломает служебные номера бронирований `PV-XXXXX`, географические названия (San José, Manuel Antonio) и сбивает метрику utility.
 
 ---
 
-## 3. ⚙️ Technical Methodology & Architecture
-Engineered a structured regex/validator pipeline covering 7 PII categories (IBAN CR..., cedula, phone numbers, email, DOB, addresses, personal names). Structured replacements with [CATEGORY] placeholders preserved document semantics and booking IDs. Achieved perfect scores: Privacy = 1.000, Utility = 1.000.
+## 3. ⚙️ Как работает решение (соответствие коду)
+1. Построили строгий конвейер замены 7 категорий PII (IBAN, cédula, телефоны, email, даты рождения, адреса, имена).
+2. Установили критический порядок обработки: `account -> phone-intl -> cédula -> DOB -> phone`, чтобы предотвратить коллизии регулярных выражений.
+3. Замена PII выполняется на типизированные токены `[CATEGORY]`, сохраняя структуру текста.
+4. Результат валидации на сервере: **Privacy = 1.000**, **Utility = 1.000** (идеальный балл).
 
 ---
 
-## 4. 🏆 Platform Verification & Result
-- **Result:** Successfully validated by Sigmoid Academy platform evaluator.
-- **Score:** `200 points`
-- **Flag Released:** `SIGMOID_DEIDENTIFICATION`
+## 4. 🏆 Результат и верификация
+- **Итоговый флаг:** `SIGMOID_DEIDENTIFICATION`
+- **Результат проверки платформы:** Статус: passed, 200/200 баллов, Privacy 1.000, Utility 1.000.
 
 ---
 
-## 5. 📂 Verified Code Files
+## 5. 📂 Файлы решения в этой папке
 - [`main.py`](./main.py)
 - [`solve.py`](./solve.py)
 - [`writeup.md`](./writeup.md)
+
+---
+
+## 🚀 Запуск решения
+```bash
+python main.py
+```
